@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
@@ -33,7 +34,34 @@ namespace Mercure
 
         private void Bouton_Integrer_Click(object sender, EventArgs e)
         {
+            XmlDocument my_XML_doc = new XmlDocument();
+            SQLiteConnection my_database = new SQLiteConnection("Data Souce=C:\\Users\\edouard\\Desktop\\Cours_4A\\S8\\Plateforme logiciel NET\\ProjetNet\\ProjetNetV2\\Mercure\\Mercure\\Resources\\Mercure.SQLite;Pooling=true;FailIfMissing=false;Version=3");
+            my_database.Open();
+            try
+            {
+                my_XML_doc.Load(chemin_Fichier);
+                XmlNodeList article = my_XML_doc.GetElementsByTagName("article");
 
+                foreach (XmlNode selectNode in article)
+                {
+                    string description = selectNode.SelectSingleNode("description").InnerText;
+                    string refArticle = selectNode.SelectSingleNode("refArticle").InnerText;
+                    string marque = selectNode.SelectSingleNode("marque").InnerText;
+                    string famille = selectNode.SelectSingleNode("famille").InnerText;
+                    string sousFamille = selectNode.SelectSingleNode("sousFamille").InnerText;
+                    string prix = selectNode.SelectSingleNode("prixHT").InnerText;
+                    Console.WriteLine(famille.ToCharArray());
+
+                    
+
+                    
+                }
+
+            }
+            catch (Exception except)
+            {
+                MessageBox.Show("Erreur de lecture du fichier XML", "Erreur XML", MessageBoxButtons.OK);
+            }
         }
 
         private void Buton_MAJ_Click(object sender, EventArgs e)
