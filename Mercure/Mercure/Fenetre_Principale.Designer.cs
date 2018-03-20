@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.Barre_Menu = new System.Windows.Forms.MenuStrip();
             this.Menu_Fichier = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Fichier_Import_XML = new System.Windows.Forms.ToolStripMenuItem();
@@ -134,6 +135,8 @@
             // 
             // Affichage_Articles
             // 
+            this.Affichage_Articles.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.Affichage_Articles.Location = new System.Drawing.Point(44, 67);
             this.Affichage_Articles.Name = "Affichage_Articles";
             this.Affichage_Articles.Size = new System.Drawing.Size(855, 449);
