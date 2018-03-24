@@ -35,7 +35,7 @@ namespace Mercure
         private void Bouton_Integrer_Click(object sender, EventArgs e)
         {
             XmlDocument my_XML_doc = new XmlDocument();
-            SQLiteConnection my_database = new SQLiteConnection("Data Souce=C:\\Users\\edouard\\Desktop\\Cours_4A\\S8\\Plateforme logiciel NET\\ProjetNet\\ProjetNetV2\\Mercure\\Mercure\\Resources\\Mercure.SQLite;Pooling=true;FailIfMissing=false;Version=3");
+            SQLiteConnection my_database = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
             my_database.Open();
             try
             {

@@ -58,12 +58,10 @@ namespace Mercure
 
         public void Remplir_Liste_Avec_Articles()
         {
-            SQLiteConnection Connection = new SQLiteConnection();//"Data Source=Mercure.SQLite");
 
+            SQLiteConnection Connection = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
+            SQLiteCommand Requete = new SQLiteCommand("SELECT * FROM Articles;", Connection);
             Connection.Open();
-
-            SQLiteCommand Requete = new SQLiteCommand("SELECT * FROM Articles", Connection);
-
             SQLiteDataReader Lecture_Base_De_Donnees = Requete.ExecuteReader();
 
             while (Lecture_Base_De_Donnees.Read())
