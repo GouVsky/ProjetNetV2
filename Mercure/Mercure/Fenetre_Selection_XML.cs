@@ -35,7 +35,7 @@ namespace Mercure
 
         private void Bouton_Integrer_Click(object sender, EventArgs e)
         {
-            /* int i;
+            int i;
              XmlDocument my_XML_doc = new XmlDocument();
      
              SQLiteDataReader reader;
@@ -60,13 +60,16 @@ namespace Mercure
                      SQLiteCommand verif_famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @nomParam", my_database);
                      verif_famille.Parameters.AddWithValue("@nomParam", famille);
                      reader = verif_famille.ExecuteReader();
+                     reader.Read();
                      if (reader == null)
                      {
                          SQLiteCommand insert_Famille = new SQLiteCommand("INSERT INTO Familles (Nom) VALUES @nomParam", my_database);
                          insert_Famille.Parameters.AddWithValue("@nomParam", famille);
                          insert_Famille.ExecuteNonQuery();
                      }
-                     SQLiteDataReader reader2 = verif_famille.ExecuteReader();
+                     reader.Close();
+                     reader = verif_famille.ExecuteReader();
+                     reader.Read();
                      int idFamilles;
                      idFamilles = reader.GetInt32(0);
 
@@ -80,7 +83,7 @@ namespace Mercure
                          insert_marque.Parameters.AddWithValue("@nomParam", marque);
                          insert_marque.ExecuteNonQuery();
                      }
-                     reader2 = verif_Marque.ExecuteReader();
+                     reader = verif_Marque.ExecuteReader();
                      int idMarque;
                      idMarque = reader.GetInt32(0);
 
@@ -103,8 +106,8 @@ namespace Mercure
                      insert_Article.Parameters.AddWithValue("@refMarq", idMarque);
                      insert_Article.Parameters.AddWithValue("@prixHT", prix);
                      insert_Article.Parameters.AddWithValue("@Quantite", 1);
-                    
-                     descCommande.ExecuteNonQuery();
+
+                     insert_Article.ExecuteNonQuery();
                      
                  }
 
@@ -113,7 +116,7 @@ namespace Mercure
              {
                  MessageBox.Show("Erreur de lecture du fichier XML", "Erreur XML", MessageBoxButtons.OK);
              }
-                  */
+                  
         }
 
         private void Buton_MAJ_Click(object sender, EventArgs e)
