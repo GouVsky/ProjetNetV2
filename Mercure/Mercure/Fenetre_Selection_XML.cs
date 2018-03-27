@@ -36,6 +36,9 @@ namespace Mercure
         private void Bouton_Integrer_Click(object sender, EventArgs e)
         {
             int i;
+            int idMaxFamille = 0;
+            int idMaxMarque = 0;
+            int idMaxSousFamille = 0;
              XmlDocument my_XML_doc = new XmlDocument();
      
              SQLiteDataReader reader;
@@ -56,60 +59,107 @@ namespace Mercure
                      string prix = selectNode.SelectSingleNode("prixHT").InnerText;
                      Console.WriteLine(famille.ToCharArray());
 
-
+                     //////////////////////////////////////////////////////////////////////////////////////////
                      SQLiteCommand verif_famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @nomParam", my_database);
-                     verif_famille.Parameters.AddWithValue("@nomParam", famille);
-                     reader = verif_famille.ExecuteReader();
-                     reader.Read();
-                     if (reader == null)
+                     verif_famille.Parameters.AddWithValue("nomParam", famille);
+                    
+                     if ( verif_famille.ExecuteScalar()== null)
                      {
-                         SQLiteCommand insert_Famille = new SQLiteCommand("INSERT INTO Familles (Nom) VALUES @nomParam", my_database);
+                         SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM Familles ORDER BY RefFamille DESC;", my_database);
+                         reader = Recuperer_IdMax.ExecuteReader();
+                         reader.Read();
+                         if (!reader.HasRows)
+                         {
+                             idMaxFamille = 0;
+                         }
+                         else
+                         {
+                             idMaxFamille = reader.GetInt32(0);
+                         }
+                          
+                         reader.Close();
+
+                         SQLiteCommand insert_Famille = new SQLiteCommand("INSERT INTO Familles (RefFamille, Nom) VALUES (@IdParam , @nomParam);", my_database);
                          insert_Famille.Parameters.AddWithValue("@nomParam", famille);
+                         insert_Famille.Parameters.AddWithValue("@IdParam", idMaxFamille + 1);
                          insert_Famille.ExecuteNonQuery();
                      }
-                     reader.Close();
                      reader = verif_famille.ExecuteReader();
                      reader.Read();
                      int idFamilles;
                      idFamilles = reader.GetInt32(0);
-
-
+                     ///////////////////////////////////////////////////////////////////////
                      SQLiteCommand verif_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE Nom LIKE @nomParam", my_database);
-                     verif_Marque.Parameters.AddWithValue("@nomParam", marque);
-                     reader = verif_Marque.ExecuteReader();
-                     if (reader == null)
+                     verif_Marque.Parameters.AddWithValue("nomParam", marque);
+
+                     if (verif_Marque.ExecuteScalar() == null)
                      {
-                         SQLiteCommand insert_marque = new SQLiteCommand("INSERT INTO Marques (Nom) VALUES @nomParam", my_database);
+                         SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM Marques ORDER BY RefMarque DESC;", my_database);
+                         reader = Recuperer_IdMax.ExecuteReader();
+                         reader.Read();
+                         if (!reader.HasRows)
+                         {
+                             idMaxMarque = 0;
+                         }
+                         else
+                         {
+                             idMaxMarque = reader.GetInt32(0);
+                         }
+
+                         reader.Close();
+
+                         SQLiteCommand insert_marque = new SQLiteCommand("INSERT INTO Marques (RefMarque, Nom) VALUES (@IdParam , @nomParam);", my_database);
                          insert_marque.Parameters.AddWithValue("@nomParam", marque);
+                         insert_marque.Parameters.AddWithValue("@IdParam", idMaxMarque + 1);
                          insert_marque.ExecuteNonQuery();
                      }
                      reader = verif_Marque.ExecuteReader();
+                     reader.Read();
                      int idMarque;
                      idMarque = reader.GetInt32(0);
-
+                     //////////////////////////////////////////////////////////////////////
                      SQLiteCommand verif_SousFamille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE Nom LIKE @nomParam", my_database);
-                     verif_SousFamille.Parameters.AddWithValue("@nomParam", sousFamille);
-                     reader = verif_SousFamille.ExecuteReader();
-                     if (reader == null)
+                     verif_SousFamille.Parameters.AddWithValue("nomParam", sousFamille);
+
+                     if (verif_SousFamille.ExecuteScalar() == null)
                      {
-                         SQLiteCommand insert_SousFamille = new SQLiteCommand("INSERT INTO SousFamilles (Nom) VALUES @nomParam", my_database);
+                         SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY RefSousFamille DESC;", my_database);
+                         reader = Recuperer_IdMax.ExecuteReader();
+                         reader.Read();
+                         if (!reader.HasRows)
+                         {
+                             idMaxSousFamille = 0;
+                         }
+                         else
+                         {
+                             idMaxSousFamille = reader.GetInt32(0);
+                         }
+
+                         reader.Close();
+
+                         SQLiteCommand insert_SousFamille = new SQLiteCommand("INSERT INTO SousFamilles (RefSousFamille, RefFamille, Nom) VALUES (@IdParam , @familleParam, @nomParam);", my_database);
                          insert_SousFamille.Parameters.AddWithValue("@nomParam", sousFamille);
+                         insert_SousFamille.Parameters.AddWithValue("@familleParam", idFamilles);
+                         insert_SousFamille.Parameters.AddWithValue("@IdParam", idMaxSousFamille + 1);
                          insert_SousFamille.ExecuteNonQuery();
                      }
                      reader = verif_SousFamille.ExecuteReader();
+                     reader.Read();
                      int idSousFamille;
                      idSousFamille = reader.GetInt32(0);
-
-                     SQLiteCommand insert_Article = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES @refArticle @desc, @refSF, @refMarq, @prixHT, @Quantité ON DUPLICATE KEY UPDATE Quantite = Quantite+1");
+                     //////////////////////////////////////////////////////////////////////
+                     SQLiteCommand insert_Article = new SQLiteCommand("INSERT OR IGNORE INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (@refArticle, @desc, @refSF, @refMarq, @prixHT, @Quantite); " + " UPDATE Articles SET Quantite = Quantite+1 WHERE RefArticle LIKE @RefArticle", my_database);
+                     insert_Article.Parameters.AddWithValue("@refArticle", refArticle);
                      insert_Article.Parameters.AddWithValue("@desc", description);
                      insert_Article.Parameters.AddWithValue("@refSF", idSousFamille);
                      insert_Article.Parameters.AddWithValue("@refMarq", idMarque);
                      insert_Article.Parameters.AddWithValue("@prixHT", prix);
-                     insert_Article.Parameters.AddWithValue("@Quantite", 1);
+                     insert_Article.Parameters.AddWithValue("@Quantite", 0);
 
-                     insert_Article.ExecuteNonQuery();
+                     int value =insert_Article.ExecuteNonQuery();
                      
                  }
+                 MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de donnée", "Insertion réussie", MessageBoxButtons.OK);
 
              }
              catch (Exception except)
