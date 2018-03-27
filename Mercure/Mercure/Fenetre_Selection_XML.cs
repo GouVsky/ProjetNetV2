@@ -36,7 +36,7 @@ namespace Mercure
         private void Bouton_Integrer_Click(object sender, EventArgs e)
         {
             int i;
-            int idMaxFamille = 0;
+            
             int idMaxMarque = 0;
             int idMaxSousFamille = 0;
              XmlDocument my_XML_doc = new XmlDocument();
@@ -60,34 +60,7 @@ namespace Mercure
                      Console.WriteLine(famille.ToCharArray());
 
                      //////////////////////////////////////////////////////////////////////////////////////////
-                     SQLiteCommand verif_famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @nomParam", my_database);
-                     verif_famille.Parameters.AddWithValue("nomParam", famille);
-                    
-                     if ( verif_famille.ExecuteScalar()== null)
-                     {
-                         SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM Familles ORDER BY RefFamille DESC;", my_database);
-                         reader = Recuperer_IdMax.ExecuteReader();
-                         reader.Read();
-                         if (!reader.HasRows)
-                         {
-                             idMaxFamille = 0;
-                         }
-                         else
-                         {
-                             idMaxFamille = reader.GetInt32(0);
-                         }
-                          
-                         reader.Close();
-
-                         SQLiteCommand insert_Famille = new SQLiteCommand("INSERT INTO Familles (RefFamille, Nom) VALUES (@IdParam , @nomParam);", my_database);
-                         insert_Famille.Parameters.AddWithValue("@nomParam", famille);
-                         insert_Famille.Parameters.AddWithValue("@IdParam", idMaxFamille + 1);
-                         insert_Famille.ExecuteNonQuery();
-                     }
-                     reader = verif_famille.ExecuteReader();
-                     reader.Read();
-                     int idFamilles;
-                     idFamilles = reader.GetInt32(0);
+                     int idFamille = iSqlDataReader.InsertIntoFamille(my_database, famille);
                      ///////////////////////////////////////////////////////////////////////
                      SQLiteCommand verif_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE Nom LIKE @nomParam", my_database);
                      verif_Marque.Parameters.AddWithValue("nomParam", marque);
@@ -139,7 +112,7 @@ namespace Mercure
 
                          SQLiteCommand insert_SousFamille = new SQLiteCommand("INSERT INTO SousFamilles (RefSousFamille, RefFamille, Nom) VALUES (@IdParam , @familleParam, @nomParam);", my_database);
                          insert_SousFamille.Parameters.AddWithValue("@nomParam", sousFamille);
-                         insert_SousFamille.Parameters.AddWithValue("@familleParam", idFamilles);
+                         insert_SousFamille.Parameters.AddWithValue("@familleParam", idFamille);
                          insert_SousFamille.Parameters.AddWithValue("@IdParam", idMaxSousFamille + 1);
                          insert_SousFamille.ExecuteNonQuery();
                      }
