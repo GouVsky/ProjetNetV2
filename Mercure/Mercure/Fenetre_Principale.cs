@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
@@ -76,6 +75,10 @@ namespace Mercure
             Affichage_Articles.Columns.Add("RefMarque", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("PrixHT", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Quantite", Taille_Derniere_Colonne, HorizontalAlignment.Left);
+
+            // Tri des colonnes.
+
+            Affichage_Articles.ListViewItemSorter = new List_View_Comparateur_Items();
         }
 
         public void Remplir_Liste_Avec_Articles()
@@ -102,6 +105,28 @@ namespace Mercure
             }
 
             Connection.Close();
+        }
+
+        private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            List_View_Comparateur_Items Comparaison = (List_View_Comparateur_Items) Affichage_Articles.ListViewItemSorter;
+
+            if (e.Column == Comparaison.Colonne)
+            {
+                Comparaison.Tri = Swap(Comparaison.Tri);
+            }
+            else
+            {
+                Comparaison.Tri = SortOrder.Ascending;
+            }
+
+            Comparaison.Colonne = e.Column;
+            Affichage_Articles.Sort();
+        }
+
+        private SortOrder Swap(SortOrder tri)
+        {
+            throw new NotImplementedException();
         }
     }
 }

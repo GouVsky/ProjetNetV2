@@ -96,6 +96,7 @@
       <DependentUpon>Fenetre_Selection_XML.cs</DependentUpon>
     </Compile>
     <Compile Include="iSqlDataReader.cs" />
+    <Compile Include="List_View_Comparateur_Items.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Fenetre_Avertissement.resx">
