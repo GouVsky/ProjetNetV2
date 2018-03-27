@@ -16,8 +16,6 @@ namespace Mercure
         public Fenetre_Principale()
         {
             InitializeComponent();
-
-            Remplir_Liste_Avec_Articles();
         }
 
         private void Mercure_Load(object sender, EventArgs e)
@@ -34,6 +32,9 @@ namespace Mercure
         {
             Fenetre_Selection_XML fen = new Fenetre_Selection_XML();
             fen.ShowDialog();
+
+            Remplir_Liste_Avec_Articles();
+
         }
 
         private void Menu_Fichier_Quitter_Click(object sender, EventArgs e)
@@ -60,15 +61,21 @@ namespace Mercure
         {
 
             SQLiteConnection Connection = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
-            SQLiteCommand Requete = new SQLiteCommand("SELECT * FROM Articles;", Connection);
             Connection.Open();
+
+            SQLiteCommand Requete = new SQLiteCommand("SELECT * FROM Articles;", Connection);
             SQLiteDataReader Lecture_Base_De_Donnees = Requete.ExecuteReader();
 
             while (Lecture_Base_De_Donnees.Read())
             {
-                ListViewItem Article = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[0]));
+                ListViewItem RefArticle = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[0]));
+                ListViewItem Description = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[1]));
+                ListViewItem RefSousFamille = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[2]));
+                ListViewItem RefMarque = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[3]));
+                ListViewItem PrixHT = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[4]));
+                ListViewItem Quantite = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[5]));
 
-                Affichage_Articles.Items.Add(Article);
+                Affichage_Articles.Items.Add(RefArticle);
             }
 
             Connection.Close();
