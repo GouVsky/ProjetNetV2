@@ -59,7 +59,7 @@ namespace Mercure
 
         public void Remplir_Liste_Avec_Articles()
         {
-
+            /*
             SQLiteConnection Connection = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
             Connection.Open();
 
@@ -78,7 +78,7 @@ namespace Mercure
                 Affichage_Articles.Items.Add(RefArticle);
             }
 
-            Connection.Close();
+            Connection.Close();*/
         }
     }
 }
