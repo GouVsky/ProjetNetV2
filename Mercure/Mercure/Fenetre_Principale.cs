@@ -16,6 +16,8 @@ namespace Mercure
         public Fenetre_Principale()
         {
             InitializeComponent();
+
+            Initialiser_Liste();
         }
 
         private void Mercure_Load(object sender, EventArgs e)
@@ -57,9 +59,27 @@ namespace Mercure
 
         }
 
+        public void Initialiser_Liste()
+        {
+            int Nombre_Colonnes = 6;
+            int Taille_Liste = Affichage_Articles.Width;
+            int Taille_Colonne = Taille_Liste / Nombre_Colonnes;
+
+            // On définit la taille de la dernière colonne.
+            // La taille de la ListeView n'est pas forcément un multiple du nombre de colonnes.
+
+            int Taille_Derniere_Colonne = Taille_Liste - (Nombre_Colonnes - 1) * Taille_Colonne;
+
+            Affichage_Articles.Columns.Add("RefArticle", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Description", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("RefSousFamille", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("RefMarque", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("PrixHT", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Quantite", Taille_Derniere_Colonne, HorizontalAlignment.Left);
+        }
+
         public void Remplir_Liste_Avec_Articles()
         {
-            /*
             SQLiteConnection Connection = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
             Connection.Open();
 
@@ -68,17 +88,20 @@ namespace Mercure
 
             while (Lecture_Base_De_Donnees.Read())
             {
-                ListViewItem RefArticle = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[0]));
-                ListViewItem Description = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[1]));
-                ListViewItem RefSousFamille = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[2]));
-                ListViewItem RefMarque = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[3]));
-                ListViewItem PrixHT = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[4]));
-                ListViewItem Quantite = new ListViewItem(Convert.ToString(Lecture_Base_De_Donnees[5]));
+                string[] Donnees = { Convert.ToString(Lecture_Base_De_Donnees[0]), // RefArticle.
+                                     Convert.ToString(Lecture_Base_De_Donnees[1]), // Description.
+                                     Convert.ToString(Lecture_Base_De_Donnees[2]), // RefSousFamille.
+                                     Convert.ToString(Lecture_Base_De_Donnees[3]), // RefMarque
+                                     Convert.ToString(Lecture_Base_De_Donnees[4]), // PrixHT
+                                     Convert.ToString(Lecture_Base_De_Donnees[5])  // Quantite
+                                    };
 
-                Affichage_Articles.Items.Add(RefArticle);
+                ListViewItem Article = new ListViewItem(Donnees);
+
+                Affichage_Articles.Items.Add(Article);
             }
 
-            Connection.Close();*/
+            Connection.Close();
         }
     }
 }
