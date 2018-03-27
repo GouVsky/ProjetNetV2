@@ -84,25 +84,39 @@ namespace Mercure
         public void Remplir_Liste_Avec_Articles()
         {
             SQLiteConnection Connection = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
+
             Connection.Open();
 
-            SQLiteCommand Requete = new SQLiteCommand("SELECT * FROM Articles;", Connection);
-            SQLiteDataReader Lecture_Base_De_Donnees = Requete.ExecuteReader();
+            SQLiteCommand Requete_Article = new SQLiteCommand("SELECT * FROM Articles;", Connection);
 
-            while (Lecture_Base_De_Donnees.Read())
+            SQLiteDataReader Lecture_Table_Article = Requete_Article.ExecuteReader();
+
+            while (Lecture_Table_Article.Read())
             {
-                string[] Donnees = { Convert.ToString(Lecture_Base_De_Donnees[0]), // RefArticle.
-                                     Convert.ToString(Lecture_Base_De_Donnees[1]), // Description.
-                                     Convert.ToString(Lecture_Base_De_Donnees[2]), // RefSousFamille.
-                                     Convert.ToString(Lecture_Base_De_Donnees[3]), // RefMarque
-                                     Convert.ToString(Lecture_Base_De_Donnees[4]), // PrixHT
-                                     Convert.ToString(Lecture_Base_De_Donnees[5])  // Quantite
+                SQLiteCommand Requete_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE @IdFamille = RefFamille;", Connection);
+
+                Requete_Famille.Parameters.AddWithValue("@IdFamille", Convert.ToInt32(Lecture_Table_Article[2]));
+
+                SQLiteDataReader Lecture_Table_Famille = Requete_Famille.ExecuteReader();
+
+                Lecture_Table_Famille.Read();
+
+                string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]), // RefArticle.
+                                     Convert.ToString(Lecture_Table_Article[1]), // Description.
+                                     Convert.ToString(Lecture_Table_Famille[1]), // RefSousFamille.
+                                     Convert.ToString(Lecture_Table_Article[3]), // RefMarque
+                                     Convert.ToString(Lecture_Table_Article[4]), // PrixHT
+                                     Convert.ToString(Lecture_Table_Article[5])  // Quantite
                                     };
 
                 ListViewItem Article = new ListViewItem(Donnees);
 
                 Affichage_Articles.Items.Add(Article);
+
+                Lecture_Table_Famille.Close();
             }
+
+            Lecture_Table_Article.Close();
 
             Connection.Close();
         }
