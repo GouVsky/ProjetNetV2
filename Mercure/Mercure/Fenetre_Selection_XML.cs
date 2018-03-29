@@ -14,7 +14,7 @@ namespace Mercure
 {
     public partial class Fenetre_Selection_XML : Form
     {
-        String chemin_Fichier;
+        String Chemin_Fichier;
 
         public Fenetre_Selection_XML()
         {
@@ -30,7 +30,10 @@ namespace Mercure
         {
             OpenFileDialog Fenetre_Parcours = new OpenFileDialog();
             Fenetre_Parcours.ShowDialog();
-            chemin_Fichier=Fenetre_Parcours.FileName.ToString();
+
+            Chemin_Fichier = Fenetre_Parcours.FileName.ToString();
+
+            Affichage_Chemin_Fichier_XML.Text = Chemin_Fichier;
         }
 
         private void Bouton_Integrer_Click(object sender, EventArgs e)
@@ -46,7 +49,7 @@ namespace Mercure
              my_database.Open();
              try
              {
-                 my_XML_doc.Load(chemin_Fichier);
+                 my_XML_doc.Load(Chemin_Fichier);
                  XmlNodeList article = my_XML_doc.GetElementsByTagName("article");
                 
                  foreach (XmlNode selectNode in article)
