@@ -87,33 +87,43 @@ namespace Mercure
 
             Connection.Open();
 
-            SQLiteCommand Requete_Article = new SQLiteCommand("SELECT * FROM Articles;", Connection);
 
-            SQLiteDataReader Lecture_Table_Article = Requete_Article.ExecuteReader();
+            SQLiteDataReader Lecture_Table_Article = SqlDataReader.Recuperer_Articles(Connection);
 
             while (Lecture_Table_Article.Read())
             {
-                SQLiteCommand Requete_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE @IdFamille = RefFamille;", Connection);
+                string Nom_Famille = "-";
+                string Nom_Marque = "-";
 
-                Requete_Famille.Parameters.AddWithValue("@IdFamille", Convert.ToInt32(Lecture_Table_Article[2]));
+                SQLiteDataReader Lecture_Table_Famille = SqlDataReader.Recuperer_Famille(Connection, Convert.ToInt16(Lecture_Table_Article[2]));
 
-                SQLiteDataReader Lecture_Table_Famille = Requete_Famille.ExecuteReader();
+                SQLiteDataReader Lecture_Table_Marque = SqlDataReader.Recuperer_Marque(Connection, Convert.ToInt16(Lecture_Table_Article[3]));
 
-                Lecture_Table_Famille.Read();
+                if (Lecture_Table_Famille.Read())
+                {
+                    Nom_Famille = Convert.ToString(Lecture_Table_Famille[1]);
+                }
+
+                if (Lecture_Table_Marque.Read())
+                {
+                    Nom_Marque = Convert.ToString(Lecture_Table_Marque[1]);
+                }
 
                 string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]), // RefArticle.
                                      Convert.ToString(Lecture_Table_Article[1]), // Description.
-                                     Convert.ToString(Lecture_Table_Famille[1]), // RefSousFamille.
-                                     Convert.ToString(Lecture_Table_Article[3]), // RefMarque
+                                     Nom_Famille,                                // RefSousFamille.
+                                     Nom_Marque,                                 // RefMarque
                                      Convert.ToString(Lecture_Table_Article[4]), // PrixHT
                                      Convert.ToString(Lecture_Table_Article[5])  // Quantite
-                                    };
+                                   };
 
                 ListViewItem Article = new ListViewItem(Donnees);
 
                 Affichage_Articles.Items.Add(Article);
 
                 Lecture_Table_Famille.Close();
+
+                Lecture_Table_Marque.Close();
             }
 
             Lecture_Table_Article.Close();

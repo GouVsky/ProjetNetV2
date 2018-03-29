@@ -60,10 +60,10 @@ namespace Mercure
                      Console.WriteLine(famille.ToCharArray());
 
                      //////////////////////////////////////////////////////////////////////////////////////////
-                     int idFamille = iSqlDataReader.InsertIntoFamille(my_database, famille);
+                     int idFamille = SqlDataReader.InsertIntoFamille(my_database, famille);
                      ///////////////////////////////////////////////////////////////////////
                      SQLiteCommand verif_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE Nom LIKE @nomParam", my_database);
-                     verif_Marque.Parameters.AddWithValue("nomParam", marque);
+                     verif_Marque.Parameters.AddWithValue("@nomParam", marque);
 
                      if (verif_Marque.ExecuteScalar() == null)
                      {
@@ -92,7 +92,7 @@ namespace Mercure
                      idMarque = reader.GetInt32(0);
                      //////////////////////////////////////////////////////////////////////
                      SQLiteCommand verif_SousFamille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE Nom LIKE @nomParam", my_database);
-                     verif_SousFamille.Parameters.AddWithValue("nomParam", sousFamille);
+                     verif_SousFamille.Parameters.AddWithValue("@nomParam", sousFamille);
 
                      if (verif_SousFamille.ExecuteScalar() == null)
                      {
@@ -132,7 +132,7 @@ namespace Mercure
                      int value =insert_Article.ExecuteNonQuery();
                      
                  }
-                 MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de donnée", "Insertion réussie", MessageBoxButtons.OK);
+                 MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données", "Insertion réussie", MessageBoxButtons.OK);
 
              }
              catch (Exception except)

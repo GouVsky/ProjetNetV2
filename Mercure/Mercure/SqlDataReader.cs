@@ -11,15 +11,46 @@ using System.Data.SQLite;
 using System.Data.SqlClient;
 namespace Mercure
 {
-    public class iSqlDataReader
+    public class SqlDataReader
     {
+        public static SQLiteDataReader Recuperer_Articles(SQLiteConnection Connection)
+        {
+            SQLiteCommand Requete_Article = new SQLiteCommand("SELECT * FROM Articles;", Connection);
+
+            SQLiteDataReader Lecture_Table_Article = Requete_Article.ExecuteReader();
+
+            return Lecture_Table_Article;
+        }
+
+        public static SQLiteDataReader Recuperer_Famille(SQLiteConnection Connection, int Id_Famille)
+        {
+            SQLiteCommand Requete_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE @Id_Famille == RefFamille;", Connection);
+
+            Requete_Famille.Parameters.AddWithValue("@Id_Famille", Id_Famille);
+
+            SQLiteDataReader Lecture_Table_Famille = Requete_Famille.ExecuteReader();
+
+            return Lecture_Table_Famille;
+        }
+
+        public static SQLiteDataReader Recuperer_Marque(SQLiteConnection Connection, int Id_Marque)
+        {
+            SQLiteCommand Requete_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE @Id_Marque == RefMarque;", Connection);
+
+            Requete_Marque.Parameters.AddWithValue("@Id_Marque", Id_Marque);
+
+            SQLiteDataReader Lecture_Table_Marque = Requete_Marque.ExecuteReader();
+
+            return Lecture_Table_Marque;
+        }
+
         public static int InsertIntoFamille(SQLiteConnection my_database, string famille)
         {
             SQLiteDataReader reader;
             int idMaxFamille = 0;
 
             SQLiteCommand verif_famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @nomParam", my_database);
-            verif_famille.Parameters.AddWithValue("nomParam", famille);
+            verif_famille.Parameters.AddWithValue("@nomParam", famille);
 
             if (verif_famille.ExecuteScalar() == null)
             {
