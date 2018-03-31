@@ -12,6 +12,8 @@ namespace Mercure
 {
     public partial class Fenetre_Principale : Form
     {
+        private int Facteur_Tri = -1;
+
         public Fenetre_Principale()
         {
             InitializeComponent();
@@ -53,9 +55,31 @@ namespace Mercure
 
         }
 
-        private void Affichage_Articles_SelectedIndexChanged(object sender, EventArgs e)
+        private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
         {
+            if (e.Column != Facteur_Tri)
+            {
+                Facteur_Tri = e.Column;
 
+                // Par défaut, le tri se fait dans l'ordre croissant.
+
+                Affichage_Articles.Sorting = SortOrder.Ascending;
+            }
+
+            else
+            {
+                // On change le type de tri un coup sur deux.
+
+                if (Affichage_Articles.Sorting == SortOrder.Ascending)
+                    Affichage_Articles.Sorting = SortOrder.Descending;
+
+                else
+                    Affichage_Articles.Sorting = SortOrder.Ascending;
+            }
+
+            Affichage_Articles.ListViewItemSorter = new List_View_Comparateur_Items(e.Column, Affichage_Articles.Sorting);
+
+            Affichage_Articles.Sort();
         }
 
         public void Initialiser_Liste()
@@ -63,6 +87,8 @@ namespace Mercure
             int Nombre_Colonnes = 6;
             int Taille_Liste = Affichage_Articles.Width;
             int Taille_Colonne = Taille_Liste / Nombre_Colonnes;
+
+            Affichage_Articles.Items.RemoveAt(0);
 
             // On définit la taille de la dernière colonne.
             // La taille de la ListeView n'est pas forcément un multiple du nombre de colonnes.
@@ -78,7 +104,7 @@ namespace Mercure
 
             // Tri des colonnes.
 
-            Affichage_Articles.ListViewItemSorter = new List_View_Comparateur_Items();
+            Affichage_Articles.ColumnClick += new ColumnClickEventHandler(Affichage_Articles_ColumnClick);
         }
 
         public void Remplir_Liste_Avec_Articles()
@@ -100,14 +126,10 @@ namespace Mercure
                 SQLiteDataReader Lecture_Table_Marque = SqlDataReader.Recuperer_Marque(Connection, Convert.ToInt16(Lecture_Table_Article[3]));
 
                 if (Lecture_Table_Famille.Read())
-                {
                     Nom_Famille = Convert.ToString(Lecture_Table_Famille[1]);
-                }
 
                 if (Lecture_Table_Marque.Read())
-                {
                     Nom_Marque = Convert.ToString(Lecture_Table_Marque[1]);
-                }
 
                 string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]), // RefArticle.
                                      Convert.ToString(Lecture_Table_Article[1]), // Description.
@@ -129,23 +151,6 @@ namespace Mercure
             Lecture_Table_Article.Close();
 
             Connection.Close();
-        }
-
-        private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            List_View_Comparateur_Items Comparaison = (List_View_Comparateur_Items) Affichage_Articles.ListViewItemSorter;
-
-            if (e.Column == Comparaison.Colonne)
-            {
-                Comparaison.Tri = Swap(Comparaison.Tri);
-            }
-            else
-            {
-                Comparaison.Tri = SortOrder.Ascending;
-            }
-
-            Comparaison.Colonne = e.Column;
-            Affichage_Articles.Sort();
         }
 
         private SortOrder Swap(SortOrder tri)

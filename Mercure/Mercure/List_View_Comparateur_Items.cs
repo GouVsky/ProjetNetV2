@@ -9,30 +9,35 @@ namespace Mercure
 {
     class List_View_Comparateur_Items : IComparer
     {
-        public SortOrder Tri = SortOrder.Ascending;
+        private int Colonne;
 
-        public int Colonne;
+        private SortOrder Ordre;
+
+
 
         public List_View_Comparateur_Items()
         {
             Colonne = 0;
+
+            Ordre = SortOrder.Ascending;
         }
 
-        public List_View_Comparateur_Items(int Colonne)
+        public List_View_Comparateur_Items(int Colonne, SortOrder Ordre)
         {
             this.Colonne = Colonne;
+
+            this.Ordre = Ordre;
         }
 
         public int Compare(object Compare, object Comparant)
         {
             int Valeur = String.Compare(((ListViewItem) Compare).SubItems[Colonne].Text,
-                                        ((ListViewItem )Comparant).SubItems[Colonne].Text);
+                                        ((ListViewItem) Comparant).SubItems[Colonne].Text);
 
-            if (Tri == SortOrder.Descending)
-                return -Valeur;
+            if (Ordre == SortOrder.Descending)
+                Valeur *= -1;
 
-            else
-                return Valeur;
+            return Valeur;
         }
     }
 }

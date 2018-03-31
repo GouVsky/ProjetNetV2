@@ -143,7 +143,6 @@
             this.Affichage_Articles.TabIndex = 3;
             this.Affichage_Articles.UseCompatibleStateImageBehavior = false;
             this.Affichage_Articles.View = System.Windows.Forms.View.Details;
-            this.Affichage_Articles.SelectedIndexChanged += new System.EventHandler(this.Affichage_Articles_SelectedIndexChanged);
             // 
             // Fenetre_Principale
             // 
