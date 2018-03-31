@@ -31,8 +31,26 @@ namespace Mercure
 
         public int Compare(object Compare, object Comparant)
         {
-            int Valeur = String.Compare(((ListViewItem) Compare).SubItems[Colonne].Text,
-                                        ((ListViewItem) Comparant).SubItems[Colonne].Text);
+            int Valeur = 0;
+
+            int Compare_Nombre = 0;
+            int Comparant_Nombre = 0;
+
+            string Compare_Texte = ((ListViewItem) Compare).SubItems[Colonne].Text;
+            string Comparant_Texte = ((ListViewItem) Comparant).SubItems[Colonne].Text;
+
+
+            // Si l'on souhaite effectuer un tri sur une colonne contenant des valeurs numériques,
+            // il ne faut pas trier dans un ordre alphanumérique mais dans un ordre croissant.
+
+            if (int.TryParse(Compare_Texte, out Compare_Nombre)
+                && int.TryParse(Comparant_Texte, out Comparant_Nombre))
+            {
+                Valeur = Compare_Nombre.CompareTo(Comparant_Nombre);
+            }
+
+            else
+                Valeur = String.Compare(Compare_Texte, Comparant_Texte);
 
             if (Ordre == SortOrder.Descending)
                 Valeur *= -1;

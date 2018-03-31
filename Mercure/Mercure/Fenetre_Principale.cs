@@ -168,10 +168,5 @@ namespace Mercure
 
             Connection.Close();
         }
-
-        private SortOrder Swap(SortOrder tri)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
