@@ -38,7 +38,7 @@
             this.Menu_Apropos = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Aide = new System.Windows.Forms.ToolStripMenuItem();
             this.Barre_De_Statut = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.Barre_De_Progression = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.Affichage_Articles = new System.Windows.Forms.ListView();
             this.Barre_Menu.SuspendLayout();
@@ -111,7 +111,7 @@
             // Barre_De_Statut
             // 
             this.Barre_De_Statut.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar1,
+            this.Barre_De_Progression,
             this.toolStripStatusLabel1});
             this.Barre_De_Statut.Location = new System.Drawing.Point(0, 564);
             this.Barre_De_Statut.Name = "Barre_De_Statut";
@@ -121,11 +121,11 @@
             this.Barre_De_Statut.Text = "statusStrip1";
             this.Barre_De_Statut.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.Barre_De_Statut_ItemClicked);
             // 
-            // toolStripProgressBar1
+            // Barre_De_Progression
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(75, 16);
-            this.toolStripProgressBar1.Click += new System.EventHandler(this.toolStripProgressBar1_Click);
+            this.Barre_De_Progression.Name = "Barre_De_Progression";
+            this.Barre_De_Progression.Size = new System.Drawing.Size(75, 16);
+            this.Barre_De_Progression.Click += new System.EventHandler(this.Barre_De_Progression_Click);
             // 
             // toolStripStatusLabel1
             // 
@@ -144,6 +144,7 @@
             this.Affichage_Articles.TabIndex = 3;
             this.Affichage_Articles.UseCompatibleStateImageBehavior = false;
             this.Affichage_Articles.View = System.Windows.Forms.View.Details;
+            this.Affichage_Articles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Affichage_Articles_KeyDown);
             // 
             // Fenetre_Principale
             // 
@@ -156,6 +157,7 @@
             this.MainMenuStrip = this.Barre_Menu;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Fenetre_Principale";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercure";
             this.Load += new System.EventHandler(this.Mercure_Load);
             this.Barre_Menu.ResumeLayout(false);
@@ -178,7 +180,7 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Apropos;
         private System.Windows.Forms.ToolStripMenuItem Menu_Aide;
         private System.Windows.Forms.ToolStripMenuItem Menu_Fichier_Quitter;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripProgressBar Barre_De_Progression;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ListView Affichage_Articles;
     }

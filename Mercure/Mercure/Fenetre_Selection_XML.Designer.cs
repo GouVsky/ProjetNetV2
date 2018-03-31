@@ -76,6 +76,7 @@
             // 
             // Fenetre_Selection_XML
             // 
+            this.AcceptButton = this.Bouton_Integrer;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(356, 109);
@@ -86,6 +87,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Fenetre_Selection_XML";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Fenetre_Selection_XML";
             this.Load += new System.EventHandler(this.Fenetre_Selection_XML_Load);
             this.ResumeLayout(false);

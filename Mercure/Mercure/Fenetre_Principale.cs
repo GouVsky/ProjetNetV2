@@ -33,8 +33,9 @@ namespace Mercure
 
         private void Menu_Fichier_Import_XML_Click(object sender, EventArgs e)
         {
-            Fenetre_Selection_XML fen = new Fenetre_Selection_XML();
-            fen.ShowDialog();
+            Fenetre_Selection_XML Fenetre_XML = new Fenetre_Selection_XML();
+
+            Fenetre_XML.ShowDialog();
 
             Remplir_Liste_Avec_Articles();
 
@@ -42,7 +43,7 @@ namespace Mercure
 
         private void Menu_Fichier_Quitter_Click(object sender, EventArgs e)
         {
-
+            Close();
         }
 
         private void Barre_De_Statut_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -50,7 +51,7 @@ namespace Mercure
 
         }
 
-        private void toolStripProgressBar1_Click(object sender, EventArgs e)
+        private void Barre_De_Progression_Click(object sender, EventArgs e)
         {
 
         }
@@ -167,6 +168,21 @@ namespace Mercure
             Lecture_Table_Article.Close();
 
             Connection.Close();
+        }
+
+        private void Affichage_Articles_KeyDown(object sender, KeyEventArgs e)
+        {
+            // La fenêtre de modification d'un article ne s'affiche que lorsque l'utilisateur presse la touche 'Entrée'.
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                // TODO : envoyer en paramètre l'objet ((ListViewItem)Compare).SubItems
+                // Remplir les champs de la fenêtre avec les valeurs de l'objet.
+
+                Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
+
+                Fenetre_Ajout.ShowDialog();
+            }
         }
     }
 }
