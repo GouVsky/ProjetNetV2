@@ -22,6 +22,17 @@ namespace Mercure
             return Lecture_Table_Article;
         }
 
+        public static SQLiteDataReader Recuperer_Sous_Famille(SQLiteConnection Connection, int Id_Sous_Famille)
+        {
+            SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE @Id_Sous_Famille == RefSousFamille;", Connection);
+
+            Requete_Sous_Famille.Parameters.AddWithValue("@Id_Sous_Famille", Id_Sous_Famille);
+
+            SQLiteDataReader Lecture_Table_Sous_Famille = Requete_Sous_Famille.ExecuteReader();
+
+            return Lecture_Table_Sous_Famille;
+        }
+
         public static SQLiteDataReader Recuperer_Famille(SQLiteConnection Connection, int Id_Famille)
         {
             SQLiteCommand Requete_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE @Id_Famille == RefFamille;", Connection);

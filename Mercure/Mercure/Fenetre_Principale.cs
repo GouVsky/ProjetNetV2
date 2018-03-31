@@ -84,7 +84,7 @@ namespace Mercure
 
         public void Initialiser_Liste()
         {
-            int Nombre_Colonnes = 6;
+            int Nombre_Colonnes = 7;
             int Taille_Liste = Affichage_Articles.Width;
             int Taille_Colonne = Taille_Liste / Nombre_Colonnes;
 
@@ -97,9 +97,10 @@ namespace Mercure
 
             Affichage_Articles.Columns.Add("RefArticle", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Description", Taille_Colonne, HorizontalAlignment.Left);
-            Affichage_Articles.Columns.Add("RefSousFamille", Taille_Colonne, HorizontalAlignment.Left);
-            Affichage_Articles.Columns.Add("RefMarque", Taille_Colonne, HorizontalAlignment.Left);
-            Affichage_Articles.Columns.Add("PrixHT", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Sous-Famille", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Famille", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Marque", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Prix HT", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Quantite", Taille_Derniere_Colonne, HorizontalAlignment.Left);
 
             // Tri des colonnes.
@@ -118,32 +119,47 @@ namespace Mercure
 
             while (Lecture_Table_Article.Read())
             {
+                string Nom_Sous_Famille = "-";
                 string Nom_Famille = "-";
                 string Nom_Marque = "-";
 
-                SQLiteDataReader Lecture_Table_Famille = SqlDataReader.Recuperer_Famille(Connection, Convert.ToInt16(Lecture_Table_Article[2]));
+                SQLiteDataReader Lecture_Table_Sous_Famille = SqlDataReader.Recuperer_Sous_Famille(Connection, Convert.ToInt16(Lecture_Table_Article[2]));
 
                 SQLiteDataReader Lecture_Table_Marque = SqlDataReader.Recuperer_Marque(Connection, Convert.ToInt16(Lecture_Table_Article[3]));
 
-                if (Lecture_Table_Famille.Read())
-                    Nom_Famille = Convert.ToString(Lecture_Table_Famille[1]);
+                // On récupère la sous-famille et la famille de l'article.
+
+                if (Lecture_Table_Sous_Famille.Read())
+                {
+                    Nom_Sous_Famille = Convert.ToString(Lecture_Table_Sous_Famille[2]);
+
+                    SQLiteDataReader Lecture_Table_Famille = SqlDataReader.Recuperer_Famille(Connection, Convert.ToInt16(Lecture_Table_Sous_Famille[1]));
+
+                    if (Lecture_Table_Famille.Read())
+                        Nom_Famille = Convert.ToString(Lecture_Table_Famille[1]);
+
+                    Lecture_Table_Famille.Close();
+                }
+
+                // On récupère la marque de l'article.
 
                 if (Lecture_Table_Marque.Read())
                     Nom_Marque = Convert.ToString(Lecture_Table_Marque[1]);
 
                 string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]), // RefArticle.
                                      Convert.ToString(Lecture_Table_Article[1]), // Description.
-                                     Nom_Famille,                                // RefSousFamille.
-                                     Nom_Marque,                                 // RefMarque
-                                     Convert.ToString(Lecture_Table_Article[4]), // PrixHT
-                                     Convert.ToString(Lecture_Table_Article[5])  // Quantite
+                                     Nom_Sous_Famille,                           // Sous-Famille.
+                                     Nom_Famille,                                // Famille.
+                                     Nom_Marque,                                 // Marque.
+                                     Convert.ToString(Lecture_Table_Article[4]), // Prix HT.
+                                     Convert.ToString(Lecture_Table_Article[5])  // Quantite.
                                    };
 
                 ListViewItem Article = new ListViewItem(Donnees);
 
                 Affichage_Articles.Items.Add(Article);
 
-                Lecture_Table_Famille.Close();
+                Lecture_Table_Sous_Famille.Close();
 
                 Lecture_Table_Marque.Close();
             }

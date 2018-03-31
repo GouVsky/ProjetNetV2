@@ -135,6 +135,7 @@
             // 
             // Affichage_Articles
             // 
+            this.Affichage_Articles.FullRowSelect = true;
             this.Affichage_Articles.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.Affichage_Articles.Location = new System.Drawing.Point(44, 67);
