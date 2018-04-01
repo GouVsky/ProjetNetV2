@@ -147,6 +147,7 @@
             this.Affichage_Articles.View = System.Windows.Forms.View.Details;
             this.Affichage_Articles.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.Affichage_Articles_ItemSelectionChanged);
             this.Affichage_Articles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Affichage_Articles_KeyDown);
+            this.Affichage_Articles.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Affichage_Articles_MouseDoubleClick);
             // 
             // Fenetre_Principale
             // 

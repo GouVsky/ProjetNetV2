@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Mercure
@@ -178,14 +172,9 @@ namespace Mercure
         {
             // La fenêtre de modification d'un article ne s'affiche que lorsque l'utilisateur presse la touche 'Entrée'.
 
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && Affichage_Articles.SelectedItems.Count > 0)
             {
-                // TODO : envoyer en paramètre l'objet ((ListViewItem)Compare).SubItems
-                // Remplir les champs de la fenêtre avec les valeurs de l'objet.
-
-                Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
-
-                Fenetre_Ajout.ShowDialog();
+                Ouvrir_Fenetre_Modification_Article(((ListView) sender).SelectedItems[0]);
             }
 
             // Suppression d'un article.
@@ -206,6 +195,31 @@ namespace Mercure
                     }
                 }
             }
+
+            // Recharge de la liste des articles.
+
+            else if (e.KeyCode == Keys.F5)
+            {
+                Affichage_Articles.Refresh();
+            }
+        }
+
+        private void Affichage_Articles_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (Affichage_Articles.SelectedItems.Count > 0)
+            {
+                Ouvrir_Fenetre_Modification_Article(((ListView)sender).SelectedItems[0]);
+            }
+        }
+
+        private void Ouvrir_Fenetre_Modification_Article(ListViewItem Article)
+        {
+            // TODO : envoyer en paramètre l'objet ((ListViewItem)Compare).SubItems
+            // Remplir les champs de la fenêtre avec les valeurs de l'objet.
+
+            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
+
+            Fenetre_Ajout.ShowDialog();
         }
     }
 }
