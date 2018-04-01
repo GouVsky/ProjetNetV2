@@ -139,11 +139,13 @@
             this.Affichage_Articles.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.Affichage_Articles.Location = new System.Drawing.Point(44, 67);
+            this.Affichage_Articles.MultiSelect = false;
             this.Affichage_Articles.Name = "Affichage_Articles";
             this.Affichage_Articles.Size = new System.Drawing.Size(855, 449);
             this.Affichage_Articles.TabIndex = 3;
             this.Affichage_Articles.UseCompatibleStateImageBehavior = false;
             this.Affichage_Articles.View = System.Windows.Forms.View.Details;
+            this.Affichage_Articles.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.Affichage_Articles_ItemSelectionChanged);
             this.Affichage_Articles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Affichage_Articles_KeyDown);
             // 
             // Fenetre_Principale

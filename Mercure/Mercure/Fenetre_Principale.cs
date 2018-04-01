@@ -48,10 +48,14 @@ namespace Mercure
 
         private void Barre_De_Statut_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
         }
 
         private void Barre_De_Progression_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Affichage_Articles_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
 
         }
@@ -182,6 +186,25 @@ namespace Mercure
                 Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
 
                 Fenetre_Ajout.ShowDialog();
+            }
+
+            // Suppression d'un article.
+
+            else if (e.KeyCode == Keys.Delete && Affichage_Articles.SelectedItems.Count > 0)
+            {
+                DialogResult Resultat_Suppression = MessageBox.Show("L'article sélectionné va être supprimé. Il sera impossible de revenir en arrière. Continuer ?", 
+                                                                    "Suppression",
+                                                                    MessageBoxButtons.YesNo,
+                                                                    MessageBoxIcon.Question);
+
+                if (Resultat_Suppression == DialogResult.Yes)
+                {
+                    for (int i = 0; i < Affichage_Articles.Items.Count; i++)
+                    {
+                        if (Affichage_Articles.Items[i].Selected)
+                            Affichage_Articles.Items[i].Remove();
+                    }
+                }
             }
         }
     }
