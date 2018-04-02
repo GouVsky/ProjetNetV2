@@ -6,19 +6,16 @@ using System.Windows.Forms;
 
 namespace Mercure
 {
-    class Fenetre_Ajout_Article : Form
+    public partial class Fenetre_Ajout_Article : Form
     {
-        private void InitializeComponent()
+        public Fenetre_Ajout_Article()
         {
-            this.SuspendLayout();
-            // 
-            // Fenetre_Ajout_Article
-            // 
-            this.ClientSize = new System.Drawing.Size(365, 314);
-            this.Name = "Fenetre_Ajout_Article";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.ResumeLayout(false);
+            InitializeComponent();
+        }
 
+        public Fenetre_Ajout_Article(ListViewItem Article)
+        {
+            InitializeComponent();
         }
     }
 }

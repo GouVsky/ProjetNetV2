@@ -80,6 +80,9 @@
     <Compile Include="Fenetre_Ajout_Article.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Fenetre_Ajout_Article.Designer.cs">
+      <DependentUpon>Fenetre_Ajout_Article.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fenetre_Avertissement.cs">
       <SubType>Form</SubType>
     </Compile>

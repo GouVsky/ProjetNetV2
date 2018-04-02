@@ -63,10 +63,10 @@ namespace Mercure
 
         private void Modifier_Article_Click(object sender, EventArgs e)
         {
-            // TODO : envoyer en paramètre l'objet ((ListViewItem)Compare).SubItems
-            // Remplir les champs de la fenêtre avec les valeurs de l'objet.
+            // On affiche la même fenêtre que celle pour l'ajout d'un article,
+            // mais avec les champs remplis avec les informations de l'objet.
 
-            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
+            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article(((ListView) sender).SelectedItems[0]);
 
             Fenetre_Ajout.ShowDialog();
         }
@@ -143,7 +143,7 @@ namespace Mercure
         {
             if (Affichage_Articles.SelectedItems.Count > 0)
             {
-                Modifier_Article_Click(sender, null);
+                Modifier_Article_Click(sender, e);
             }
         }
 
