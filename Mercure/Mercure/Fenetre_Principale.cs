@@ -54,6 +54,40 @@ namespace Mercure
 
         }
 
+        private void Ajouter_Article_Click(object sender, EventArgs e)
+        {
+            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
+
+            Fenetre_Ajout.ShowDialog();
+        }
+
+        private void Modifier_Article_Click(object sender, EventArgs e)
+        {
+            // TODO : envoyer en paramètre l'objet ((ListViewItem)Compare).SubItems
+            // Remplir les champs de la fenêtre avec les valeurs de l'objet.
+
+            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
+
+            Fenetre_Ajout.ShowDialog();
+        }
+
+        private void Supprimer_Article_Click(object sender, EventArgs e)
+        {
+            DialogResult Resultat_Suppression = MessageBox.Show("L'article sélectionné va être supprimé. Il sera impossible de revenir en arrière. Continuer ?",
+                                                                "Suppression",
+                                                                MessageBoxButtons.YesNo,
+                                                                MessageBoxIcon.Question);
+
+            if (Resultat_Suppression == DialogResult.Yes)
+            {
+                for (int i = 0; i < Affichage_Articles.Items.Count; i++)
+                {
+                    if (Affichage_Articles.Items[i].Selected)
+                        Affichage_Articles.Items[i].Remove();
+                }
+            }
+        }
+
         private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             if (e.Column != Facteur_Tri)
@@ -79,6 +113,56 @@ namespace Mercure
             Affichage_Articles.ListViewItemSorter = new List_View_Comparateur_Items(e.Column, Affichage_Articles.Sorting);
 
             Affichage_Articles.Sort();
+        }
+
+        private void Affichage_Articles_KeyDown(object sender, KeyEventArgs e)
+        {
+            // La fenêtre de modification d'un article ne s'affiche que lorsque l'utilisateur presse la touche 'Entrée'.
+
+            if (e.KeyCode == Keys.Enter && Affichage_Articles.SelectedItems.Count > 0)
+            {
+                Modifier_Article_Click(sender, e);
+            }
+
+            // Suppression d'un article.
+
+            else if (e.KeyCode == Keys.Delete && Affichage_Articles.SelectedItems.Count > 0)
+            {
+                Supprimer_Article_Click(sender, e);
+            }
+
+            // Recharge de la liste des articles.
+
+            else if (e.KeyCode == Keys.F5)
+            {
+                Affichage_Articles.Refresh();
+            }
+        }
+
+        private void Affichage_Articles_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (Affichage_Articles.SelectedItems.Count > 0)
+            {
+                Modifier_Article_Click(sender, null);
+            }
+        }
+
+        private void Affichage_Articles_MouseClick(object sender, MouseEventArgs e)
+        {
+            ContextMenu Menu_Contextuel = new ContextMenu();
+
+            // Affichage d'un menu contextuel lors du clic droit de la souris.
+            // Si aucun article n'est sélectionné, l'utilisateur ne pourra que faire l'action "Ajouter".
+            // Dans le cas contraire, les deux actions "Modifier" et "Supprimer" s'ajoutent.
+
+            if (e.Button == MouseButtons.Right)
+            {
+                Menu_Contextuel.MenuItems.Add("Ajouter un article", new EventHandler(Ajouter_Article_Click));
+                Menu_Contextuel.MenuItems.Add("Modifier l'article sélectionné", new EventHandler(Modifier_Article_Click));
+                Menu_Contextuel.MenuItems.Add("Supprimer l'article sélectionné", new EventHandler(Supprimer_Article_Click));
+
+                Affichage_Articles.ContextMenu = Menu_Contextuel;
+            }
         }
 
         public void Initialiser_Liste()
@@ -166,60 +250,6 @@ namespace Mercure
             Lecture_Table_Article.Close();
 
             Connection.Close();
-        }
-
-        private void Affichage_Articles_KeyDown(object sender, KeyEventArgs e)
-        {
-            // La fenêtre de modification d'un article ne s'affiche que lorsque l'utilisateur presse la touche 'Entrée'.
-
-            if (e.KeyCode == Keys.Enter && Affichage_Articles.SelectedItems.Count > 0)
-            {
-                Ouvrir_Fenetre_Modification_Article(((ListView) sender).SelectedItems[0]);
-            }
-
-            // Suppression d'un article.
-
-            else if (e.KeyCode == Keys.Delete && Affichage_Articles.SelectedItems.Count > 0)
-            {
-                DialogResult Resultat_Suppression = MessageBox.Show("L'article sélectionné va être supprimé. Il sera impossible de revenir en arrière. Continuer ?", 
-                                                                    "Suppression",
-                                                                    MessageBoxButtons.YesNo,
-                                                                    MessageBoxIcon.Question);
-
-                if (Resultat_Suppression == DialogResult.Yes)
-                {
-                    for (int i = 0; i < Affichage_Articles.Items.Count; i++)
-                    {
-                        if (Affichage_Articles.Items[i].Selected)
-                            Affichage_Articles.Items[i].Remove();
-                    }
-                }
-            }
-
-            // Recharge de la liste des articles.
-
-            else if (e.KeyCode == Keys.F5)
-            {
-                Affichage_Articles.Refresh();
-            }
-        }
-
-        private void Affichage_Articles_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (Affichage_Articles.SelectedItems.Count > 0)
-            {
-                Ouvrir_Fenetre_Modification_Article(((ListView)sender).SelectedItems[0]);
-            }
-        }
-
-        private void Ouvrir_Fenetre_Modification_Article(ListViewItem Article)
-        {
-            // TODO : envoyer en paramètre l'objet ((ListViewItem)Compare).SubItems
-            // Remplir les champs de la fenêtre avec les valeurs de l'objet.
-
-            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
-
-            Fenetre_Ajout.ShowDialog();
         }
     }
 }
