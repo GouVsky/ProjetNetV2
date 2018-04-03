@@ -177,7 +177,7 @@ namespace Mercure
                 insert_Article.Parameters.AddWithValue("@refSF", idSousFamille);
                 insert_Article.Parameters.AddWithValue("@refMarq", idMarque);
                 insert_Article.Parameters.AddWithValue("@prixHT", prix);
-                insert_Article.Parameters.AddWithValue("@Quantite", 0);
+                insert_Article.Parameters.AddWithValue("@Quantite", 1);
                 value = insert_Article.ExecuteNonQuery();
             }
             else
@@ -188,6 +188,15 @@ namespace Mercure
             }
             
             return value;
+        }
+
+        public static void PurgerBDD(SQLiteConnection my_database)
+        {
+            SQLiteCommand Purger_Tables = new SQLiteCommand("DELETE FROM Familles; " +
+                                                            "DELETE FROM Marques; " +
+                                                            "DELETE FROM SousFamilles;" +
+                                                            "DELETE FROM Articles;", my_database);
+            Purger_Tables.ExecuteNonQuery();
         }
     }
 }
