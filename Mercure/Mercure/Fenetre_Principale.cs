@@ -31,6 +31,9 @@ namespace Mercure
 
             Fenetre_XML.ShowDialog();
 
+            // A chaque importation, on supprime ce qui existe déjà dans la liste,
+            // afin d'afficher les nouvelles données.
+
             if (Fenetre_XML.Get_Importation_Value())
             {
                 Affichage_Articles.Items.Clear();

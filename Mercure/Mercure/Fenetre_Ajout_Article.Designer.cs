@@ -27,10 +27,10 @@ namespace Mercure
             // 
             // Description_Article_Edition
             // 
-            this.Description_Article_Edition.Location = new System.Drawing.Point(21, 226);
+            this.Description_Article_Edition.Location = new System.Drawing.Point(21, 182);
             this.Description_Article_Edition.Multiline = true;
             this.Description_Article_Edition.Name = "Description_Article_Edition";
-            this.Description_Article_Edition.Size = new System.Drawing.Size(416, 72);
+            this.Description_Article_Edition.Size = new System.Drawing.Size(268, 98);
             this.Description_Article_Edition.TabIndex = 0;
             // 
             // Reference_Article_Titre
@@ -45,7 +45,7 @@ namespace Mercure
             // Description_Article_Label
             // 
             this.Description_Article_Label.AutoSize = true;
-            this.Description_Article_Label.Location = new System.Drawing.Point(18, 197);
+            this.Description_Article_Label.Location = new System.Drawing.Point(18, 166);
             this.Description_Article_Label.Name = "Description_Article_Label";
             this.Description_Article_Label.Size = new System.Drawing.Size(60, 13);
             this.Description_Article_Label.TabIndex = 2;
@@ -53,15 +53,15 @@ namespace Mercure
             // 
             // Reference_Article_Edition
             // 
-            this.Reference_Article_Edition.Location = new System.Drawing.Point(21, 78);
+            this.Reference_Article_Edition.Location = new System.Drawing.Point(21, 68);
             this.Reference_Article_Edition.Name = "Reference_Article_Edition";
-            this.Reference_Article_Edition.Size = new System.Drawing.Size(100, 20);
+            this.Reference_Article_Edition.Size = new System.Drawing.Size(121, 20);
             this.Reference_Article_Edition.TabIndex = 3;
             // 
             // Famille_Article_Titre
             // 
             this.Famille_Article_Titre.AutoSize = true;
-            this.Famille_Article_Titre.Location = new System.Drawing.Point(18, 125);
+            this.Famille_Article_Titre.Location = new System.Drawing.Point(18, 107);
             this.Famille_Article_Titre.Name = "Famille_Article_Titre";
             this.Famille_Article_Titre.Size = new System.Drawing.Size(39, 13);
             this.Famille_Article_Titre.TabIndex = 4;
@@ -70,7 +70,7 @@ namespace Mercure
             // Sous_Famille_Article_Titre
             // 
             this.Sous_Famille_Article_Titre.AutoSize = true;
-            this.Sous_Famille_Article_Titre.Location = new System.Drawing.Point(165, 125);
+            this.Sous_Famille_Article_Titre.Location = new System.Drawing.Point(165, 107);
             this.Sous_Famille_Article_Titre.Name = "Sous_Famille_Article_Titre";
             this.Sous_Famille_Article_Titre.Size = new System.Drawing.Size(63, 13);
             this.Sous_Famille_Article_Titre.TabIndex = 5;
@@ -79,7 +79,7 @@ namespace Mercure
             // Marque_Article_Titre
             // 
             this.Marque_Article_Titre.AutoSize = true;
-            this.Marque_Article_Titre.Location = new System.Drawing.Point(313, 125);
+            this.Marque_Article_Titre.Location = new System.Drawing.Point(165, 52);
             this.Marque_Article_Titre.Name = "Marque_Article_Titre";
             this.Marque_Article_Titre.Size = new System.Drawing.Size(43, 13);
             this.Marque_Article_Titre.TabIndex = 6;
@@ -88,7 +88,7 @@ namespace Mercure
             // Choix_Famille_Article
             // 
             this.Choix_Famille_Article.FormattingEnabled = true;
-            this.Choix_Famille_Article.Location = new System.Drawing.Point(21, 150);
+            this.Choix_Famille_Article.Location = new System.Drawing.Point(21, 123);
             this.Choix_Famille_Article.Name = "Choix_Famille_Article";
             this.Choix_Famille_Article.Size = new System.Drawing.Size(121, 21);
             this.Choix_Famille_Article.TabIndex = 7;
@@ -96,7 +96,7 @@ namespace Mercure
             // Choix_Sous_Famille_Article
             // 
             this.Choix_Sous_Famille_Article.FormattingEnabled = true;
-            this.Choix_Sous_Famille_Article.Location = new System.Drawing.Point(168, 150);
+            this.Choix_Sous_Famille_Article.Location = new System.Drawing.Point(168, 123);
             this.Choix_Sous_Famille_Article.Name = "Choix_Sous_Famille_Article";
             this.Choix_Sous_Famille_Article.Size = new System.Drawing.Size(121, 21);
             this.Choix_Sous_Famille_Article.TabIndex = 8;
@@ -104,7 +104,7 @@ namespace Mercure
             // Choix_Marque_Article
             // 
             this.Choix_Marque_Article.FormattingEnabled = true;
-            this.Choix_Marque_Article.Location = new System.Drawing.Point(316, 150);
+            this.Choix_Marque_Article.Location = new System.Drawing.Point(168, 68);
             this.Choix_Marque_Article.Name = "Choix_Marque_Article";
             this.Choix_Marque_Article.Size = new System.Drawing.Size(121, 21);
             this.Choix_Marque_Article.TabIndex = 9;
@@ -112,7 +112,7 @@ namespace Mercure
             // Prix_Unitaire_Article_Titre
             // 
             this.Prix_Unitaire_Article_Titre.AutoSize = true;
-            this.Prix_Unitaire_Article_Titre.Location = new System.Drawing.Point(18, 361);
+            this.Prix_Unitaire_Article_Titre.Location = new System.Drawing.Point(18, 349);
             this.Prix_Unitaire_Article_Titre.Name = "Prix_Unitaire_Article_Titre";
             this.Prix_Unitaire_Article_Titre.Size = new System.Drawing.Size(118, 13);
             this.Prix_Unitaire_Article_Titre.TabIndex = 11;
@@ -121,7 +121,7 @@ namespace Mercure
             // Quantite_Article_Titre
             // 
             this.Quantite_Article_Titre.AutoSize = true;
-            this.Quantite_Article_Titre.Location = new System.Drawing.Point(165, 361);
+            this.Quantite_Article_Titre.Location = new System.Drawing.Point(193, 349);
             this.Quantite_Article_Titre.Name = "Quantite_Article_Titre";
             this.Quantite_Article_Titre.Size = new System.Drawing.Size(47, 13);
             this.Quantite_Article_Titre.TabIndex = 12;
@@ -131,7 +131,7 @@ namespace Mercure
             // 
             this.Zone_Autres_Informations_Titre.AutoSize = true;
             this.Zone_Autres_Informations_Titre.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.Zone_Autres_Informations_Titre.Location = new System.Drawing.Point(18, 328);
+            this.Zone_Autres_Informations_Titre.Location = new System.Drawing.Point(18, 315);
             this.Zone_Autres_Informations_Titre.Name = "Zone_Autres_Informations_Titre";
             this.Zone_Autres_Informations_Titre.Size = new System.Drawing.Size(115, 13);
             this.Zone_Autres_Informations_Titre.TabIndex = 15;
@@ -149,21 +149,21 @@ namespace Mercure
             // 
             // Quantite_Article_Edition
             // 
-            this.Quantite_Article_Edition.Location = new System.Drawing.Point(168, 387);
+            this.Quantite_Article_Edition.Location = new System.Drawing.Point(196, 366);
             this.Quantite_Article_Edition.Name = "Quantite_Article_Edition";
-            this.Quantite_Article_Edition.Size = new System.Drawing.Size(70, 20);
+            this.Quantite_Article_Edition.Size = new System.Drawing.Size(60, 20);
             this.Quantite_Article_Edition.TabIndex = 17;
             // 
             // Prix_Unitaire_Article_Edition
             // 
-            this.Prix_Unitaire_Article_Edition.Location = new System.Drawing.Point(21, 387);
+            this.Prix_Unitaire_Article_Edition.Location = new System.Drawing.Point(21, 365);
             this.Prix_Unitaire_Article_Edition.Name = "Prix_Unitaire_Article_Edition";
             this.Prix_Unitaire_Article_Edition.Size = new System.Drawing.Size(100, 20);
             this.Prix_Unitaire_Article_Edition.TabIndex = 13;
             // 
             // Fenetre_Ajout_Article
             // 
-            this.ClientSize = new System.Drawing.Size(457, 430);
+            this.ClientSize = new System.Drawing.Size(311, 402);
             this.Controls.Add(this.Quantite_Article_Edition);
             this.Controls.Add(this.Zone_Description_Article_Titre);
             this.Controls.Add(this.Zone_Autres_Informations_Titre);

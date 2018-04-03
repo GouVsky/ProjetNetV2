@@ -55,148 +55,148 @@ namespace Mercure
             return Lecture_Table_Marque;
         }
 
-        public static int InsertIntoFamille(SQLiteConnection my_database, string famille)
+        public static int InsertIntoFamille(SQLiteConnection Connection, string Famille)
         {
 
-            SQLiteDataReader reader;
-            int idMaxFamille = 0;
+            SQLiteDataReader Lecture;
+            int Id_Max_Famille = 0;
 
-            SQLiteCommand verif_famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @nomParam", my_database);
-            verif_famille.Parameters.AddWithValue("@nomParam", famille);
+            SQLiteCommand Verif_famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @nomParam", Connection);
+            Verif_famille.Parameters.AddWithValue("@nomParam", Famille);
 
-            if (verif_famille.ExecuteScalar() == null)
+            if (Verif_famille.ExecuteScalar() == null)
             {
-                SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM Familles ORDER BY RefFamille DESC;", my_database);
-                reader = Recuperer_IdMax.ExecuteReader();
-                reader.Read();
-                if (!reader.HasRows)
+                SQLiteCommand Recuperer_Id_Max = new SQLiteCommand("SELECT * FROM Familles ORDER BY RefFamille DESC;", Connection);
+                Lecture = Recuperer_Id_Max.ExecuteReader();
+                Lecture.Read();
+                if (!Lecture.HasRows)
                 {
-                    idMaxFamille = 0;
+                    Id_Max_Famille = 0;
                 }
                 else
                 {
-                    idMaxFamille = reader.GetInt32(0);
+                    Id_Max_Famille = Lecture.GetInt32(0);
                 }
 
-                reader.Close();
+                Lecture.Close();
 
-                SQLiteCommand insert_Famille = new SQLiteCommand("INSERT INTO Familles (RefFamille, Nom) VALUES (@IdParam , @nomParam);", my_database);
-                insert_Famille.Parameters.AddWithValue("@nomParam", famille);
-                insert_Famille.Parameters.AddWithValue("@IdParam", idMaxFamille + 1);
-                insert_Famille.ExecuteNonQuery();
+                SQLiteCommand Inserer_Famille = new SQLiteCommand("INSERT INTO Familles (RefFamille, Nom) VALUES (@IdParam , @nomParam);", Connection);
+                Inserer_Famille.Parameters.AddWithValue("@nomParam", Famille);
+                Inserer_Famille.Parameters.AddWithValue("@IdParam", Id_Max_Famille + 1);
+                Inserer_Famille.ExecuteNonQuery();
             }
-            reader = verif_famille.ExecuteReader();
-            reader.Read();
-            int idFamilles;
-            idFamilles = reader.GetInt32(0);
-            return idFamilles;
+            Lecture = Verif_famille.ExecuteReader();
+            Lecture.Read();
+            int Id_Familles;
+            Id_Familles = Lecture.GetInt32(0);
+            return Id_Familles;
         }
 
-        public static int InsertIntoMarque(SQLiteConnection my_database, string marque)
+        public static int Inserer_Marque(SQLiteConnection Connection, string Marque)
         {
-            SQLiteDataReader reader;
-            int idMaxMarque;
-            SQLiteCommand verif_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE Nom LIKE @nomParam", my_database);
-            verif_Marque.Parameters.AddWithValue("@nomParam", marque);
+            SQLiteDataReader Lecture;
+            int Id_Max_Marque;
+            SQLiteCommand Verif_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE Nom LIKE @nomParam", Connection);
+            Verif_Marque.Parameters.AddWithValue("@nomParam", Marque);
 
-            if (verif_Marque.ExecuteScalar() == null)
+            if (Verif_Marque.ExecuteScalar() == null)
             {
-                SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM Marques ORDER BY RefMarque DESC;", my_database);
-                reader = Recuperer_IdMax.ExecuteReader();
-                reader.Read();
-                if (!reader.HasRows)
+                SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM Marques ORDER BY RefMarque DESC;", Connection);
+                Lecture = Recuperer_IdMax.ExecuteReader();
+                Lecture.Read();
+                if (!Lecture.HasRows)
                 {
-                    idMaxMarque = 0;
+                    Id_Max_Marque = 0;
                 }
                 else
                 {
-                    idMaxMarque = reader.GetInt32(0);
+                    Id_Max_Marque = Lecture.GetInt32(0);
                 }
 
-                reader.Close();
+                Lecture.Close();
 
-                SQLiteCommand insert_marque = new SQLiteCommand("INSERT INTO Marques (RefMarque, Nom) VALUES (@IdParam , @nomParam);", my_database);
-                insert_marque.Parameters.AddWithValue("@nomParam", marque);
-                insert_marque.Parameters.AddWithValue("@IdParam", idMaxMarque + 1);
-                insert_marque.ExecuteNonQuery();
+                SQLiteCommand Inserer_Marque = new SQLiteCommand("INSERT INTO Marques (RefMarque, Nom) VALUES (@IdParam , @nomParam);", Connection);
+                Inserer_Marque.Parameters.AddWithValue("@nomParam", Marque);
+                Inserer_Marque.Parameters.AddWithValue("@IdParam", Id_Max_Marque + 1);
+                Inserer_Marque.ExecuteNonQuery();
             }
-            reader = verif_Marque.ExecuteReader();
-            reader.Read();
-            int idMarque;
-            idMarque = reader.GetInt32(0);
-            return idMarque;
+            Lecture = Verif_Marque.ExecuteReader();
+            Lecture.Read();
+            int Id_Marque;
+            Id_Marque = Lecture.GetInt32(0);
+            return Id_Marque;
         }
 
-        public static int InsertIntoSousFamille(SQLiteConnection my_database, string sousFamille, int idFamille)
+        public static int Inserer_Sous_Famille(SQLiteConnection Connection, string Sous_Famille, int Id_Famille)
         {
-            SQLiteDataReader reader;
-            int idMaxSousFamille;
-            SQLiteCommand verif_SousFamille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE Nom LIKE @nomParam", my_database);
-            verif_SousFamille.Parameters.AddWithValue("@nomParam", sousFamille);
+            SQLiteDataReader Lecture;
+            int Id_Max_Sous_Famille;
+            SQLiteCommand Verif_Sous_Famille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE Nom LIKE @nomParam", Connection);
+            Verif_Sous_Famille.Parameters.AddWithValue("@nomParam", Sous_Famille);
 
-            if (verif_SousFamille.ExecuteScalar() == null)
+            if (Verif_Sous_Famille.ExecuteScalar() == null)
             {
-                SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY RefSousFamille DESC;", my_database);
-                reader = Recuperer_IdMax.ExecuteReader();
-                reader.Read();
-                if (!reader.HasRows)
+                SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY RefSousFamille DESC;", Connection);
+                Lecture = Recuperer_IdMax.ExecuteReader();
+                Lecture.Read();
+                if (!Lecture.HasRows)
                 {
-                    idMaxSousFamille = 0;
+                    Id_Max_Sous_Famille = 0;
                 }
                 else
                 {
-                    idMaxSousFamille = reader.GetInt32(0);
+                    Id_Max_Sous_Famille = Lecture.GetInt32(0);
                 }
 
-                reader.Close();
+                Lecture.Close();
 
-                SQLiteCommand insert_SousFamille = new SQLiteCommand("INSERT INTO SousFamilles (RefSousFamille, RefFamille, Nom) VALUES (@IdParam , @familleParam, @nomParam);", my_database);
-                insert_SousFamille.Parameters.AddWithValue("@nomParam", sousFamille);
-                insert_SousFamille.Parameters.AddWithValue("@familleParam", idFamille);
-                insert_SousFamille.Parameters.AddWithValue("@IdParam", idMaxSousFamille + 1);
-                insert_SousFamille.ExecuteNonQuery();
+                SQLiteCommand Inserer_Sous_Famille = new SQLiteCommand("INSERT INTO SousFamilles (RefSousFamille, RefFamille, Nom) VALUES (@IdParam , @familleParam, @nomParam);", Connection);
+                Inserer_Sous_Famille.Parameters.AddWithValue("@nomParam", Sous_Famille);
+                Inserer_Sous_Famille.Parameters.AddWithValue("@familleParam", Id_Famille);
+                Inserer_Sous_Famille.Parameters.AddWithValue("@IdParam", Id_Max_Sous_Famille + 1);
+                Inserer_Sous_Famille.ExecuteNonQuery();
             }
-            reader = verif_SousFamille.ExecuteReader();
-            reader.Read();
-            int idSousFamille;
-            idSousFamille = reader.GetInt32(0);
-            return idSousFamille;
+            Lecture = Verif_Sous_Famille.ExecuteReader();
+            Lecture.Read();
+            int Id_Sous_Famille;
+            Id_Sous_Famille = Lecture.GetInt32(0);
+            return Id_Sous_Famille;
         }
 
-        public static int InsertIntoArticle(SQLiteConnection my_database, string refArticle, string description, int idSousFamille, int idMarque, string prix)
+        public static int Inserer_Article(SQLiteConnection Connection, string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, string Prix)
         {
-            int value=-1;
-            SQLiteCommand verif_Article = new SQLiteCommand("SELECT * FROM Articles WHERE RefArticle LIKE @refArticle", my_database);
-            verif_Article.Parameters.AddWithValue("@refArticle", refArticle);
+            int Valeur=-1;
+            SQLiteCommand Verif_Article = new SQLiteCommand("SELECT * FROM Articles WHERE RefArticle LIKE @refArticle", Connection);
+            Verif_Article.Parameters.AddWithValue("@refArticle", Ref_Article);
 
-            if (verif_Article.ExecuteScalar() == null)
+            if (Verif_Article.ExecuteScalar() == null)
             {
-                SQLiteCommand insert_Article = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (@refArticle, @desc, @refSF, @refMarq, @prixHT, @Quantite); ", my_database);
-                insert_Article.Parameters.AddWithValue("@refArticle", refArticle);
-                insert_Article.Parameters.AddWithValue("@desc", description);
-                insert_Article.Parameters.AddWithValue("@refSF", idSousFamille);
-                insert_Article.Parameters.AddWithValue("@refMarq", idMarque);
-                insert_Article.Parameters.AddWithValue("@prixHT", prix);
+                SQLiteCommand insert_Article = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (@refArticle, @desc, @refSF, @refMarq, @prixHT, @Quantite); ", Connection);
+                insert_Article.Parameters.AddWithValue("@refArticle", Ref_Article);
+                insert_Article.Parameters.AddWithValue("@desc", Description);
+                insert_Article.Parameters.AddWithValue("@refSF", Id_Sous_Famille);
+                insert_Article.Parameters.AddWithValue("@refMarq", Id_Marque);
+                insert_Article.Parameters.AddWithValue("@prixHT", Prix);
                 insert_Article.Parameters.AddWithValue("@Quantite", 1);
-                value = insert_Article.ExecuteNonQuery();
+                Valeur = insert_Article.ExecuteNonQuery();
             }
             else
             {
-                SQLiteCommand update_Article = new SQLiteCommand("UPDATE Articles SET Quantite = Quantite+1 WHERE RefArticle LIKE @RefArticle", my_database);
-                update_Article.Parameters.AddWithValue("@RefArticle", refArticle);
-                value = update_Article.ExecuteNonQuery();
+                SQLiteCommand Mise_A_Jour_Article = new SQLiteCommand("UPDATE Articles SET Quantite = Quantite+1 WHERE RefArticle LIKE @RefArticle", Connection);
+                Mise_A_Jour_Article.Parameters.AddWithValue("@RefArticle", Ref_Article);
+                Valeur = Mise_A_Jour_Article.ExecuteNonQuery();
             }
             
-            return value;
+            return Valeur;
         }
 
-        public static void PurgerBDD(SQLiteConnection my_database)
+        public static void Purger_BDD(SQLiteConnection Connection)
         {
             SQLiteCommand Purger_Tables = new SQLiteCommand("DELETE FROM Familles; " +
                                                             "DELETE FROM Marques; " +
                                                             "DELETE FROM SousFamilles;" +
                                                             "DELETE FROM Articles;" +
-                                                            "VACUUM", my_database);
+                                                            "VACUUM", Connection);
             Purger_Tables.ExecuteNonQuery();
         }
     }

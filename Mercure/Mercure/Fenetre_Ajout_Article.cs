@@ -16,6 +16,8 @@ namespace Mercure
         public Fenetre_Ajout_Article(ListViewItem Article)
         {
             InitializeComponent();
+
+            Reference_Article_Edition.Text = Article.SubItems[0].Text;
         }
     }
 }
