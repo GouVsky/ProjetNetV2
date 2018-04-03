@@ -39,7 +39,16 @@ namespace Mercure
         private void Bouton_Integrer_Click(object sender, EventArgs e)
         {
             bool Effacer_BDD = true;
-            Fonction_Lecture_XML(Effacer_BDD);
+            DialogResult result = MessageBox.Show("Attention, vous etes sur le point d'écraser la base de donnée existante.", "Attention", MessageBoxButtons.OKCancel);
+                if(result == DialogResult.Cancel)
+                {
+                    this.Close();
+                }
+                if(result == DialogResult.OK)
+                {
+                    Fonction_Lecture_XML(Effacer_BDD);
+                }
+            
         }
 
         private void Buton_MAJ_Click(object sender, EventArgs e)
@@ -50,6 +59,7 @@ namespace Mercure
 
         private void Fonction_Lecture_XML(bool Effacer_BDD)
         {
+            int nbre_donnee = 0;
             XmlDocument my_XML_doc = new XmlDocument();
 
             SQLiteConnection my_database = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
@@ -83,8 +93,10 @@ namespace Mercure
                     //////////////////////////////////////////////////////////////////////
                     int value = SqlDataReader.InsertIntoArticle(my_database, refArticle, description, idSousFamille, idMarque, prix);
 
+                    nbre_donnee++;
+
                 }
-                MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données", "Insertion réussie", MessageBoxButtons.OK);
+                MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données. " + nbre_donnee + " données ont été chargées." , "Insertion réussie", MessageBoxButtons.OK);
 
             }
             catch (Exception except)
