@@ -31,8 +31,17 @@ namespace Mercure
 
             Fenetre_XML.ShowDialog();
 
-            Remplir_Liste_Avec_Articles();
+            if (Fenetre_XML.Get_Importation_Value())
+            {
+                Remplir_Liste_Avec_Articles();
+            }
 
+            else if (Fenetre_XML.Get_Mise_A_Jour_Value())
+            {
+                Affichage_Articles.Items.Clear();
+
+                Remplir_Liste_Avec_Articles();
+            }
         }
 
         private void Menu_Fichier_Quitter_Click(object sender, EventArgs e)
