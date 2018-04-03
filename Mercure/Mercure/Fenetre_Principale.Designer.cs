@@ -38,7 +38,6 @@
             this.Menu_Apropos = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Aide = new System.Windows.Forms.ToolStripMenuItem();
             this.Barre_De_Statut = new System.Windows.Forms.StatusStrip();
-            this.Barre_De_Progression = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.Affichage_Articles = new System.Windows.Forms.ListView();
             this.Barre_Menu.SuspendLayout();
@@ -55,8 +54,8 @@
             this.Menu_Aide});
             this.Barre_Menu.Location = new System.Drawing.Point(0, 0);
             this.Barre_Menu.Name = "Barre_Menu";
-            this.Barre_Menu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.Barre_Menu.Size = new System.Drawing.Size(939, 24);
+            this.Barre_Menu.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.Barre_Menu.Size = new System.Drawing.Size(1252, 28);
             this.Barre_Menu.TabIndex = 0;
             this.Barre_Menu.Text = "Menu";
             // 
@@ -66,71 +65,64 @@
             this.Menu_Fichier_Import_XML,
             this.Menu_Fichier_Quitter});
             this.Menu_Fichier.Name = "Menu_Fichier";
-            this.Menu_Fichier.Size = new System.Drawing.Size(54, 20);
+            this.Menu_Fichier.Size = new System.Drawing.Size(64, 24);
             this.Menu_Fichier.Text = "Fichier";
             this.Menu_Fichier.Click += new System.EventHandler(this.Menu_Fichier_Click);
             // 
             // Menu_Fichier_Import_XML
             // 
             this.Menu_Fichier_Import_XML.Name = "Menu_Fichier_Import_XML";
-            this.Menu_Fichier_Import_XML.Size = new System.Drawing.Size(147, 22);
+            this.Menu_Fichier_Import_XML.Size = new System.Drawing.Size(169, 24);
             this.Menu_Fichier_Import_XML.Text = "Importer XML";
             this.Menu_Fichier_Import_XML.Click += new System.EventHandler(this.Menu_Fichier_Import_XML_Click);
             // 
             // Menu_Fichier_Quitter
             // 
             this.Menu_Fichier_Quitter.Name = "Menu_Fichier_Quitter";
-            this.Menu_Fichier_Quitter.Size = new System.Drawing.Size(147, 22);
+            this.Menu_Fichier_Quitter.Size = new System.Drawing.Size(169, 24);
             this.Menu_Fichier_Quitter.Text = "Quitter";
             this.Menu_Fichier_Quitter.Click += new System.EventHandler(this.Menu_Fichier_Quitter_Click);
             // 
             // Menu_Edition
             // 
             this.Menu_Edition.Name = "Menu_Edition";
-            this.Menu_Edition.Size = new System.Drawing.Size(56, 20);
+            this.Menu_Edition.Size = new System.Drawing.Size(68, 24);
             this.Menu_Edition.Text = "Edition";
             // 
             // Menu_Affichage
             // 
             this.Menu_Affichage.Name = "Menu_Affichage";
-            this.Menu_Affichage.Size = new System.Drawing.Size(70, 20);
+            this.Menu_Affichage.Size = new System.Drawing.Size(85, 24);
             this.Menu_Affichage.Text = "Affichage";
             // 
             // Menu_Apropos
             // 
             this.Menu_Apropos.Name = "Menu_Apropos";
-            this.Menu_Apropos.Size = new System.Drawing.Size(70, 20);
+            this.Menu_Apropos.Size = new System.Drawing.Size(86, 24);
             this.Menu_Apropos.Text = "A propos ";
             // 
             // Menu_Aide
             // 
             this.Menu_Aide.Name = "Menu_Aide";
-            this.Menu_Aide.Size = new System.Drawing.Size(24, 20);
+            this.Menu_Aide.Size = new System.Drawing.Size(28, 24);
             this.Menu_Aide.Text = "?";
             // 
             // Barre_De_Statut
             // 
             this.Barre_De_Statut.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Barre_De_Progression,
             this.toolStripStatusLabel1});
-            this.Barre_De_Statut.Location = new System.Drawing.Point(0, 564);
+            this.Barre_De_Statut.Location = new System.Drawing.Point(0, 696);
             this.Barre_De_Statut.Name = "Barre_De_Statut";
-            this.Barre_De_Statut.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.Barre_De_Statut.Size = new System.Drawing.Size(939, 22);
+            this.Barre_De_Statut.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
+            this.Barre_De_Statut.Size = new System.Drawing.Size(1252, 25);
             this.Barre_De_Statut.TabIndex = 2;
             this.Barre_De_Statut.Text = "statusStrip1";
             this.Barre_De_Statut.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.Barre_De_Statut_ItemClicked);
             // 
-            // Barre_De_Progression
-            // 
-            this.Barre_De_Progression.Name = "Barre_De_Progression";
-            this.Barre_De_Progression.Size = new System.Drawing.Size(75, 16);
-            this.Barre_De_Progression.Click += new System.EventHandler(this.Barre_De_Progression_Click);
-            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(119, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(151, 20);
             this.toolStripStatusLabel1.Text = "Etat De La Connexion";
             // 
             // Affichage_Articles
@@ -138,10 +130,11 @@
             this.Affichage_Articles.FullRowSelect = true;
             this.Affichage_Articles.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
-            this.Affichage_Articles.Location = new System.Drawing.Point(44, 67);
+            this.Affichage_Articles.Location = new System.Drawing.Point(59, 82);
+            this.Affichage_Articles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Affichage_Articles.MultiSelect = false;
             this.Affichage_Articles.Name = "Affichage_Articles";
-            this.Affichage_Articles.Size = new System.Drawing.Size(855, 449);
+            this.Affichage_Articles.Size = new System.Drawing.Size(1139, 552);
             this.Affichage_Articles.TabIndex = 3;
             this.Affichage_Articles.UseCompatibleStateImageBehavior = false;
             this.Affichage_Articles.View = System.Windows.Forms.View.Details;
@@ -152,14 +145,14 @@
             // 
             // Fenetre_Principale
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(939, 586);
+            this.ClientSize = new System.Drawing.Size(1252, 721);
             this.Controls.Add(this.Affichage_Articles);
             this.Controls.Add(this.Barre_De_Statut);
             this.Controls.Add(this.Barre_Menu);
             this.MainMenuStrip = this.Barre_Menu;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Fenetre_Principale";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mercure";
@@ -184,7 +177,6 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Apropos;
         private System.Windows.Forms.ToolStripMenuItem Menu_Aide;
         private System.Windows.Forms.ToolStripMenuItem Menu_Fichier_Quitter;
-        private System.Windows.Forms.ToolStripProgressBar Barre_De_Progression;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ListView Affichage_Articles;
     }
