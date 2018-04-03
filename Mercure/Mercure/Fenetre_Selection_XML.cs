@@ -48,7 +48,7 @@ namespace Mercure
             DialogResult result = MessageBox.Show("Attention, vous etes sur le point d'écraser la base de donnée existante.", "Attention", MessageBoxButtons.OKCancel);
                 if(result == DialogResult.Cancel)
                 {
-                    this.Close();
+                    
                 }
                 if(result == DialogResult.OK)
                 {
@@ -68,6 +68,10 @@ namespace Mercure
 
         private void Fonction_Lecture_XML(bool Effacer_BDD)
         {
+            Bar_chargement_XML.Visible = true;
+            Bar_chargement_XML.Minimum = 0;
+            Bar_chargement_XML.Value = 0;
+            Bar_chargement_XML.Step = 1;
             int nbre_donnee = 0;
             XmlDocument my_XML_doc = new XmlDocument();
 
@@ -82,7 +86,8 @@ namespace Mercure
 
                 my_XML_doc.Load(Chemin_Fichier);
                 XmlNodeList article = my_XML_doc.GetElementsByTagName("article");
-
+                
+                Bar_chargement_XML.Maximum = article.Count;
                 foreach (XmlNode selectNode in article)
                 {
                     string description = selectNode.SelectSingleNode("description").InnerText;
@@ -103,7 +108,7 @@ namespace Mercure
                     int value = SqlDataReader.InsertIntoArticle(my_database, refArticle, description, idSousFamille, idMarque, prix);
 
                     nbre_donnee++;
-
+                    Bar_chargement_XML.PerformStep();
                 }
                 MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données. " + nbre_donnee + " données ont été chargées." , "Insertion réussie", MessageBoxButtons.OK);
 
