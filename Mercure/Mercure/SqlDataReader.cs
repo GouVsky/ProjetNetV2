@@ -195,7 +195,8 @@ namespace Mercure
             SQLiteCommand Purger_Tables = new SQLiteCommand("DELETE FROM Familles; " +
                                                             "DELETE FROM Marques; " +
                                                             "DELETE FROM SousFamilles;" +
-                                                            "DELETE FROM Articles;", my_database);
+                                                            "DELETE FROM Articles;" +
+                                                            "VACUUM", my_database);
             Purger_Tables.ExecuteNonQuery();
         }
     }
