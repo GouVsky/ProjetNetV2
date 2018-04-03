@@ -14,7 +14,6 @@ namespace Mercure
 {
     public partial class Fenetre_Selection_XML : Form
     {
-        bool Mise_A_Jour = false;
         bool Importation = false;
 
         String Chemin_Fichier;
@@ -41,7 +40,6 @@ namespace Mercure
 
         private void Bouton_Integrer_Click(object sender, EventArgs e)
         {
-            Mise_A_Jour = false;
             Importation = true;
 
             bool Effacer_BDD = true;
@@ -59,8 +57,7 @@ namespace Mercure
 
         private void Buton_MAJ_Click(object sender, EventArgs e)
         {
-            Mise_A_Jour = true;
-            Importation = false;
+            Importation = true;
 
             bool Effacer_BDD = false;
             Fonction_Lecture_XML(Effacer_BDD);
@@ -117,11 +114,6 @@ namespace Mercure
             {
                 MessageBox.Show("Erreur de lecture du fichier XML", "Erreur XML", MessageBoxButtons.OK);
             }
-        }
-
-        public bool Get_Mise_A_Jour_Value()
-        {
-            return Mise_A_Jour;
         }
 
         public bool Get_Importation_Value()

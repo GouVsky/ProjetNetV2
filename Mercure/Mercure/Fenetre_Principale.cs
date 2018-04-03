@@ -33,11 +33,6 @@ namespace Mercure
 
             if (Fenetre_XML.Get_Importation_Value())
             {
-                Remplir_Liste_Avec_Articles();
-            }
-
-            else if (Fenetre_XML.Get_Mise_A_Jour_Value())
-            {
                 Affichage_Articles.Items.Clear();
 
                 Remplir_Liste_Avec_Articles();
@@ -238,13 +233,13 @@ namespace Mercure
                 if (Lecture_Table_Marque.Read())
                     Nom_Marque = Convert.ToString(Lecture_Table_Marque[1]);
 
-                string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]), // RefArticle.
-                                     Convert.ToString(Lecture_Table_Article[1]), // Description.
-                                     Nom_Sous_Famille,                           // Sous-Famille.
-                                     Nom_Famille,                                // Famille.
-                                     Nom_Marque,                                 // Marque.
-                                     Convert.ToString(Lecture_Table_Article[4]), // Prix HT.
-                                     Convert.ToString(Lecture_Table_Article[5])  // Quantite.
+                string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]),                    // RefArticle.
+                                     Convert.ToString(Lecture_Table_Article[1]),                    // Description.
+                                     Nom_Sous_Famille,                                              // Sous-Famille.
+                                     Nom_Famille,                                                   // Famille.
+                                     Nom_Marque,                                                    // Marque.
+                                     Lecture_Table_Article.GetString(4),  // Prix HT.
+                                     Convert.ToString(Lecture_Table_Article[5])                     // Quantite.
                                    };
 
                 ListViewItem Article = new ListViewItem(Donnees);
