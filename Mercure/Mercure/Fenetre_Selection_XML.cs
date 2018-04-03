@@ -16,7 +16,7 @@ namespace Mercure
     {
         bool Importation = false;
 
-        String Chemin_Fichier;
+        String Chemin_Fichier = "";
 
         public Fenetre_Selection_XML()
         {
@@ -25,12 +25,11 @@ namespace Mercure
 
         private void Fenetre_Selection_XML_Load(object sender, EventArgs e)
         {
-            Chemin_Fichier = null;
+            Chemin_Fichier = "";
         }
 
         private void Parcourir_Click(object sender, EventArgs e)
         {
-            Chemin_Fichier = null;
             OpenFileDialog Fenetre_Parcours = new OpenFileDialog();
             Fenetre_Parcours.ShowDialog();
 
@@ -111,10 +110,12 @@ namespace Mercure
                 MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données. " + nbre_donnee + " données ont été chargées." , "Insertion réussie", MessageBoxButtons.OK);
 
             }
-            catch (Exception except)
+            catch (Exception)
             {
                 MessageBox.Show("Erreur de lecture du fichier XML", "Erreur XML", MessageBoxButtons.OK);
             }
+
+            my_database.Close();
         }
 
         public bool Get_Importation_Value()
