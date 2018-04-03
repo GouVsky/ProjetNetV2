@@ -23,11 +23,12 @@ namespace Mercure
 
         private void Fenetre_Selection_XML_Load(object sender, EventArgs e)
         {
-
+            Chemin_Fichier = null;
         }
 
         private void Parcourir_Click(object sender, EventArgs e)
         {
+            Chemin_Fichier = null;
             OpenFileDialog Fenetre_Parcours = new OpenFileDialog();
             Fenetre_Parcours.ShowDialog();
 
