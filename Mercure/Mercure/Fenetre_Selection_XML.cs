@@ -44,14 +44,14 @@ namespace Mercure
 
             bool Effacer_BDD = true;
             DialogResult result = MessageBox.Show("Attention, vous êtes sur le point d'écraser la base de donnée existante.", "Attention", MessageBoxButtons.OKCancel);
-                if(result == DialogResult.Cancel)
-                {
+            if(result == DialogResult.Cancel)
+            {
                     
-                }
-                if(result == DialogResult.OK)
-                {
-                    Fonction_Lecture_XML(Effacer_BDD);
-                }
+            }
+            if(result == DialogResult.OK)
+            {
+                Fonction_Lecture_XML(Effacer_BDD);
+            }
             
         }
 
@@ -94,7 +94,6 @@ namespace Mercure
                     string famille = selectNode.SelectSingleNode("famille").InnerText;
                     string sousFamille = selectNode.SelectSingleNode("sousFamille").InnerText;
                     string prix = selectNode.SelectSingleNode("prixHT").InnerText;
-                    Console.WriteLine(famille.ToCharArray());
 
                     //////////////////////////////////////////////////////////////////////////////////////////
                     int idFamille = SqlDataReader.InsertIntoFamille(my_database, famille);

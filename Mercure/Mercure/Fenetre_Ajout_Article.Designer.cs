@@ -21,8 +21,11 @@ namespace Mercure
             this.Zone_Autres_Informations_Titre = new System.Windows.Forms.Label();
             this.Zone_Description_Article_Titre = new System.Windows.Forms.Label();
             this.Quantite_Article_Edition = new System.Windows.Forms.NumericUpDown();
-            this.Prix_Unitaire_Article_Edition = new System.Windows.Forms.TextBox();
+            this.Prix_Unitaire_Article_Edition = new System.Windows.Forms.NumericUpDown();
+            this.Bouton_Validation = new System.Windows.Forms.Button();
+            this.Bouton_Annulation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Quantite_Article_Edition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Prix_Unitaire_Article_Edition)).BeginInit();
             this.SuspendLayout();
             // 
             // Description_Article_Edition
@@ -121,7 +124,7 @@ namespace Mercure
             // Quantite_Article_Titre
             // 
             this.Quantite_Article_Titre.AutoSize = true;
-            this.Quantite_Article_Titre.Location = new System.Drawing.Point(193, 349);
+            this.Quantite_Article_Titre.Location = new System.Drawing.Point(194, 349);
             this.Quantite_Article_Titre.Name = "Quantite_Article_Titre";
             this.Quantite_Article_Titre.Size = new System.Drawing.Size(47, 13);
             this.Quantite_Article_Titre.TabIndex = 12;
@@ -149,25 +152,62 @@ namespace Mercure
             // 
             // Quantite_Article_Edition
             // 
-            this.Quantite_Article_Edition.Location = new System.Drawing.Point(196, 366);
+            this.Quantite_Article_Edition.Location = new System.Drawing.Point(197, 366);
             this.Quantite_Article_Edition.Name = "Quantite_Article_Edition";
-            this.Quantite_Article_Edition.Size = new System.Drawing.Size(60, 20);
+            this.Quantite_Article_Edition.Size = new System.Drawing.Size(68, 20);
             this.Quantite_Article_Edition.TabIndex = 17;
             // 
             // Prix_Unitaire_Article_Edition
             // 
-            this.Prix_Unitaire_Article_Edition.Location = new System.Drawing.Point(21, 365);
+            this.Prix_Unitaire_Article_Edition.DecimalPlaces = 2;
+            this.Prix_Unitaire_Article_Edition.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.Prix_Unitaire_Article_Edition.Location = new System.Drawing.Point(21, 366);
+            this.Prix_Unitaire_Article_Edition.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.Prix_Unitaire_Article_Edition.Name = "Prix_Unitaire_Article_Edition";
-            this.Prix_Unitaire_Article_Edition.Size = new System.Drawing.Size(100, 20);
-            this.Prix_Unitaire_Article_Edition.TabIndex = 13;
+            this.Prix_Unitaire_Article_Edition.Size = new System.Drawing.Size(70, 20);
+            this.Prix_Unitaire_Article_Edition.TabIndex = 18;
+            // 
+            // Bouton_Validation
+            // 
+            this.Bouton_Validation.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.Bouton_Validation.Location = new System.Drawing.Point(117, 427);
+            this.Bouton_Validation.Name = "Bouton_Validation";
+            this.Bouton_Validation.Size = new System.Drawing.Size(75, 23);
+            this.Bouton_Validation.TabIndex = 19;
+            this.Bouton_Validation.Tag = "";
+            this.Bouton_Validation.Text = "Ajouter";
+            this.Bouton_Validation.UseVisualStyleBackColor = true;
+            this.Bouton_Validation.Click += new System.EventHandler(this.Bouton_Validation_Click);
+            // 
+            // Bouton_Annulation
+            // 
+            this.Bouton_Annulation.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Bouton_Annulation.Location = new System.Drawing.Point(214, 427);
+            this.Bouton_Annulation.Name = "Bouton_Annulation";
+            this.Bouton_Annulation.Size = new System.Drawing.Size(75, 23);
+            this.Bouton_Annulation.TabIndex = 20;
+            this.Bouton_Annulation.Text = "Annuler";
+            this.Bouton_Annulation.UseVisualStyleBackColor = true;
             // 
             // Fenetre_Ajout_Article
             // 
-            this.ClientSize = new System.Drawing.Size(311, 402);
+            this.AcceptButton = this.Bouton_Validation;
+            this.CancelButton = this.Bouton_Annulation;
+            this.ClientSize = new System.Drawing.Size(311, 462);
+            this.Controls.Add(this.Bouton_Annulation);
+            this.Controls.Add(this.Bouton_Validation);
+            this.Controls.Add(this.Prix_Unitaire_Article_Edition);
             this.Controls.Add(this.Quantite_Article_Edition);
             this.Controls.Add(this.Zone_Description_Article_Titre);
             this.Controls.Add(this.Zone_Autres_Informations_Titre);
-            this.Controls.Add(this.Prix_Unitaire_Article_Edition);
             this.Controls.Add(this.Quantite_Article_Titre);
             this.Controls.Add(this.Prix_Unitaire_Article_Titre);
             this.Controls.Add(this.Choix_Marque_Article);
@@ -183,6 +223,7 @@ namespace Mercure
             this.Name = "Fenetre_Ajout_Article";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             ((System.ComponentModel.ISupportInitialize)(this.Quantite_Article_Edition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Prix_Unitaire_Article_Edition)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,6 +244,8 @@ namespace Mercure
         private System.Windows.Forms.Label Zone_Autres_Informations_Titre;
         private System.Windows.Forms.Label Zone_Description_Article_Titre;
         private System.Windows.Forms.NumericUpDown Quantite_Article_Edition;
-        private System.Windows.Forms.TextBox Prix_Unitaire_Article_Edition;
+        private System.Windows.Forms.NumericUpDown Prix_Unitaire_Article_Edition;
+        private System.Windows.Forms.Button Bouton_Validation;
+        private System.Windows.Forms.Button Bouton_Annulation;
     }
 }

@@ -12,17 +12,16 @@ namespace Mercure
         {
             InitializeComponent();
 
+            Mise_A_Jour_Barre_De_Statut("Vous êtes connectés à l'application.");
+
             Initialiser_Liste();
         }
 
-        private void Mercure_Load(object sender, EventArgs e)
+        public void Mise_A_Jour_Barre_De_Statut(string Message)
         {
+            Barre_De_Statut_Texte.Text = Message;
 
-        }
-
-        private void Menu_Fichier_Click(object sender, EventArgs e)
-        {
-
+            Barre_De_Statut.Refresh();
         }
 
         private void Menu_Fichier_Import_XML_Click(object sender, EventArgs e)
@@ -47,25 +46,16 @@ namespace Mercure
             Close();
         }
 
-        private void Barre_De_Statut_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-        }
-
-        private void Barre_De_Progression_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Affichage_Articles_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-
-        }
-
         private void Ajouter_Article_Click(object sender, EventArgs e)
         {
             Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
 
-            Fenetre_Ajout.ShowDialog();
+            DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+            if (Resultat == DialogResult.OK)
+            {
+                Mise_A_Jour_Barre_De_Statut("Vous avez ajouté un nouvel article avec succès.");
+            }
         }
 
         private void Modifier_Article_Click(object sender, EventArgs e)
@@ -75,7 +65,12 @@ namespace Mercure
 
             Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article(((ListView) sender).SelectedItems[0]);
 
-            Fenetre_Ajout.ShowDialog();
+            DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+            if (Resultat == DialogResult.OK)
+            {
+                Mise_A_Jour_Barre_De_Statut("Vous avez modifié un article avec succès.");
+            }
         }
 
         private void Supprimer_Article_Click(object sender, EventArgs e)
@@ -241,7 +236,7 @@ namespace Mercure
                                      Nom_Sous_Famille,                                              // Sous-Famille.
                                      Nom_Famille,                                                   // Famille.
                                      Nom_Marque,                                                    // Marque.
-                                     Lecture_Table_Article.GetString(4),  // Prix HT.
+                                     Lecture_Table_Article.GetString(4),                            // Prix HT.
                                      Convert.ToString(Lecture_Table_Article[5])                     // Quantite.
                                    };
 
