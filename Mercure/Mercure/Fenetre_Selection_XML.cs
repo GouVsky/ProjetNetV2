@@ -72,7 +72,8 @@ namespace Mercure
             int nbre_donnee = 0;
             XmlDocument my_XML_doc = new XmlDocument();
 
-            SQLiteConnection my_database = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
+            SQLiteConnection my_database = new SQLiteConnection("Data Source=Resources\\Mercure.SQLite; Version=3");
+
             my_database.Open();
             try
             {

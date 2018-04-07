@@ -200,7 +200,7 @@ namespace Mercure
 
         public void Remplir_Liste_Avec_Articles()
         {
-            SQLiteConnection Connection = new SQLiteConnection("Data Source=Mercure.SQLite; Version=3");
+            SQLiteConnection Connection = new SQLiteConnection("Data Source=Resources\\Mercure.SQLite; Version=3");
 
             Connection.Open();
 
