@@ -60,6 +60,7 @@ namespace Mercure
             this.Reference_Article_Edition.Name = "Reference_Article_Edition";
             this.Reference_Article_Edition.Size = new System.Drawing.Size(121, 20);
             this.Reference_Article_Edition.TabIndex = 3;
+            this.Reference_Article_Edition.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Reference_Article_Edition_KeyPress);
             // 
             // Famille_Article_Titre
             // 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Mercure
@@ -31,6 +33,20 @@ namespace Mercure
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Reference_Article_Edition_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+
+            if (String.IsNullOrEmpty(Reference_Article_Edition.Text))
+                e.Handled = !(e.KeyChar == (char) Keys.F);
+
+            else if (Reference_Article_Edition.Text.Length <= 7)
+                e.Handled = !((e.KeyChar >= '0' && e.KeyChar <= '9') || e.KeyChar == (char)8);
+
+            else if (Reference_Article_Edition.Text.Length <= 8)
+                e.Handled = !(e.KeyChar == (char)8);
         }
     }
 }

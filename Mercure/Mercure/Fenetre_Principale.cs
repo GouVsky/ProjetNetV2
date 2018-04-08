@@ -180,13 +180,13 @@ namespace Mercure
 
             int Taille_Derniere_Colonne = Taille_Liste - (Nombre_Colonnes - 1) * Taille_Colonne;
 
-            Affichage_Articles.Columns.Add("RefArticle", Taille_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Référence", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Description", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Sous-Famille", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Famille", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Marque", Taille_Colonne, HorizontalAlignment.Left);
             Affichage_Articles.Columns.Add("Prix HT", Taille_Colonne, HorizontalAlignment.Left);
-            Affichage_Articles.Columns.Add("Quantite", Taille_Derniere_Colonne, HorizontalAlignment.Left);
+            Affichage_Articles.Columns.Add("Quantité", Taille_Derniere_Colonne, HorizontalAlignment.Left);
 
             // Tri des colonnes.
 
