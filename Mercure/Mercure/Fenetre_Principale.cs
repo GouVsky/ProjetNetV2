@@ -12,7 +12,7 @@ namespace Mercure
         {
             InitializeComponent();
 
-            Mise_A_Jour_Barre_De_Statut("Vous êtes connectés à l'application.");
+            Mise_A_Jour_Barre_De_Statut("Vous êtes connecté à l'application.");
 
             Initialiser_Liste();
         }
@@ -63,7 +63,7 @@ namespace Mercure
             // On affiche la même fenêtre que celle pour l'ajout d'un article,
             // mais avec les champs remplis avec les informations de l'objet.
 
-            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article(((ListView) sender).SelectedItems[0]);
+            Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article(Affichage_Articles.SelectedItems[0]);
 
             DialogResult Resultat = Fenetre_Ajout.ShowDialog();
 
@@ -195,22 +195,19 @@ namespace Mercure
 
         public void Remplir_Liste_Avec_Articles()
         {
-            SQLiteConnection Connection = new SQLiteConnection("Data Source=Resources\\Mercure.SQLite; Version=3");
+            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            Connection.Open();
-
-
-            SQLiteDataReader Lecture_Table_Article = SqlDataReader.Recuperer_Articles(Connection);
+            SQLiteDataReader Lecture_Table_Article = Data_Reader.Recuperer_Articles();
 
             while (Lecture_Table_Article.Read())
             {
                 string Nom_Sous_Famille = "-";
                 string Nom_Famille = "-";
-                string Nom_Marque = "-";
 
-                SQLiteDataReader Lecture_Table_Sous_Famille = SqlDataReader.Recuperer_Sous_Famille(Connection, Convert.ToInt16(Lecture_Table_Article[2]));
 
-                SQLiteDataReader Lecture_Table_Marque = SqlDataReader.Recuperer_Marque(Connection, Convert.ToInt16(Lecture_Table_Article[3]));
+                SQLiteDataReader Lecture_Table_Sous_Famille = Data_Reader.Recuperer_Sous_Famille(Convert.ToInt16(Lecture_Table_Article[2]));
+
+                Marque Marque = Data_Reader.Recuperer_Marque(Convert.ToInt16(Lecture_Table_Article[3]));
 
                 // On récupère la sous-famille et la famille de l'article.
 
@@ -218,7 +215,7 @@ namespace Mercure
                 {
                     Nom_Sous_Famille = Convert.ToString(Lecture_Table_Sous_Famille[2]);
 
-                    SQLiteDataReader Lecture_Table_Famille = SqlDataReader.Recuperer_Famille(Connection, Convert.ToInt16(Lecture_Table_Sous_Famille[1]));
+                    SQLiteDataReader Lecture_Table_Famille = Data_Reader.Recuperer_Famille(Convert.ToInt16(Lecture_Table_Sous_Famille[1]));
 
                     if (Lecture_Table_Famille.Read())
                         Nom_Famille = Convert.ToString(Lecture_Table_Famille[1]);
@@ -226,16 +223,11 @@ namespace Mercure
                     Lecture_Table_Famille.Close();
                 }
 
-                // On récupère la marque de l'article.
-
-                if (Lecture_Table_Marque.Read())
-                    Nom_Marque = Convert.ToString(Lecture_Table_Marque[1]);
-
                 string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]),                    // RefArticle.
                                      Convert.ToString(Lecture_Table_Article[1]),                    // Description.
                                      Nom_Sous_Famille,                                              // Sous-Famille.
                                      Nom_Famille,                                                   // Famille.
-                                     Nom_Marque,                                                    // Marque.
+                                     Marque.Recuperer_Nom(),                                        // Marque.
                                      Lecture_Table_Article.GetString(4),                            // Prix HT.
                                      Convert.ToString(Lecture_Table_Article[5])                     // Quantite.
                                    };
@@ -245,13 +237,11 @@ namespace Mercure
                 Affichage_Articles.Items.Add(Article);
 
                 Lecture_Table_Sous_Famille.Close();
-
-                Lecture_Table_Marque.Close();
             }
 
             Lecture_Table_Article.Close();
 
-            Connection.Close();
+            Data_Reader.Terminer_Connection();
         }
     }
 }

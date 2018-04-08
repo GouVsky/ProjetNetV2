@@ -72,14 +72,13 @@ namespace Mercure
             int nbre_donnee = 0;
             XmlDocument my_XML_doc = new XmlDocument();
 
-            SQLiteConnection my_database = new SQLiteConnection("Data Source=Resources\\Mercure.SQLite; Version=3");
+            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            my_database.Open();
             try
             {
                 if (Effacer_BDD)
                 {
-                    SqlDataReader.Purger_BDD(my_database);
+                    Data_Reader.Purger_BDD();
                 }
 
                 my_XML_doc.Load(Chemin_Fichier);
@@ -96,13 +95,13 @@ namespace Mercure
                     string prix = selectNode.SelectSingleNode("prixHT").InnerText;
 
                     //////////////////////////////////////////////////////////////////////////////////////////
-                    int idFamille = SqlDataReader.InsertIntoFamille(my_database, famille);
+                    int idFamille = Data_Reader.InsertIntoFamille(famille);
                     ///////////////////////////////////////////////////////////////////////
-                    int idMarque = SqlDataReader.Inserer_Marque(my_database, marque);
+                    int idMarque = Data_Reader.Inserer_Marque(marque);
                     //////////////////////////////////////////////////////////////////////
-                    int idSousFamille = SqlDataReader.Inserer_Sous_Famille(my_database, sousFamille, idFamille);
+                    int idSousFamille = Data_Reader.Inserer_Sous_Famille(sousFamille, idFamille);
                     //////////////////////////////////////////////////////////////////////
-                    int value = SqlDataReader.Inserer_Article(my_database, refArticle, description, idSousFamille, idMarque, prix);
+                    int value = Data_Reader.Inserer_Article(refArticle, description, idSousFamille, idMarque, prix);
 
                     nbre_donnee++;
                     Bar_Chargement_XML.PerformStep();
@@ -115,7 +114,7 @@ namespace Mercure
                 MessageBox.Show("Erreur de lecture du fichier XML", "Erreur XML", MessageBoxButtons.OK);
             }
 
-            my_database.Close();
+            Data_Reader.Terminer_Connection();
         }
 
         public bool Get_Importation_Value()

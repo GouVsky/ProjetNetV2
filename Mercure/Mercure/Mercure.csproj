@@ -101,6 +101,7 @@
     <Compile Include="Fenetre_Selection_XML.Designer.cs">
       <DependentUpon>Fenetre_Selection_XML.cs</DependentUpon>
     </Compile>
+    <Compile Include="Marque.cs" />
     <Compile Include="SqlDataReader.cs" />
     <Compile Include="List_View_Comparateur_Items.cs" />
     <Compile Include="Program.cs" />

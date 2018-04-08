@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Mercure
         public Fenetre_Ajout_Article()
         {
             InitializeComponent();
+
+            Charger_Marques();
         }
 
         public Fenetre_Ajout_Article(ListViewItem Article)
@@ -47,6 +50,20 @@ namespace Mercure
 
             else if (Reference_Article_Edition.Text.Length <= 8)
                 e.Handled = !(e.KeyChar == (char)8);
+        }
+
+        private void Charger_Marques()
+        {
+            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
+
+            List <Marque> Marques = Data_Reader.Recuperer_Marques();
+
+            foreach (Marque Marque in Marques)
+            {
+                Choix_Marque_Article.Items.Add(Marque);
+            }
+
+            Data_Reader.Terminer_Connection();
         }
     }
 }

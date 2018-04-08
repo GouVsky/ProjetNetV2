@@ -13,7 +13,30 @@ namespace Mercure
 {
     public class SqlDataReader
     {
-        public static SQLiteDataReader Recuperer_Articles(SQLiteConnection Connection)
+        private static SqlDataReader Data_Reader;
+        private static SQLiteConnection Connection;
+
+        private SqlDataReader()
+        {
+            Connection = new SQLiteConnection("Data Source=Resources\\Mercure.SQLite; Version=3");
+        }
+
+        public static SqlDataReader Ouvrir_Connection()
+        {
+            if (Data_Reader == null)
+                Data_Reader = new SqlDataReader();
+
+            Connection.Open();
+
+            return Data_Reader;
+        }
+
+        public void Terminer_Connection()
+        {
+            Connection.Close();
+        }
+
+        public SQLiteDataReader Recuperer_Articles()
         {
             SQLiteCommand Requete_Article = new SQLiteCommand("SELECT * FROM Articles;", Connection);
 
@@ -22,7 +45,7 @@ namespace Mercure
             return Lecture_Table_Article;
         }
 
-        public static SQLiteDataReader Recuperer_Sous_Famille(SQLiteConnection Connection, int Id_Sous_Famille)
+        public SQLiteDataReader Recuperer_Sous_Famille(int Id_Sous_Famille)
         {
             SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE @Id_Sous_Famille == RefSousFamille;", Connection);
 
@@ -33,7 +56,7 @@ namespace Mercure
             return Lecture_Table_Sous_Famille;
         }
 
-        public static SQLiteDataReader Recuperer_Famille(SQLiteConnection Connection, int Id_Famille)
+        public SQLiteDataReader Recuperer_Famille(int Id_Famille)
         {
             SQLiteCommand Requete_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE @Id_Famille == RefFamille;", Connection);
 
@@ -44,7 +67,7 @@ namespace Mercure
             return Lecture_Table_Famille;
         }
 
-        public static SQLiteDataReader Recuperer_Marque(SQLiteConnection Connection, int Id_Marque)
+        public Marque Recuperer_Marque(int Id_Marque)
         {
             SQLiteCommand Requete_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE @Id_Marque == RefMarque;", Connection);
 
@@ -52,10 +75,34 @@ namespace Mercure
 
             SQLiteDataReader Lecture_Table_Marque = Requete_Marque.ExecuteReader();
 
-            return Lecture_Table_Marque;
+            Lecture_Table_Marque.Read();
+
+            Marque Marque = new Marque(Convert.ToString(Lecture_Table_Marque[0]), Convert.ToString(Lecture_Table_Marque[1]));
+
+            Lecture_Table_Marque.Close();
+
+            return Marque;
         }
 
-        public static int InsertIntoFamille(SQLiteConnection Connection, string Famille)
+        public List <Marque> Recuperer_Marques()
+        {
+            List <Marque> Marques = new List <Marque> ();
+
+            SQLiteCommand Requete_Marques = new SQLiteCommand("SELECT * FROM Marques;", Connection);
+
+            SQLiteDataReader Lecture_Table_Marque = Requete_Marques.ExecuteReader();
+
+            while (Lecture_Table_Marque.Read())
+            {
+                Marques.Add(new Marque(Convert.ToString(Lecture_Table_Marque[0]), Convert.ToString(Lecture_Table_Marque[1])));
+            }
+
+            Lecture_Table_Marque.Close();
+
+            return Marques;
+        }
+
+        public int InsertIntoFamille(string Famille)
         {
 
             SQLiteDataReader Lecture;
@@ -92,7 +139,7 @@ namespace Mercure
             return Id_Familles;
         }
 
-        public static int Inserer_Marque(SQLiteConnection Connection, string Marque)
+        public int Inserer_Marque(string Marque)
         {
             SQLiteDataReader Lecture;
             int Id_Max_Marque;
@@ -127,7 +174,7 @@ namespace Mercure
             return Id_Marque;
         }
 
-        public static int Inserer_Sous_Famille(SQLiteConnection Connection, string Sous_Famille, int Id_Famille)
+        public int Inserer_Sous_Famille(string Sous_Famille, int Id_Famille)
         {
             SQLiteDataReader Lecture;
             int Id_Max_Sous_Famille;
@@ -163,7 +210,7 @@ namespace Mercure
             return Id_Sous_Famille;
         }
 
-        public static int Inserer_Article(SQLiteConnection Connection, string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, string Prix)
+        public int Inserer_Article(string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, string Prix)
         {
             int Valeur=-1;
             SQLiteCommand Verif_Article = new SQLiteCommand("SELECT * FROM Articles WHERE RefArticle LIKE @refArticle", Connection);
@@ -190,7 +237,7 @@ namespace Mercure
             return Valeur;
         }
 
-        public static void Purger_BDD(SQLiteConnection Connection)
+        public void Purger_BDD()
         {
             SQLiteCommand Purger_Tables = new SQLiteCommand("DELETE FROM Familles; " +
                                                             "DELETE FROM Marques; " +
