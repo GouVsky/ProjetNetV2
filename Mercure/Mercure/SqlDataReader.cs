@@ -50,12 +50,17 @@ namespace Mercure
 
                 Marque Marque = Recuperer_Marque(Convert.ToInt16(Lecture_Table_Article[3]));
 
+                // On récupère le prix de l'article sous forme numérique.
+
+                double Prix = 0;
+
+                Double.TryParse(Lecture_Table_Article.GetString(4).Replace(',', '.'), out Prix);
 
                 Articles.Add(new Article(Convert.ToString(Lecture_Table_Article[0]),
                                          Convert.ToString(Lecture_Table_Article[1]),
                                          Sous_Famille,
                                          Marque,
-                                         Convert.ToDouble(Lecture_Table_Article.GetString(4)),
+                                         Prix,
                                          Convert.ToInt32(Lecture_Table_Article[5])
                                          ));
             }
