@@ -5,18 +5,18 @@ using System.Text;
 
 namespace Mercure
 {
-    public class Marque
+    public class Famille
     {
-        private int Reference;
+        private string Reference;
         private string Nom;
 
-        public Marque(int Reference, string Nom)
+        public Famille(string Reference, string Nom)
         {
             this.Reference = Reference;
             this.Nom = Nom;
         }
 
-        public int Recuperer_Reference()
+        public string Recuperer_Reference()
         {
             return Reference;
         }

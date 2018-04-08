@@ -5,15 +5,19 @@ using System.Text;
 
 namespace Mercure
 {
-    public class Marque
+    public class SousFamille
     {
         private int Reference;
         private string Nom;
 
-        public Marque(int Reference, string Nom)
+        private Famille Famille;
+
+        public SousFamille(int Reference, string Nom, Famille Famille)
         {
             this.Reference = Reference;
             this.Nom = Nom;
+
+            this.Famille = Famille;
         }
 
         public int Recuperer_Reference()
@@ -26,9 +30,9 @@ namespace Mercure
             return Nom;
         }
 
-        public override string ToString()
+        public Famille Recuperer_Famille()
         {
-            return Nom;
+            return Famille;
         }
     }
 }

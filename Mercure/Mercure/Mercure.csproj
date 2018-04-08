@@ -76,7 +76,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Article.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Famille.cs" />
     <Compile Include="Fenetre_Ajout_Article.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +104,7 @@
       <DependentUpon>Fenetre_Selection_XML.cs</DependentUpon>
     </Compile>
     <Compile Include="Marque.cs" />
+    <Compile Include="SousFamille.cs" />
     <Compile Include="SqlDataReader.cs" />
     <Compile Include="List_View_Comparateur_Items.cs" />
     <Compile Include="Program.cs" />

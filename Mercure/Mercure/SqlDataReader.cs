@@ -36,27 +36,36 @@ namespace Mercure
             Connection.Close();
         }
 
-        public SQLiteDataReader Recuperer_Articles()
+        public List <Article> Recuperer_Articles()
         {
+            List <Article> Articles = new List <Article> ();
+
             SQLiteCommand Requete_Article = new SQLiteCommand("SELECT * FROM Articles;", Connection);
 
             SQLiteDataReader Lecture_Table_Article = Requete_Article.ExecuteReader();
 
-            return Lecture_Table_Article;
+            while (Lecture_Table_Article.Read())
+            {
+                SousFamille Sous_Famille = Recuperer_Sous_Famille(Convert.ToInt16(Lecture_Table_Article[2]));
+
+                Marque Marque = Recuperer_Marque(Convert.ToInt16(Lecture_Table_Article[3]));
+
+
+                Articles.Add(new Article(Convert.ToString(Lecture_Table_Article[0]),
+                                         Convert.ToString(Lecture_Table_Article[1]),
+                                         Sous_Famille,
+                                         Marque,
+                                         Convert.ToDouble(Lecture_Table_Article.GetString(4)),
+                                         Convert.ToInt32(Lecture_Table_Article[5])
+                                         ));
+            }
+
+            Lecture_Table_Article.Close();
+
+            return Articles;
         }
 
-        public SQLiteDataReader Recuperer_Sous_Famille(int Id_Sous_Famille)
-        {
-            SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE @Id_Sous_Famille == RefSousFamille;", Connection);
-
-            Requete_Sous_Famille.Parameters.AddWithValue("@Id_Sous_Famille", Id_Sous_Famille);
-
-            SQLiteDataReader Lecture_Table_Sous_Famille = Requete_Sous_Famille.ExecuteReader();
-
-            return Lecture_Table_Sous_Famille;
-        }
-
-        public SQLiteDataReader Recuperer_Famille(int Id_Famille)
+        public Famille Recuperer_Famille(int Id_Famille)
         {
             SQLiteCommand Requete_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE @Id_Famille == RefFamille;", Connection);
 
@@ -64,7 +73,30 @@ namespace Mercure
 
             SQLiteDataReader Lecture_Table_Famille = Requete_Famille.ExecuteReader();
 
-            return Lecture_Table_Famille;
+            Lecture_Table_Famille.Read();
+
+            Famille Famille = new Famille(Convert.ToString(Lecture_Table_Famille[0]), Convert.ToString(Lecture_Table_Famille[1]));
+
+            Lecture_Table_Famille.Close();
+
+            return Famille;
+        }
+
+        public SousFamille Recuperer_Sous_Famille(int Id_Sous_Famille)
+        {
+            SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE @Id_Sous_Famille == RefSousFamille;", Connection);
+
+            Requete_Sous_Famille.Parameters.AddWithValue("@Id_Sous_Famille", Id_Sous_Famille);
+
+            SQLiteDataReader Lecture_Table_Sous_Famille = Requete_Sous_Famille.ExecuteReader();
+
+            Lecture_Table_Sous_Famille.Read();
+
+            SousFamille Sous_Famille = new SousFamille(Convert.ToInt32(Lecture_Table_Sous_Famille[0]),
+                                                       Convert.ToString(Lecture_Table_Sous_Famille[2]),
+                                                       Recuperer_Famille(Convert.ToInt32(Lecture_Table_Sous_Famille[1])));
+
+            return Sous_Famille;
         }
 
         public Marque Recuperer_Marque(int Id_Marque)
@@ -77,7 +109,7 @@ namespace Mercure
 
             Lecture_Table_Marque.Read();
 
-            Marque Marque = new Marque(Convert.ToString(Lecture_Table_Marque[0]), Convert.ToString(Lecture_Table_Marque[1]));
+            Marque Marque = new Marque(Convert.ToInt32(Lecture_Table_Marque[0]), Convert.ToString(Lecture_Table_Marque[1]));
 
             Lecture_Table_Marque.Close();
 
@@ -94,7 +126,7 @@ namespace Mercure
 
             while (Lecture_Table_Marque.Read())
             {
-                Marques.Add(new Marque(Convert.ToString(Lecture_Table_Marque[0]), Convert.ToString(Lecture_Table_Marque[1])));
+                Marques.Add(new Marque(Convert.ToInt32(Lecture_Table_Marque[0]), Convert.ToString(Lecture_Table_Marque[1])));
             }
 
             Lecture_Table_Marque.Close();

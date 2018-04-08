@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
@@ -197,49 +198,14 @@ namespace Mercure
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            SQLiteDataReader Lecture_Table_Article = Data_Reader.Recuperer_Articles();
+            List <Article> Articles = Data_Reader.Recuperer_Articles();
 
-            while (Lecture_Table_Article.Read())
+            foreach (Article Un_Article in Articles)
             {
-                string Nom_Sous_Famille = "-";
-                string Nom_Famille = "-";
-
-
-                SQLiteDataReader Lecture_Table_Sous_Famille = Data_Reader.Recuperer_Sous_Famille(Convert.ToInt16(Lecture_Table_Article[2]));
-
-                Marque Marque = Data_Reader.Recuperer_Marque(Convert.ToInt16(Lecture_Table_Article[3]));
-
-                // On récupère la sous-famille et la famille de l'article.
-
-                if (Lecture_Table_Sous_Famille.Read())
-                {
-                    Nom_Sous_Famille = Convert.ToString(Lecture_Table_Sous_Famille[2]);
-
-                    SQLiteDataReader Lecture_Table_Famille = Data_Reader.Recuperer_Famille(Convert.ToInt16(Lecture_Table_Sous_Famille[1]));
-
-                    if (Lecture_Table_Famille.Read())
-                        Nom_Famille = Convert.ToString(Lecture_Table_Famille[1]);
-
-                    Lecture_Table_Famille.Close();
-                }
-
-                string[] Donnees = { Convert.ToString(Lecture_Table_Article[0]),                    // RefArticle.
-                                     Convert.ToString(Lecture_Table_Article[1]),                    // Description.
-                                     Nom_Sous_Famille,                                              // Sous-Famille.
-                                     Nom_Famille,                                                   // Famille.
-                                     Marque.Recuperer_Nom(),                                        // Marque.
-                                     Lecture_Table_Article.GetString(4),                            // Prix HT.
-                                     Convert.ToString(Lecture_Table_Article[5])                     // Quantite.
-                                   };
-
-                ListViewItem Article = new ListViewItem(Donnees);
+                ListViewItem Article = new ListViewItem(Un_Article.Recuperer_Donnees());
 
                 Affichage_Articles.Items.Add(Article);
-
-                Lecture_Table_Sous_Famille.Close();
             }
-
-            Lecture_Table_Article.Close();
 
             Data_Reader.Terminer_Connection();
         }
