@@ -7,16 +7,16 @@ namespace Mercure
 {
     public class Famille
     {
-        private string Reference;
+        private int Reference;
         private string Nom;
 
-        public Famille(string Reference, string Nom)
+        public Famille(int Reference, string Nom)
         {
             this.Reference = Reference;
             this.Nom = Nom;
         }
 
-        public string Recuperer_Reference()
+        public int Recuperer_Reference()
         {
             return Reference;
         }

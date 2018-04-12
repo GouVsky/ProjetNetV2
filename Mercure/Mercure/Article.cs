@@ -67,8 +67,8 @@ namespace Mercure
         {
             string[] Donnees = {Reference,
                                 Description,
-                                Sous_Famille.Recuperer_Nom(),
                                 Sous_Famille.Recuperer_Famille().Recuperer_Nom(),
+                                Sous_Famille.Recuperer_Nom(),
                                 Marque.Recuperer_Nom(),
                                 Convert.ToString(Prix),
                                 Convert.ToString(Quantite)};

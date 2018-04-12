@@ -80,7 +80,7 @@ namespace Mercure
 
             Lecture_Table_Famille.Read();
 
-            Famille Famille = new Famille(Convert.ToString(Lecture_Table_Famille[0]), Convert.ToString(Lecture_Table_Famille[1]));
+            Famille Famille = new Famille(Convert.ToInt32(Lecture_Table_Famille[0]), Convert.ToString(Lecture_Table_Famille[1]));
 
             Lecture_Table_Famille.Close();
 
@@ -91,13 +91,13 @@ namespace Mercure
         {
             List <Famille> Familles = new List <Famille>();
 
-            SQLiteCommand Requete_Familles = new SQLiteCommand("SELECT * FROM Familles;", Connection);
+            SQLiteCommand Requete_Familles = new SQLiteCommand("SELECT * FROM Familles ORDER BY Nom ASC;", Connection);
 
             SQLiteDataReader Lecture_Table_Famille = Requete_Familles.ExecuteReader();
 
             while (Lecture_Table_Famille.Read())
             {
-                Familles.Add(new Famille(Convert.ToString(Lecture_Table_Famille[0]), Convert.ToString(Lecture_Table_Famille[1])));
+                Familles.Add(new Famille(Convert.ToInt32(Lecture_Table_Famille[0]), Convert.ToString(Lecture_Table_Famille[1])));
             }
 
             Lecture_Table_Famille.Close();
@@ -126,7 +126,7 @@ namespace Mercure
         {
             List <SousFamille> Sous_Familles = new List <SousFamille>();
 
-            SQLiteCommand Requete_Sous_Familles = new SQLiteCommand("SELECT * FROM SousFamilles;", Connection);
+            SQLiteCommand Requete_Sous_Familles = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY Nom ASC;", Connection);
 
             SQLiteDataReader Lecture_Table_Sous_Famille = Requete_Sous_Familles.ExecuteReader();
 
@@ -165,7 +165,7 @@ namespace Mercure
         {
             List <Marque> Marques = new List <Marque> ();
 
-            SQLiteCommand Requete_Marques = new SQLiteCommand("SELECT * FROM Marques;", Connection);
+            SQLiteCommand Requete_Marques = new SQLiteCommand("SELECT * FROM Marques ORDER BY Nom ASC;", Connection);
 
             SQLiteDataReader Lecture_Table_Marque = Requete_Marques.ExecuteReader();
 

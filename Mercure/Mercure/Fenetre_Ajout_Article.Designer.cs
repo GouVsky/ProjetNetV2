@@ -33,8 +33,8 @@ namespace Mercure
             this.Description_Article_Edition.Location = new System.Drawing.Point(21, 182);
             this.Description_Article_Edition.Multiline = true;
             this.Description_Article_Edition.Name = "Description_Article_Edition";
-            this.Description_Article_Edition.Size = new System.Drawing.Size(346, 98);
-            this.Description_Article_Edition.TabIndex = 0;
+            this.Description_Article_Edition.Size = new System.Drawing.Size(398, 70);
+            this.Description_Article_Edition.TabIndex = 4;
             // 
             // Reference_Article_Titre
             // 
@@ -58,8 +58,8 @@ namespace Mercure
             // 
             this.Reference_Article_Edition.Location = new System.Drawing.Point(21, 68);
             this.Reference_Article_Edition.Name = "Reference_Article_Edition";
-            this.Reference_Article_Edition.Size = new System.Drawing.Size(150, 20);
-            this.Reference_Article_Edition.TabIndex = 3;
+            this.Reference_Article_Edition.Size = new System.Drawing.Size(185, 20);
+            this.Reference_Article_Edition.TabIndex = 0;
             this.Reference_Article_Edition.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Reference_Article_Edition_KeyPress);
             // 
             // Famille_Article_Titre
@@ -74,7 +74,7 @@ namespace Mercure
             // Sous_Famille_Article_Titre
             // 
             this.Sous_Famille_Article_Titre.AutoSize = true;
-            this.Sous_Famille_Article_Titre.Location = new System.Drawing.Point(211, 107);
+            this.Sous_Famille_Article_Titre.Location = new System.Drawing.Point(231, 107);
             this.Sous_Famille_Article_Titre.Name = "Sous_Famille_Article_Titre";
             this.Sous_Famille_Article_Titre.Size = new System.Drawing.Size(63, 13);
             this.Sous_Famille_Article_Titre.TabIndex = 5;
@@ -83,7 +83,7 @@ namespace Mercure
             // Marque_Article_Titre
             // 
             this.Marque_Article_Titre.AutoSize = true;
-            this.Marque_Article_Titre.Location = new System.Drawing.Point(211, 52);
+            this.Marque_Article_Titre.Location = new System.Drawing.Point(231, 52);
             this.Marque_Article_Titre.Name = "Marque_Article_Titre";
             this.Marque_Article_Titre.Size = new System.Drawing.Size(43, 13);
             this.Marque_Article_Titre.TabIndex = 6;
@@ -94,29 +94,35 @@ namespace Mercure
             this.Choix_Famille_Article.FormattingEnabled = true;
             this.Choix_Famille_Article.Location = new System.Drawing.Point(21, 123);
             this.Choix_Famille_Article.Name = "Choix_Famille_Article";
-            this.Choix_Famille_Article.Size = new System.Drawing.Size(150, 21);
-            this.Choix_Famille_Article.TabIndex = 7;
+            this.Choix_Famille_Article.Size = new System.Drawing.Size(185, 21);
+            this.Choix_Famille_Article.Sorted = true;
+            this.Choix_Famille_Article.TabIndex = 2;
+            this.Choix_Famille_Article.Text = "Sélectionnez une famille";
             // 
             // Choix_Sous_Famille_Article
             // 
             this.Choix_Sous_Famille_Article.FormattingEnabled = true;
-            this.Choix_Sous_Famille_Article.Location = new System.Drawing.Point(217, 123);
+            this.Choix_Sous_Famille_Article.Location = new System.Drawing.Point(234, 123);
             this.Choix_Sous_Famille_Article.Name = "Choix_Sous_Famille_Article";
-            this.Choix_Sous_Famille_Article.Size = new System.Drawing.Size(150, 21);
-            this.Choix_Sous_Famille_Article.TabIndex = 8;
+            this.Choix_Sous_Famille_Article.Size = new System.Drawing.Size(185, 21);
+            this.Choix_Sous_Famille_Article.Sorted = true;
+            this.Choix_Sous_Famille_Article.TabIndex = 3;
+            this.Choix_Sous_Famille_Article.Text = "Sélectionnez une sous-famille";
             // 
             // Choix_Marque_Article
             // 
             this.Choix_Marque_Article.FormattingEnabled = true;
-            this.Choix_Marque_Article.Location = new System.Drawing.Point(214, 68);
+            this.Choix_Marque_Article.Location = new System.Drawing.Point(234, 68);
             this.Choix_Marque_Article.Name = "Choix_Marque_Article";
-            this.Choix_Marque_Article.Size = new System.Drawing.Size(153, 21);
-            this.Choix_Marque_Article.TabIndex = 9;
+            this.Choix_Marque_Article.Size = new System.Drawing.Size(185, 21);
+            this.Choix_Marque_Article.Sorted = true;
+            this.Choix_Marque_Article.TabIndex = 1;
+            this.Choix_Marque_Article.Text = "Sélectionnez une marque";
             // 
             // Prix_Unitaire_Article_Titre
             // 
             this.Prix_Unitaire_Article_Titre.AutoSize = true;
-            this.Prix_Unitaire_Article_Titre.Location = new System.Drawing.Point(18, 349);
+            this.Prix_Unitaire_Article_Titre.Location = new System.Drawing.Point(18, 309);
             this.Prix_Unitaire_Article_Titre.Name = "Prix_Unitaire_Article_Titre";
             this.Prix_Unitaire_Article_Titre.Size = new System.Drawing.Size(118, 13);
             this.Prix_Unitaire_Article_Titre.TabIndex = 11;
@@ -125,7 +131,7 @@ namespace Mercure
             // Quantite_Article_Titre
             // 
             this.Quantite_Article_Titre.AutoSize = true;
-            this.Quantite_Article_Titre.Location = new System.Drawing.Point(214, 349);
+            this.Quantite_Article_Titre.Location = new System.Drawing.Point(247, 309);
             this.Quantite_Article_Titre.Name = "Quantite_Article_Titre";
             this.Quantite_Article_Titre.Size = new System.Drawing.Size(47, 13);
             this.Quantite_Article_Titre.TabIndex = 12;
@@ -135,7 +141,7 @@ namespace Mercure
             // 
             this.Zone_Autres_Informations_Titre.AutoSize = true;
             this.Zone_Autres_Informations_Titre.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.Zone_Autres_Informations_Titre.Location = new System.Drawing.Point(18, 315);
+            this.Zone_Autres_Informations_Titre.Location = new System.Drawing.Point(18, 283);
             this.Zone_Autres_Informations_Titre.Name = "Zone_Autres_Informations_Titre";
             this.Zone_Autres_Informations_Titre.Size = new System.Drawing.Size(115, 13);
             this.Zone_Autres_Informations_Titre.TabIndex = 15;
@@ -153,10 +159,10 @@ namespace Mercure
             // 
             // Quantite_Article_Edition
             // 
-            this.Quantite_Article_Edition.Location = new System.Drawing.Point(217, 366);
+            this.Quantite_Article_Edition.Location = new System.Drawing.Point(250, 325);
             this.Quantite_Article_Edition.Name = "Quantite_Article_Edition";
             this.Quantite_Article_Edition.Size = new System.Drawing.Size(68, 20);
-            this.Quantite_Article_Edition.TabIndex = 17;
+            this.Quantite_Article_Edition.TabIndex = 6;
             // 
             // Prix_Unitaire_Article_Edition
             // 
@@ -166,7 +172,7 @@ namespace Mercure
             0,
             0,
             131072});
-            this.Prix_Unitaire_Article_Edition.Location = new System.Drawing.Point(21, 366);
+            this.Prix_Unitaire_Article_Edition.Location = new System.Drawing.Point(21, 325);
             this.Prix_Unitaire_Article_Edition.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -174,12 +180,12 @@ namespace Mercure
             0});
             this.Prix_Unitaire_Article_Edition.Name = "Prix_Unitaire_Article_Edition";
             this.Prix_Unitaire_Article_Edition.Size = new System.Drawing.Size(70, 20);
-            this.Prix_Unitaire_Article_Edition.TabIndex = 18;
+            this.Prix_Unitaire_Article_Edition.TabIndex = 5;
             // 
             // Bouton_Validation
             // 
             this.Bouton_Validation.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Bouton_Validation.Location = new System.Drawing.Point(199, 427);
+            this.Bouton_Validation.Location = new System.Drawing.Point(260, 379);
             this.Bouton_Validation.Name = "Bouton_Validation";
             this.Bouton_Validation.Size = new System.Drawing.Size(75, 23);
             this.Bouton_Validation.TabIndex = 19;
@@ -191,7 +197,7 @@ namespace Mercure
             // Bouton_Annulation
             // 
             this.Bouton_Annulation.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Bouton_Annulation.Location = new System.Drawing.Point(292, 427);
+            this.Bouton_Annulation.Location = new System.Drawing.Point(344, 379);
             this.Bouton_Annulation.Name = "Bouton_Annulation";
             this.Bouton_Annulation.Size = new System.Drawing.Size(75, 23);
             this.Bouton_Annulation.TabIndex = 20;
@@ -202,7 +208,7 @@ namespace Mercure
             // 
             this.AcceptButton = this.Bouton_Validation;
             this.CancelButton = this.Bouton_Annulation;
-            this.ClientSize = new System.Drawing.Size(390, 462);
+            this.ClientSize = new System.Drawing.Size(440, 411);
             this.Controls.Add(this.Bouton_Annulation);
             this.Controls.Add(this.Bouton_Validation);
             this.Controls.Add(this.Prix_Unitaire_Article_Edition);
