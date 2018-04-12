@@ -34,5 +34,10 @@ namespace Mercure
         {
             return Famille;
         }
+
+        public override string ToString()
+        {
+            return Nom;
+        }
     }
 }

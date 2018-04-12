@@ -87,6 +87,24 @@ namespace Mercure
             return Famille;
         }
 
+        public List <Famille> Recuperer_Familles()
+        {
+            List <Famille> Familles = new List <Famille>();
+
+            SQLiteCommand Requete_Familles = new SQLiteCommand("SELECT * FROM Familles;", Connection);
+
+            SQLiteDataReader Lecture_Table_Famille = Requete_Familles.ExecuteReader();
+
+            while (Lecture_Table_Famille.Read())
+            {
+                Familles.Add(new Famille(Convert.ToString(Lecture_Table_Famille[0]), Convert.ToString(Lecture_Table_Famille[1])));
+            }
+
+            Lecture_Table_Famille.Close();
+
+            return Familles;
+        }
+
         public SousFamille Recuperer_Sous_Famille(int Id_Sous_Famille)
         {
             SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE @Id_Sous_Famille == RefSousFamille;", Connection);
@@ -102,6 +120,28 @@ namespace Mercure
                                                        Recuperer_Famille(Convert.ToInt32(Lecture_Table_Sous_Famille[1])));
 
             return Sous_Famille;
+        }
+
+        public List <SousFamille> Recuperer_Sous_Familles()
+        {
+            List <SousFamille> Sous_Familles = new List <SousFamille>();
+
+            SQLiteCommand Requete_Sous_Familles = new SQLiteCommand("SELECT * FROM SousFamilles;", Connection);
+
+            SQLiteDataReader Lecture_Table_Sous_Famille = Requete_Sous_Familles.ExecuteReader();
+
+            while (Lecture_Table_Sous_Famille.Read())
+            {
+                Famille Famille = Recuperer_Famille(Convert.ToInt32(Lecture_Table_Sous_Famille[1]));
+
+                Sous_Familles.Add(new SousFamille(Convert.ToInt32(Lecture_Table_Sous_Famille[0]),
+                                                 Convert.ToString(Lecture_Table_Sous_Famille[2]),
+                                                 Famille));
+            }
+
+            Lecture_Table_Sous_Famille.Close();
+
+            return Sous_Familles;
         }
 
         public Marque Recuperer_Marque(int Id_Marque)
