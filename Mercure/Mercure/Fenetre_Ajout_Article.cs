@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Globalization;
@@ -39,7 +40,27 @@ namespace Mercure
 
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
+            foreach (Control Control in Controls)
+            {
+                Control.Focus();
 
+                // Validate lance l'évènement 'Validating'.
+
+                if (!Validate())
+                {
+                    DialogResult = DialogResult.None;
+
+                    return;
+                }
+            }
+        }
+
+        private void Reference_Article_Edition_Validating(object sender, CancelEventArgs e)
+        {
+            if (Reference_Article_Edition.Text.Length < 6)
+            {
+                MessageBox.Show("La référence de l'article n'a pas ou mal été renseignée.", "Erreur", MessageBoxButtons.OK);
+            }
         }
 
         private void Reference_Article_Edition_KeyPress(object sender, KeyPressEventArgs e)
