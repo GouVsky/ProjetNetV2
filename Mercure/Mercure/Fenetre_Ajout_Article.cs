@@ -40,18 +40,11 @@ namespace Mercure
 
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
-            foreach (Control Control in Controls)
+            // Validate lance l'évènement 'Validating'.
+
+            if (!Validate())
             {
-                Control.Focus();
-
-                // Validate lance l'évènement 'Validating'.
-
-                if (!Validate())
-                {
-                    DialogResult = DialogResult.None;
-
-                    return;
-                }
+                DialogResult = DialogResult.None;
             }
         }
 
@@ -68,12 +61,19 @@ namespace Mercure
             e.Handled = true;
 
             if (String.IsNullOrEmpty(Reference_Article_Edition.Text))
-                e.Handled = !(e.KeyChar == (char) Keys.F);
+
+                e.Handled = !(e.KeyChar == (char)Keys.F);
+
+
 
             else if (Reference_Article_Edition.Text.Length <= 7)
+
                 e.Handled = !((e.KeyChar >= '0' && e.KeyChar <= '9') || e.KeyChar == (char)8);
 
+
+
             else if (Reference_Article_Edition.Text.Length <= 8)
+
                 e.Handled = !(e.KeyChar == (char)8);
         }
 
