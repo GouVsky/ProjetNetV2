@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
             this.Barre_Menu = new System.Windows.Forms.MenuStrip();
             this.Menu_Fichier = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Fichier_Import_XML = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Fichier_Quitter = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Edition = new System.Windows.Forms.ToolStripMenuItem();
+            this.familleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.marqueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sousFamillesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Affichage = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Apropos = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Aide = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +70,7 @@
             this.Menu_Fichier.Name = "Menu_Fichier";
             this.Menu_Fichier.Size = new System.Drawing.Size(64, 24);
             this.Menu_Fichier.Text = "Fichier";
+            this.Menu_Fichier.Click += new System.EventHandler(this.Menu_Fichier_Click);
             // 
             // Menu_Fichier_Import_XML
             // 
@@ -84,9 +88,34 @@
             // 
             // Menu_Edition
             // 
+            this.Menu_Edition.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.familleToolStripMenuItem,
+            this.marqueToolStripMenuItem,
+            this.sousFamillesToolStripMenuItem});
             this.Menu_Edition.Name = "Menu_Edition";
             this.Menu_Edition.Size = new System.Drawing.Size(68, 24);
             this.Menu_Edition.Text = "Edition";
+            // 
+            // familleToolStripMenuItem
+            // 
+            this.familleToolStripMenuItem.Name = "familleToolStripMenuItem";
+            this.familleToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.familleToolStripMenuItem.Text = "Familles";
+            this.familleToolStripMenuItem.Click += new System.EventHandler(this.familleToolStripMenuItem_Click);
+            // 
+            // marqueToolStripMenuItem
+            // 
+            this.marqueToolStripMenuItem.Name = "marqueToolStripMenuItem";
+            this.marqueToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.marqueToolStripMenuItem.Text = "Marques";
+            this.marqueToolStripMenuItem.Click += new System.EventHandler(this.marqueToolStripMenuItem_Click);
+            // 
+            // sousFamillesToolStripMenuItem
+            // 
+            this.sousFamillesToolStripMenuItem.Name = "sousFamillesToolStripMenuItem";
+            this.sousFamillesToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.sousFamillesToolStripMenuItem.Text = "Sous-Familles";
+            this.sousFamillesToolStripMenuItem.Click += new System.EventHandler(this.sousFamillesToolStripMenuItem_Click);
             // 
             // Menu_Affichage
             // 
@@ -99,6 +128,7 @@
             this.Menu_Apropos.Name = "Menu_Apropos";
             this.Menu_Apropos.Size = new System.Drawing.Size(86, 24);
             this.Menu_Apropos.Text = "A propos ";
+            this.Menu_Apropos.Click += new System.EventHandler(this.Menu_Apropos_Click);
             // 
             // Menu_Aide
             // 
@@ -129,9 +159,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Affichage_Articles.FullRowSelect = true;
             this.Affichage_Articles.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem3});
             this.Affichage_Articles.Location = new System.Drawing.Point(59, 82);
-            this.Affichage_Articles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Affichage_Articles.Margin = new System.Windows.Forms.Padding(4);
             this.Affichage_Articles.MultiSelect = false;
             this.Affichage_Articles.Name = "Affichage_Articles";
             this.Affichage_Articles.Size = new System.Drawing.Size(1139, 552);
@@ -178,6 +208,9 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Fichier_Quitter;
         private System.Windows.Forms.ToolStripStatusLabel Barre_De_Statut_Texte;
         private System.Windows.Forms.ListView Affichage_Articles;
+        private System.Windows.Forms.ToolStripMenuItem familleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem marqueToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sousFamillesToolStripMenuItem;
     }
 }
 
