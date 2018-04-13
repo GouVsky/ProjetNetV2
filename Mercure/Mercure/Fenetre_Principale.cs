@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListViewItem;
 
 namespace Mercure
 {
@@ -93,7 +94,29 @@ namespace Mercure
 
         private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (e.Column != Facteur_Tri)
+            int Nombre_Articles = Affichage_Articles.Items.Count;
+
+            for (int i = 0; i < Nombre_Articles; i++)
+            {
+                ListViewSubItem Article = Affichage_Articles.Items[i].SubItems[e.Column];
+
+                ListViewGroup Groupe = new ListViewGroup(Article.Text, HorizontalAlignment.Left);
+
+                int Nombre_Groupes = Affichage_Articles.Groups.Count;
+
+                /* for (int j = 0; j < Nombre_Groupes; j++)
+                 {
+                     if (!(Affichage_Articles.Groups[j].Name == Groupe.Name))
+                     {
+                         Affichage_Articles.Groups.Add(Groupe);
+                     }
+                 }
+
+                 if (Nombre_Groupes == 0)*/
+                Affichage_Articles.Groups.Add(Groupe);
+            }
+
+            /*if (e.Column != Facteur_Tri)
             {
                 Facteur_Tri = e.Column;
 
@@ -115,7 +138,7 @@ namespace Mercure
 
             Affichage_Articles.ListViewItemSorter = new List_View_Comparateur_Items(e.Column, Affichage_Articles.Sorting);
 
-            Affichage_Articles.Sort();
+            Affichage_Articles.Sort();*/
         }
 
         private void Affichage_Articles_KeyDown(object sender, KeyEventArgs e)
