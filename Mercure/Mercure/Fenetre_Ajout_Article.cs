@@ -50,7 +50,7 @@ namespace Mercure
 
         private void Reference_Article_Edition_Validating(object sender, CancelEventArgs e)
         {
-            if (Reference_Article_Edition.Text.Length < 6)
+            if (Reference_Article_Edition.Text.Length < 8)
             {
                 MessageBox.Show("La référence de l'article n'a pas ou mal été renseignée.", "Erreur", MessageBoxButtons.OK);
             }
@@ -60,20 +60,12 @@ namespace Mercure
         {
             e.Handled = true;
 
-            if (String.IsNullOrEmpty(Reference_Article_Edition.Text))
+            Regex Regex = new Regex(@"[^a-zA-Z0-9]");
 
-                e.Handled = !(e.KeyChar == (char)Keys.F);
+            if (Reference_Article_Edition.Text.Length < 8)
+                e.Handled = !(!Regex.IsMatch(e.KeyChar.ToString()) || e.KeyChar == (char)8);
 
-
-
-            else if (Reference_Article_Edition.Text.Length <= 7)
-
-                e.Handled = !((e.KeyChar >= '0' && e.KeyChar <= '9') || e.KeyChar == (char)8);
-
-
-
-            else if (Reference_Article_Edition.Text.Length <= 8)
-
+            else if (Reference_Article_Edition.Text.Length == 8)
                 e.Handled = !(e.KeyChar == (char)8);
         }
 
