@@ -121,5 +121,10 @@ namespace Mercure
         {
             return Importation;
         }
+
+        private void BoutonCliquer_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

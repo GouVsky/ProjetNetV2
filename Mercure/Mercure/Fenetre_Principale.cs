@@ -234,5 +234,30 @@ namespace Mercure
 
             Data_Reader.Terminer_Connection();
         }
+
+        private void familleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("familleToolStripMenuItem_Click", "Erreur XML", MessageBoxButtons.OK);
+        }
+
+        private void marqueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("marqueToolStripMenuItem_Click", "Erreur XML", MessageBoxButtons.OK);
+        }
+
+        private void sousFamillesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("sousFamillesToolStripMenuItem_Click", "Erreur XML", MessageBoxButtons.OK);
+        }
+
+        private void Menu_Fichier_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Menu_Apropos_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("lalala LA LA", "olala", MessageBoxButtons.OK);
+        }
     }
 }
