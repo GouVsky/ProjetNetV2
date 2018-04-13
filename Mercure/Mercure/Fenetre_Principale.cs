@@ -192,6 +192,8 @@ namespace Mercure
             // Tri des colonnes.
 
             Affichage_Articles.ColumnClick += new ColumnClickEventHandler(Affichage_Articles_ColumnClick);
+
+            Remplir_Liste_Avec_Articles();
         }
 
         public void Remplir_Liste_Avec_Articles()

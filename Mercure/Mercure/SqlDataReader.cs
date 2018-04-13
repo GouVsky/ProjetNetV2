@@ -36,6 +36,8 @@ namespace Mercure
             Connection.Close();
         }
 
+       
+
         public List <Article> Recuperer_Articles()
         {
             List <Article> Articles = new List <Article> ();
