@@ -94,51 +94,76 @@ namespace Mercure
 
         private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            int Nombre_Articles = Affichage_Articles.Items.Count;
+            Trier_Articles(e.Column);
 
-            for (int i = 0; i < Nombre_Articles; i++)
+            Creer_Groupes(e.Column);
+        }
+
+        private void Trier_Articles(int Numero_Colonne)
+        {
+            if (Numero_Colonne != Facteur_Tri)
             {
-                ListViewSubItem Article = Affichage_Articles.Items[i].SubItems[e.Column];
-
-                ListViewGroup Groupe = new ListViewGroup(Article.Text, HorizontalAlignment.Left);
-
-                int Nombre_Groupes = Affichage_Articles.Groups.Count;
-
-                /* for (int j = 0; j < Nombre_Groupes; j++)
-                 {
-                     if (!(Affichage_Articles.Groups[j].Name == Groupe.Name))
-                     {
-                         Affichage_Articles.Groups.Add(Groupe);
-                     }
-                 }
-
-                 if (Nombre_Groupes == 0)*/
-                Affichage_Articles.Groups.Add(Groupe);
-            }
-
-            /*if (e.Column != Facteur_Tri)
-            {
-                Facteur_Tri = e.Column;
+                Facteur_Tri = Numero_Colonne;
 
                 // Par défaut, le tri se fait dans l'ordre croissant.
 
                 Affichage_Articles.Sorting = SortOrder.Ascending;
             }
 
-            else
+            Affichage_Articles.ListViewItemSorter = new List_View_Comparateur_Items(Numero_Colonne, Affichage_Articles.Sorting);
+
+            Affichage_Articles.Sort();
+        }
+
+        private void Creer_Groupes(int Numero_Colonne)
+        {
+            // On ne crée pas de groupe sur la référence et la description de l'article.
+
+            if (Numero_Colonne == 0 || Numero_Colonne == 1)
             {
-                // On change le type de tri un coup sur deux.
-
-                if (Affichage_Articles.Sorting == SortOrder.Ascending)
-                    Affichage_Articles.Sorting = SortOrder.Descending;
-
-                else
-                    Affichage_Articles.Sorting = SortOrder.Ascending;
+                Affichage_Articles.Groups.Clear();
             }
 
-            Affichage_Articles.ListViewItemSorter = new List_View_Comparateur_Items(e.Column, Affichage_Articles.Sorting);
+            else
+            {
+                int Nombre_Articles = Affichage_Articles.Items.Count;
 
-            Affichage_Articles.Sort();*/
+                for (int i = 0; i < Nombre_Articles; i++)
+                {
+                    ListViewSubItem Article = Affichage_Articles.Items[i].SubItems[Numero_Colonne];
+
+                    // On crée le groupe.
+
+                    ListViewGroup Groupe = new ListViewGroup(Article.Text, HorizontalAlignment.Left);
+
+
+                    bool Groupe_Existe = false;
+
+                    int Nombre_Groupes = Affichage_Articles.Groups.Count;
+
+                    for (int j = 0; j < Nombre_Groupes && !Groupe_Existe; j++)
+                    {
+                        // On vérifie si le groupe existe déjà ou non.
+                        // Si c'est le cas, on y ajoute l'article.
+
+                        if (Affichage_Articles.Groups[j].Header == Groupe.Header)
+                        {
+                            Groupe_Existe = true;
+
+                            Affichage_Articles.Items[i].Group = Affichage_Articles.Groups[j];
+                        }
+                    }
+
+                    // Si le groupe n'existe pas encore, on l'ajoute à la liste des groupes,
+
+                    if (!Groupe_Existe)
+                    {
+                        Affichage_Articles.Groups.Add(Groupe);
+
+                        Affichage_Articles.Items[i].Group = Affichage_Articles.Groups[Nombre_Groupes];
+                    }
+                }
+            }
         }
 
         private void Affichage_Articles_KeyDown(object sender, KeyEventArgs e)
