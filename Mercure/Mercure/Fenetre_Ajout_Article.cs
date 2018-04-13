@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace Mercure
 {
+
     public partial class Fenetre_Ajout_Article : Form
     {
         public Fenetre_Ajout_Article()
@@ -20,6 +21,7 @@ namespace Mercure
             Charger_Marques();
             Charger_Familles();
             Charger_Sous_Familles();
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
 
         public Fenetre_Ajout_Article(ListViewItem Article)
@@ -36,6 +38,7 @@ namespace Mercure
             Prix_Unitaire_Article_Edition.Value = Decimal.Parse(Article.SubItems[5].Text);
 
             Quantite_Article_Edition.Value = Int32.Parse(Article.SubItems[6].Text);
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
 
         private void Bouton_Validation_Click(object sender, EventArgs e)

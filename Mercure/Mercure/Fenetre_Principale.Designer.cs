@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             this.Barre_Menu = new System.Windows.Forms.MenuStrip();
             this.Menu_Fichier = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Fichier_Import_XML = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,7 +129,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Affichage_Articles.FullRowSelect = true;
             this.Affichage_Articles.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.Affichage_Articles.Location = new System.Drawing.Point(59, 82);
             this.Affichage_Articles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Affichage_Articles.MultiSelect = false;
