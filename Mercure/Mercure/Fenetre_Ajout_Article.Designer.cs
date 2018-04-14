@@ -6,6 +6,7 @@ namespace Mercure
     {
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Description_Article_Edition = new System.Windows.Forms.TextBox();
             this.Reference_Article_Titre = new System.Windows.Forms.Label();
             this.Description_Article_Label = new System.Windows.Forms.Label();
@@ -25,8 +26,10 @@ namespace Mercure
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.Choix_Marque_Article = new System.Windows.Forms.ComboBox();
             this.Reference_Article_Edition = new System.Windows.Forms.TextBox();
+            this.Erreur = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.Quantite_Article_Edition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Prix_Unitaire_Article_Edition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Erreur)).BeginInit();
             this.SuspendLayout();
             // 
             // Description_Article_Edition
@@ -40,6 +43,7 @@ namespace Mercure
             this.Description_Article_Edition.Size = new System.Drawing.Size(390, 62);
             this.Description_Article_Edition.TabIndex = 4;
             this.Description_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Description_Article_Edition_Validating);
+            this.Description_Article_Edition.Validated += new System.EventHandler(this.Description_Article_Edition_Validated);
             // 
             // Reference_Article_Titre
             // 
@@ -106,6 +110,8 @@ namespace Mercure
             this.Choix_Famille_Article.Sorted = true;
             this.Choix_Famille_Article.TabIndex = 2;
             this.Choix_Famille_Article.Text = "Sélectionnez une famille";
+            this.Choix_Famille_Article.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Famille_Article_Validating);
+            this.Choix_Famille_Article.Validated += new System.EventHandler(this.Choix_Famille_Article_Validated);
             // 
             // Choix_Sous_Famille_Article
             // 
@@ -118,6 +124,8 @@ namespace Mercure
             this.Choix_Sous_Famille_Article.Sorted = true;
             this.Choix_Sous_Famille_Article.TabIndex = 3;
             this.Choix_Sous_Famille_Article.Text = "Sélectionnez une sous-famille";
+            this.Choix_Sous_Famille_Article.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Sous_Famille_Article_Validating);
+            this.Choix_Sous_Famille_Article.Validated += new System.EventHandler(this.Choix_Sous_Famille_Article_Validated);
             // 
             // Prix_Unitaire_Article_Titre
             // 
@@ -168,6 +176,7 @@ namespace Mercure
             this.Quantite_Article_Edition.Size = new System.Drawing.Size(68, 20);
             this.Quantite_Article_Edition.TabIndex = 6;
             this.Quantite_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Quantite_Article_Edition_Validating);
+            this.Quantite_Article_Edition.Validated += new System.EventHandler(this.Quantite_Article_Edition_Validated);
             // 
             // Prix_Unitaire_Article_Edition
             // 
@@ -188,6 +197,7 @@ namespace Mercure
             this.Prix_Unitaire_Article_Edition.Size = new System.Drawing.Size(70, 20);
             this.Prix_Unitaire_Article_Edition.TabIndex = 5;
             this.Prix_Unitaire_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Prix_Unitaire_Article_Edition_Validating);
+            this.Prix_Unitaire_Article_Edition.Validated += new System.EventHandler(this.Prix_Unitaire_Article_Edition_Validated);
             // 
             // Bouton_Validation
             // 
@@ -224,6 +234,8 @@ namespace Mercure
             this.Choix_Marque_Article.Sorted = true;
             this.Choix_Marque_Article.TabIndex = 1;
             this.Choix_Marque_Article.Text = "Sélectionnez une marque";
+            this.Choix_Marque_Article.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Marque_Article_Validating);
+            this.Choix_Marque_Article.Validated += new System.EventHandler(this.Choix_Marque_Article_Validated);
             // 
             // Reference_Article_Edition
             // 
@@ -233,10 +245,19 @@ namespace Mercure
             this.Reference_Article_Edition.TabIndex = 0;
             this.Reference_Article_Edition.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Reference_Article_Edition_KeyPress);
             this.Reference_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Reference_Article_Edition_Validating);
+            this.Reference_Article_Edition.Validated += new System.EventHandler(this.Reference_Article_Edition_Validated);
+            // 
+            // Erreur
+            // 
+            this.Erreur.BlinkRate = 0;
+            this.Erreur.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.Erreur.ContainerControl = this;
+            this.Erreur.RightToLeftChanged += new System.EventHandler(this.Bouton_Validation_Click);
             // 
             // Fenetre_Ajout_Article
             // 
             this.AcceptButton = this.Bouton_Validation;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.Bouton_Annulation;
             this.ClientSize = new System.Drawing.Size(432, 403);
             this.Controls.Add(this.Bouton_Annulation);
@@ -263,6 +284,7 @@ namespace Mercure
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             ((System.ComponentModel.ISupportInitialize)(this.Quantite_Article_Edition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Prix_Unitaire_Article_Edition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Erreur)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,5 +309,7 @@ namespace Mercure
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.ComboBox Choix_Marque_Article;
         private System.Windows.Forms.TextBox Reference_Article_Edition;
+        private System.Windows.Forms.ErrorProvider Erreur;
+        private System.ComponentModel.IContainer components;
     }
 }

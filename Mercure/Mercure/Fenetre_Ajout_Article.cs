@@ -14,8 +14,6 @@ namespace Mercure
 
     public partial class Fenetre_Ajout_Article : Form
     {
-        private ErrorProvider Erreur;
-
         public Fenetre_Ajout_Article()
         {
             InitializeComponent();
@@ -25,8 +23,6 @@ namespace Mercure
             Charger_Sous_Familles();
 
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
-
-            Erreur = new ErrorProvider();
         }
 
         public Fenetre_Ajout_Article(ListViewItem Article)
@@ -45,13 +41,12 @@ namespace Mercure
             Quantite_Article_Edition.Value = Int32.Parse(Article.SubItems[6].Text);
 
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
-
-            Erreur = new ErrorProvider();
         }
 
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
-            
+            if (!ValidateChildren())
+                DialogResult = DialogResult.None;
         }
 
         private void Reference_Article_Edition_Validating(object sender, CancelEventArgs e)
@@ -60,13 +55,13 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Reference_Article_Edition.Select(0, Reference_Article_Edition.Text.Length);
-
-                Erreur.SetError(Reference_Article_Edition, "La référence de l'article n'a pas ou mal été renseignée.\nElle doit contenir 8 caractères.");
+                Erreur.SetError(Reference_Article_Edition, "La référence de l'article n'a pas ou a mal été renseignée.\nElle doit contenir 8 caractères.");
             }
+        }
 
-            else
-                Erreur.SetError(Reference_Article_Edition, "");
+        private void Reference_Article_Edition_Validated(object sender, EventArgs e)
+        {           
+            Erreur.SetError(Reference_Article_Edition, "");
         }
 
         private void Reference_Article_Edition_KeyPress(object sender, KeyPressEventArgs e)
@@ -82,19 +77,64 @@ namespace Mercure
                 e.Handled = !(e.KeyChar == (char)8);
         }
 
+        private void Choix_Marque_Article_Validating(object sender, CancelEventArgs e)
+        {
+            if (Choix_Marque_Article.SelectedIndex == -1)
+            {
+                e.Cancel = true;
+
+                Erreur.SetError(Choix_Marque_Article, "Une marque doit être sélectionnée.");
+            }
+        }
+
+        private void Choix_Marque_Article_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Choix_Marque_Article, "");
+        }
+
+        private void Choix_Famille_Article_Validating(object sender, CancelEventArgs e)
+        {
+            if (Choix_Famille_Article.SelectedIndex == -1)
+            {
+                e.Cancel = true;
+
+                Erreur.SetError(Choix_Famille_Article, "Une famille d'articles doit être sélectionnée.");
+            }
+        }
+
+        private void Choix_Famille_Article_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Choix_Famille_Article, "");
+        }
+
+        private void Choix_Sous_Famille_Article_Validating(object sender, CancelEventArgs e)
+        {
+            if (Choix_Sous_Famille_Article.SelectedIndex == -1)
+            {
+                e.Cancel = true;
+
+                Erreur.SetError(Choix_Sous_Famille_Article, "Une sous-famille d'articles doit être sélectionnée.");
+            }
+        }
+
+        private void Choix_Sous_Famille_Article_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Choix_Sous_Famille_Article, "");
+        }
+
         private void Description_Article_Edition_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(Description_Article_Edition.Text))
             {
                 e.Cancel = true;
 
-                Description_Article_Edition.Select(0, Description_Article_Edition.Text.Length);
-
                 Erreur.SetError(Description_Article_Edition, "Une description de l'article doit être renseignée.");
             }
+        }
 
-            else
-                Erreur.SetError(Description_Article_Edition, "");
+        private void Description_Article_Edition_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Description_Article_Edition, "");
         }
 
         private void Prix_Unitaire_Article_Edition_Validating(object sender, CancelEventArgs e)
@@ -103,13 +143,13 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Prix_Unitaire_Article_Edition.Select(0, Prix_Unitaire_Article_Edition.Text.Length);
-
                 Erreur.SetError(Prix_Unitaire_Article_Edition, "Le prix unitaire de l'article ne peut pas être nul.");
             }
+        }
 
-            else
-                Erreur.SetError(Prix_Unitaire_Article_Edition, "");
+        private void Prix_Unitaire_Article_Edition_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Prix_Unitaire_Article_Edition, "");
         }
 
         private void Quantite_Article_Edition_Validating(object sender, CancelEventArgs e)
@@ -118,13 +158,13 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Quantite_Article_Edition.Select(0, Quantite_Article_Edition.Text.Length);
-
                 Erreur.SetError(Quantite_Article_Edition, "La quantité prévue d'articles ne peut pas être nulle.");
             }
+        }
 
-            else
-                Erreur.SetError(Quantite_Article_Edition, "");
+        private void Quantite_Article_Edition_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Quantite_Article_Edition, "");
         }
 
         private void Charger_Marques()
