@@ -56,6 +56,8 @@ namespace Mercure
 
             if (Resultat == DialogResult.OK)
             {
+                Fenetre_Ajout.Ajouter_Article();
+
                 Mise_A_Jour_Barre_De_Statut("Vous avez ajouté un nouvel article avec succès.");
             }
         }

@@ -82,10 +82,10 @@ namespace Mercure
                 }
 
                 my_XML_doc.Load(Chemin_Fichier);
-                XmlNodeList article = my_XML_doc.GetElementsByTagName("article");
+                XmlNodeList Article = my_XML_doc.GetElementsByTagName("article");
                 
-                Bar_Chargement_XML.Maximum = article.Count;
-                foreach (XmlNode selectNode in article)
+                Bar_Chargement_XML.Maximum = Article.Count;
+                foreach (XmlNode selectNode in Article)
                 {
                     string description = selectNode.SelectSingleNode("description").InnerText;
                     string refArticle = selectNode.SelectSingleNode("refArticle").InnerText;
@@ -95,13 +95,13 @@ namespace Mercure
                     string prix = selectNode.SelectSingleNode("prixHT").InnerText;
 
                     //////////////////////////////////////////////////////////////////////////////////////////
-                    int idFamille = Data_Reader.InsertIntoFamille(famille);
+                    int idFamille = Data_Reader.Inserer_Famille(famille);
                     ///////////////////////////////////////////////////////////////////////
                     int idMarque = Data_Reader.Inserer_Marque(marque);
                     //////////////////////////////////////////////////////////////////////
                     int idSousFamille = Data_Reader.Inserer_Sous_Famille(sousFamille, idFamille);
                     //////////////////////////////////////////////////////////////////////
-                    int value = Data_Reader.Inserer_Article(refArticle, description, idSousFamille, idMarque, prix);
+                    int value = Data_Reader.Inserer_Article(refArticle, description, idSousFamille, idMarque, prix, "1");
 
                     nbre_donnee++;
                     Bar_Chargement_XML.PerformStep();
@@ -111,7 +111,7 @@ namespace Mercure
             }
             catch (Exception)
             {
-                MessageBox.Show("Erreur de lecture du fichier XML", "Erreur XML", MessageBoxButtons.OK);
+                MessageBox.Show("Erreur de lecture du fichier XML.", "Erreur XML", MessageBoxButtons.OK);
             }
 
             Data_Reader.Terminer_Connection();
@@ -124,7 +124,7 @@ namespace Mercure
 
         private void BoutonCliquer_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

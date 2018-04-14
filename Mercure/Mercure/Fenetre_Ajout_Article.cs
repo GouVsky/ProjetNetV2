@@ -47,6 +47,9 @@ namespace Mercure
         {
             if (!ValidateChildren())
                 DialogResult = DialogResult.None;
+
+            else
+                DialogResult = DialogResult.OK;
         }
 
         private void Reference_Article_Edition_Validating(object sender, CancelEventArgs e)
@@ -264,6 +267,27 @@ namespace Mercure
             }
 
             Data_Reader.Terminer_Connection();
+        }
+
+        public void Ajouter_Article()
+        {
+            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
+
+
+            Famille Famille = ((Famille) Choix_Famille_Article.SelectedItem);
+
+            SousFamille Sous_Famille = (SousFamille) Choix_Sous_Famille_Article.SelectedItem;
+
+            Marque Marque = (Marque) Choix_Marque_Article.SelectedItem;
+
+            Data_Reader.Inserer_Sous_Famille(Sous_Famille.Recuperer_Nom(), Famille.Recuperer_Reference());
+
+            Data_Reader.Inserer_Article(Reference_Article_Edition.Text,
+                                        Description_Article_Edition.Text,
+                                        Sous_Famille.Recuperer_Reference(),
+                                        Marque.Recuperer_Reference(),
+                                        Prix_Unitaire_Article_Edition.Text,
+                                        Quantite_Article_Edition.Text);
         }
     }
 }

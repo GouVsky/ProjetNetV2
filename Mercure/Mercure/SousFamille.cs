@@ -20,6 +20,11 @@ namespace Mercure
             this.Famille = Famille;
         }
 
+        public void Definir_Famille(Famille Famille)
+        {
+            this.Famille = Famille;
+        }
+
         public int Recuperer_Reference()
         {
             return Reference;

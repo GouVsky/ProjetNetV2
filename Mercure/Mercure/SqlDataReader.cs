@@ -181,7 +181,7 @@ namespace Mercure
             return Marques;
         }
 
-        public int InsertIntoFamille(string Famille)
+        public int Inserer_Famille(string Famille)
         {
 
             SQLiteDataReader Lecture;
@@ -213,9 +213,10 @@ namespace Mercure
             }
             Lecture = Verif_famille.ExecuteReader();
             Lecture.Read();
-            int Id_Familles;
-            Id_Familles = Lecture.GetInt32(0);
-            return Id_Familles;
+            int Id_Famille;
+            Id_Famille = Lecture.GetInt32(0);
+
+            return Id_Famille;
         }
 
         public int Inserer_Marque(string Marque)
@@ -289,7 +290,7 @@ namespace Mercure
             return Id_Sous_Famille;
         }
 
-        public int Inserer_Article(string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, string Prix)
+        public int Inserer_Article(string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, string Prix, string Quantite)
         {
             int Valeur=-1;
             SQLiteCommand Verif_Article = new SQLiteCommand("SELECT * FROM Articles WHERE RefArticle LIKE @refArticle", Connection);
@@ -303,7 +304,7 @@ namespace Mercure
                 insert_Article.Parameters.AddWithValue("@refSF", Id_Sous_Famille);
                 insert_Article.Parameters.AddWithValue("@refMarq", Id_Marque);
                 insert_Article.Parameters.AddWithValue("@prixHT", Prix);
-                insert_Article.Parameters.AddWithValue("@Quantite", 1);
+                insert_Article.Parameters.AddWithValue("@Quantite", Quantite);
                 Valeur = insert_Article.ExecuteNonQuery();
             }
             else
