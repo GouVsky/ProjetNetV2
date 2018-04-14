@@ -14,6 +14,8 @@ namespace Mercure
 
     public partial class Fenetre_Ajout_Article : Form
     {
+        private ErrorProvider Erreur;
+
         public Fenetre_Ajout_Article()
         {
             InitializeComponent();
@@ -21,7 +23,10 @@ namespace Mercure
             Charger_Marques();
             Charger_Familles();
             Charger_Sous_Familles();
-            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+
+            MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+
+            Erreur = new ErrorProvider();
         }
 
         public Fenetre_Ajout_Article(ListViewItem Article)
@@ -38,25 +43,30 @@ namespace Mercure
             Prix_Unitaire_Article_Edition.Value = Decimal.Parse(Article.SubItems[5].Text);
 
             Quantite_Article_Edition.Value = Int32.Parse(Article.SubItems[6].Text);
-            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+
+            MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+
+            Erreur = new ErrorProvider();
         }
 
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
-            // Validate lance l'évènement 'Validating'.
-
-            if (!Validate())
-            {
-                DialogResult = DialogResult.None;
-            }
+            
         }
 
         private void Reference_Article_Edition_Validating(object sender, CancelEventArgs e)
         {
             if (Reference_Article_Edition.Text.Length < 8)
             {
-                MessageBox.Show("La référence de l'article n'a pas ou mal été renseignée.", "Erreur", MessageBoxButtons.OK);
+                e.Cancel = true;
+
+                Reference_Article_Edition.Select(0, Reference_Article_Edition.Text.Length);
+
+                Erreur.SetError(Reference_Article_Edition, "La référence de l'article n'a pas ou mal été renseignée.\nElle doit contenir 8 caractères.");
             }
+
+            else
+                Erreur.SetError(Reference_Article_Edition, "");
         }
 
         private void Reference_Article_Edition_KeyPress(object sender, KeyPressEventArgs e)
@@ -70,6 +80,51 @@ namespace Mercure
 
             else if (Reference_Article_Edition.Text.Length == 8)
                 e.Handled = !(e.KeyChar == (char)8);
+        }
+
+        private void Description_Article_Edition_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(Description_Article_Edition.Text))
+            {
+                e.Cancel = true;
+
+                Description_Article_Edition.Select(0, Description_Article_Edition.Text.Length);
+
+                Erreur.SetError(Description_Article_Edition, "Une description de l'article doit être renseignée.");
+            }
+
+            else
+                Erreur.SetError(Description_Article_Edition, "");
+        }
+
+        private void Prix_Unitaire_Article_Edition_Validating(object sender, CancelEventArgs e)
+        {
+            if (Prix_Unitaire_Article_Edition.Value == 0)
+            {
+                e.Cancel = true;
+
+                Prix_Unitaire_Article_Edition.Select(0, Prix_Unitaire_Article_Edition.Text.Length);
+
+                Erreur.SetError(Prix_Unitaire_Article_Edition, "Le prix unitaire de l'article ne peut pas être nul.");
+            }
+
+            else
+                Erreur.SetError(Prix_Unitaire_Article_Edition, "");
+        }
+
+        private void Quantite_Article_Edition_Validating(object sender, CancelEventArgs e)
+        {
+            if (Quantite_Article_Edition.Value == 0)
+            {
+                e.Cancel = true;
+
+                Quantite_Article_Edition.Select(0, Quantite_Article_Edition.Text.Length);
+
+                Erreur.SetError(Quantite_Article_Edition, "La quantité prévue d'articles ne peut pas être nulle.");
+            }
+
+            else
+                Erreur.SetError(Quantite_Article_Edition, "");
         }
 
         private void Charger_Marques()
