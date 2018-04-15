@@ -38,8 +38,6 @@ namespace Mercure
             Connection.Close();
         }
 
-       
-
         public List <Article> Recuperer_Articles()
         {
             List <Article> Articles = new List <Article> ();
@@ -298,14 +296,14 @@ namespace Mercure
 
             if (Verif_Article.ExecuteScalar() == null)
             {
-                SQLiteCommand insert_Article = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (@refArticle, @desc, @refSF, @refMarq, @prixHT, @Quantite); ", Connection);
-                insert_Article.Parameters.AddWithValue("@refArticle", Ref_Article);
-                insert_Article.Parameters.AddWithValue("@desc", Description);
-                insert_Article.Parameters.AddWithValue("@refSF", Id_Sous_Famille);
-                insert_Article.Parameters.AddWithValue("@refMarq", Id_Marque);
-                insert_Article.Parameters.AddWithValue("@prixHT", Prix);
-                insert_Article.Parameters.AddWithValue("@Quantite", Quantite);
-                Valeur = insert_Article.ExecuteNonQuery();
+                SQLiteCommand Inserer_Article = new SQLiteCommand("INSERT INTO Articles (RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES (@refArticle, @desc, @refSF, @refMarq, @prixHT, @Quantite); ", Connection);
+                Inserer_Article.Parameters.AddWithValue("@refArticle", Ref_Article);
+                Inserer_Article.Parameters.AddWithValue("@desc", Description);
+                Inserer_Article.Parameters.AddWithValue("@refSF", Id_Sous_Famille);
+                Inserer_Article.Parameters.AddWithValue("@refMarq", Id_Marque);
+                Inserer_Article.Parameters.AddWithValue("@prixHT", Prix);
+                Inserer_Article.Parameters.AddWithValue("@Quantite", Quantite);
+                Valeur = Inserer_Article.ExecuteNonQuery();
             }
             else
             {
@@ -315,6 +313,15 @@ namespace Mercure
             }
             
             return Valeur;
+        }
+
+        public void Supprimer_Article(string Reference)
+        {
+            SQLiteCommand Requete_Article = new SQLiteCommand("DELETE FROM Articles WHERE RefArticle LIKE @Reference;", Connection);
+
+            Requete_Article.Parameters.AddWithValue("@Reference", Reference);
+
+            Requete_Article.ExecuteNonQuery();
         }
 
         public void Purger_BDD()

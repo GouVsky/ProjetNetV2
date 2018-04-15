@@ -83,6 +83,8 @@ namespace Mercure
 
         private void Supprimer_Article_Click(object sender, EventArgs e)
         {
+            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
+
             DialogResult Resultat_Suppression = MessageBox.Show("L'article sélectionné va être supprimé. Il sera impossible de revenir en arrière. Continuer ?",
                                                                 "Suppression",
                                                                 MessageBoxButtons.YesNo,
@@ -90,12 +92,12 @@ namespace Mercure
 
             if (Resultat_Suppression == DialogResult.Yes)
             {
-                for (int i = 0; i < Affichage_Articles.Items.Count; i++)
-                {
-                    if (Affichage_Articles.Items[i].Selected)
-                        Affichage_Articles.Items[i].Remove();
-                }
+                Data_Reader.Supprimer_Article(Affichage_Articles.SelectedItems[0].SubItems[0].Text);
+
+                Affichage_Articles.SelectedItems[0].Remove();
             }
+
+            Data_Reader.Terminer_Connection();
         }
 
         private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
