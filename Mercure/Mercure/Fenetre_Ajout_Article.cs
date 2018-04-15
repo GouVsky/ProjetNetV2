@@ -269,25 +269,37 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
-        public void Ajouter_Article()
+        public Article Ajouter_Article()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
 
-            Famille Famille = ((Famille) Choix_Famille_Article.SelectedItem);
+            Famille Famille = (Famille) Choix_Famille_Article.SelectedItem;
 
             SousFamille Sous_Famille = (SousFamille) Choix_Sous_Famille_Article.SelectedItem;
+            Sous_Famille.Definir_Famille(Famille);
 
             Marque Marque = (Marque) Choix_Marque_Article.SelectedItem;
 
+            string Reference = Reference_Article_Edition.Text;
+            string Description = Description_Article_Edition.Text;
+            string Prix = Prix_Unitaire_Article_Edition.Text.Replace('.', ',');
+            string Quantite = Quantite_Article_Edition.Text;
+
             Data_Reader.Inserer_Sous_Famille(Sous_Famille.Recuperer_Nom(), Famille.Recuperer_Reference());
 
-            Data_Reader.Inserer_Article(Reference_Article_Edition.Text,
-                                        Description_Article_Edition.Text,
+            Data_Reader.Inserer_Article(Reference,
+                                        Description,
                                         Sous_Famille.Recuperer_Reference(),
                                         Marque.Recuperer_Reference(),
-                                        Prix_Unitaire_Article_Edition.Text,
-                                        Quantite_Article_Edition.Text);
+                                        Prix,
+                                        Quantite);
+
+            Article Article = new Article(Reference, Description, Sous_Famille, Marque, (double) decimal.Parse(Prix, new NumberFormatInfo() { NumberDecimalSeparator = "," }), Int32.Parse(Quantite));
+
+            Data_Reader.Terminer_Connection();
+
+            return Article;
         }
     }
 }
