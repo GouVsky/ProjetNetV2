@@ -77,6 +77,10 @@ namespace Mercure
 
             if (Resultat == DialogResult.OK)
             {
+                Article Article = Fenetre_Ajout.Ajouter_Article();
+
+                Affichage_Articles.Items[Affichage_Articles.SelectedIndices[0]] = new ListViewItem(Article.Recuperer_Donnees());
+
                 Mise_A_Jour_Barre_De_Statut("Vous avez modifié un article avec succès.");
             }
         }

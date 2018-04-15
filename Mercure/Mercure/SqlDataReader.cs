@@ -54,13 +54,13 @@ namespace Mercure
 
                 // On récupère le prix de l'article sous forme numérique.
 
-                decimal Prix = decimal.Parse(Lecture_Table_Article.GetString(4), new NumberFormatInfo() { NumberDecimalSeparator = "," });
+                double Prix = Convert.ToDouble(Convert.ToString(Lecture_Table_Article[4]));
 
                 Articles.Add(new Article(Convert.ToString(Lecture_Table_Article[0]),
                                          Convert.ToString(Lecture_Table_Article[1]),
                                          Sous_Famille,
                                          Marque,
-                                         (double) Prix,
+                                         Prix,
                                          Convert.ToInt32(Lecture_Table_Article[5])
                                          ));
             }
@@ -119,14 +119,18 @@ namespace Mercure
                                                        Convert.ToString(Lecture_Table_Sous_Famille[2]),
                                                        Recuperer_Famille(Convert.ToInt32(Lecture_Table_Sous_Famille[1])));
 
+            Lecture_Table_Sous_Famille.Close();
+
             return Sous_Famille;
         }
 
-        public List <SousFamille> Recuperer_Sous_Familles()
+        public List <SousFamille> Recuperer_Sous_Familles(int Reference_Famille)
         {
             List <SousFamille> Sous_Familles = new List <SousFamille>();
 
-            SQLiteCommand Requete_Sous_Familles = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY Nom ASC;", Connection);
+            SQLiteCommand Requete_Sous_Familles = new SQLiteCommand("SELECT * FROM SousFamilles WHERE RefFamille = @Reference_Famille ORDER BY Nom ASC;", Connection);
+
+            Requete_Sous_Familles.Parameters.AddWithValue("@Reference_Famille", Reference_Famille);
 
             SQLiteDataReader Lecture_Table_Sous_Famille = Requete_Sous_Familles.ExecuteReader();
 
@@ -230,13 +234,10 @@ namespace Mercure
                 Lecture = Recuperer_IdMax.ExecuteReader();
                 Lecture.Read();
                 if (!Lecture.HasRows)
-                {
                     Id_Max_Marque = 0;
-                }
+
                 else
-                {
                     Id_Max_Marque = Lecture.GetInt32(0);
-                }
 
                 Lecture.Close();
 
@@ -264,14 +265,12 @@ namespace Mercure
                 SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY RefSousFamille DESC;", Connection);
                 Lecture = Recuperer_IdMax.ExecuteReader();
                 Lecture.Read();
+
                 if (!Lecture.HasRows)
-                {
                     Id_Max_Sous_Famille = 0;
-                }
+
                 else
-                {
                     Id_Max_Sous_Famille = Lecture.GetInt32(0);
-                }
 
                 Lecture.Close();
 
@@ -288,7 +287,7 @@ namespace Mercure
             return Id_Sous_Famille;
         }
 
-        public int Inserer_Article(string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, string Prix, string Quantite)
+        public int Inserer_Article(string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, double Prix, int Quantite)
         {
             int Valeur=-1;
             SQLiteCommand Verif_Article = new SQLiteCommand("SELECT * FROM Articles WHERE RefArticle LIKE @refArticle", Connection);
@@ -307,8 +306,12 @@ namespace Mercure
             }
             else
             {
-                SQLiteCommand Mise_A_Jour_Article = new SQLiteCommand("UPDATE Articles SET Quantite = Quantite+1 WHERE RefArticle LIKE @RefArticle", Connection);
+                SQLiteCommand Mise_A_Jour_Article = new SQLiteCommand("UPDATE Articles SET RefSousFamille = @Id_Sous_Famille, RefMarque = @Id_Marque, PrixHT = @Prix, Quantite = @Quantite WHERE RefArticle LIKE @RefArticle", Connection);
                 Mise_A_Jour_Article.Parameters.AddWithValue("@RefArticle", Ref_Article);
+                Mise_A_Jour_Article.Parameters.AddWithValue("@Id_Sous_Famille", Id_Sous_Famille);
+                Mise_A_Jour_Article.Parameters.AddWithValue("@Id_Marque", Id_Marque);
+                Mise_A_Jour_Article.Parameters.AddWithValue("@Prix", Prix);
+                Mise_A_Jour_Article.Parameters.AddWithValue("@Quantite", Quantite);
                 Valeur = Mise_A_Jour_Article.ExecuteNonQuery();
             }
             

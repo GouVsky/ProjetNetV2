@@ -14,13 +14,14 @@ namespace Mercure
 
     public partial class Fenetre_Ajout_Article : Form
     {
+        private ListViewItem Article;
+
         public Fenetre_Ajout_Article()
         {
             InitializeComponent();
 
             Charger_Marques();
             Charger_Familles();
-            Charger_Sous_Familles();
 
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
         }
@@ -29,9 +30,10 @@ namespace Mercure
         {
             InitializeComponent();
 
+            this.Article = Article;
+
             Charger_Marques(Article.SubItems[4].Text);
             Charger_Familles(Article.SubItems[2].Text);
-            Charger_Sous_Familles(Article.SubItems[3].Text);
 
             Reference_Article_Edition.Text = Article.SubItems[0].Text;
             Description_Article_Edition.Text = Article.SubItems[1].Text;
@@ -223,50 +225,50 @@ namespace Mercure
 
             List <Famille> Familles = Data_Reader.Recuperer_Familles();
 
+            Famille Famille_A_Selectionner = null;
+
             foreach (Famille Famille in Familles)
             {
                 Choix_Famille_Article.Items.Add(Famille);
 
                 if (Nom.Equals(Famille.Recuperer_Nom()))
                 {
-                    Choix_Famille_Article.SelectedItem = Famille;
+                   Famille_A_Selectionner = Famille;
                 }
             }
 
             Data_Reader.Terminer_Connection();
+
+            Choix_Famille_Article.SelectedItem = Famille_A_Selectionner;
         }
 
-        private void Charger_Sous_Familles()
+        private void Choix_Famille_Article_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
-
-            List <SousFamille> Sous_Familles = Data_Reader.Recuperer_Sous_Familles();
-
-            foreach (SousFamille Sous_Famille in Sous_Familles)
+            if (Choix_Famille_Article.SelectedIndex > -1)
             {
-                Choix_Sous_Famille_Article.Items.Add(Sous_Famille);
-            }
+                // On efface le contenu actuel du combobox.
 
-            Data_Reader.Terminer_Connection();
-        }
+                Choix_Sous_Famille_Article.Items.Clear();
+                Choix_Sous_Famille_Article.Text = "Sélectionnez une sous-famille";
 
-        private void Charger_Sous_Familles(string Nom)
-        {
-            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
+                // On remplit le combobox en fonction de la famille.
 
-            List<SousFamille> Sous_Familles = Data_Reader.Recuperer_Sous_Familles();
+                SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            foreach (SousFamille Sous_Famille in Sous_Familles)
-            {
-                Choix_Sous_Famille_Article.Items.Add(Sous_Famille);
+                List <SousFamille> Sous_Familles = Data_Reader.Recuperer_Sous_Familles(((Famille) Choix_Famille_Article.SelectedItem).Recuperer_Reference());
 
-                if (Nom.Equals(Sous_Famille.Recuperer_Nom()))
+                foreach (SousFamille Sous_Famille in Sous_Familles)
                 {
-                    Choix_Sous_Famille_Article.SelectedItem = Sous_Famille;
-                }
-            }
+                    Choix_Sous_Famille_Article.Items.Add(Sous_Famille);
 
-            Data_Reader.Terminer_Connection();
+                    if (Article.SubItems[3].Text.Equals(Sous_Famille.Recuperer_Nom()))
+                    {
+                        Choix_Sous_Famille_Article.SelectedItem = Sous_Famille;
+                    }
+                }
+
+                Data_Reader.Terminer_Connection();
+            }
         }
 
         public Article Ajouter_Article()
@@ -283,8 +285,10 @@ namespace Mercure
 
             string Reference = Reference_Article_Edition.Text;
             string Description = Description_Article_Edition.Text;
-            string Prix = Prix_Unitaire_Article_Edition.Text.Replace('.', ',');
+            string Prix = Prix_Unitaire_Article_Edition.Text;
             string Quantite = Quantite_Article_Edition.Text;
+
+            double Prix_Converti = Convert.ToDouble(Prix);
 
             Data_Reader.Inserer_Sous_Famille(Sous_Famille.Recuperer_Nom(), Famille.Recuperer_Reference());
 
@@ -292,10 +296,10 @@ namespace Mercure
                                         Description,
                                         Sous_Famille.Recuperer_Reference(),
                                         Marque.Recuperer_Reference(),
-                                        Prix,
-                                        Quantite);
+                                        Prix_Converti,
+                                        Int32.Parse(Quantite));
 
-            Article Article = new Article(Reference, Description, Sous_Famille, Marque, (double) decimal.Parse(Prix, new NumberFormatInfo() { NumberDecimalSeparator = "," }), Int32.Parse(Quantite));
+            Article Article = new Article(Reference, Description, Sous_Famille, Marque, Prix_Converti, Int32.Parse(Quantite));
 
             Data_Reader.Terminer_Connection();
 

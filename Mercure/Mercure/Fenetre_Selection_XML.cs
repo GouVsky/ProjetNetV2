@@ -9,6 +9,7 @@ using System.Xml;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Mercure
 {
@@ -69,45 +70,43 @@ namespace Mercure
             Bar_Chargement_XML.Minimum = 0;
             Bar_Chargement_XML.Value = 0;
             Bar_Chargement_XML.Step = 1;
-            int nbre_donnee = 0;
-            XmlDocument my_XML_doc = new XmlDocument();
+            int Nbre_Donnees = 0;
+            XmlDocument Mon_XML_Doc = new XmlDocument();
 
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
             try
             {
                 if (Effacer_BDD)
-                {
                     Data_Reader.Purger_BDD();
-                }
 
-                my_XML_doc.Load(Chemin_Fichier);
-                XmlNodeList Article = my_XML_doc.GetElementsByTagName("article");
+                Mon_XML_Doc.Load(Chemin_Fichier);
+                XmlNodeList Article = Mon_XML_Doc.GetElementsByTagName("article");
                 
                 Bar_Chargement_XML.Maximum = Article.Count;
                 foreach (XmlNode selectNode in Article)
                 {
-                    string description = selectNode.SelectSingleNode("description").InnerText;
-                    string refArticle = selectNode.SelectSingleNode("refArticle").InnerText;
-                    string marque = selectNode.SelectSingleNode("marque").InnerText;
-                    string famille = selectNode.SelectSingleNode("famille").InnerText;
-                    string sousFamille = selectNode.SelectSingleNode("sousFamille").InnerText;
-                    string prix = selectNode.SelectSingleNode("prixHT").InnerText;
+                    string Description = selectNode.SelectSingleNode("description").InnerText;
+                    string Ref_Article = selectNode.SelectSingleNode("refArticle").InnerText;
+                    string Marque = selectNode.SelectSingleNode("marque").InnerText;
+                    string Famille = selectNode.SelectSingleNode("famille").InnerText;
+                    string Sous_Famille = selectNode.SelectSingleNode("sousFamille").InnerText;
+                    string Prix = selectNode.SelectSingleNode("prixHT").InnerText.Replace(',', '.');
 
                     //////////////////////////////////////////////////////////////////////////////////////////
-                    int idFamille = Data_Reader.Inserer_Famille(famille);
+                    int Id_Famille = Data_Reader.Inserer_Famille(Famille);
                     ///////////////////////////////////////////////////////////////////////
-                    int idMarque = Data_Reader.Inserer_Marque(marque);
+                    int Id_Marque = Data_Reader.Inserer_Marque(Marque);
                     //////////////////////////////////////////////////////////////////////
-                    int idSousFamille = Data_Reader.Inserer_Sous_Famille(sousFamille, idFamille);
+                    int Id_Sous_Famille = Data_Reader.Inserer_Sous_Famille(Sous_Famille, Id_Famille);
                     //////////////////////////////////////////////////////////////////////
-                    int value = Data_Reader.Inserer_Article(refArticle, description, idSousFamille, idMarque, prix, "1");
+                    int Valeur = Data_Reader.Inserer_Article(Ref_Article, Description, Id_Sous_Famille, Id_Marque, Convert.ToDouble(Prix), 1);
 
-                    nbre_donnee++;
+                    Nbre_Donnees++;
                     Bar_Chargement_XML.PerformStep();
                 }
-                MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données. " + nbre_donnee + " données ont été chargées." , "Insertion réussie", MessageBoxButtons.OK);
-
+            
+                MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données. " + Nbre_Donnees + " données ont été chargées." , "Insertion réussie", MessageBoxButtons.OK);
             }
             catch (Exception)
             {

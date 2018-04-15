@@ -110,6 +110,7 @@ namespace Mercure
             this.Choix_Famille_Article.Sorted = true;
             this.Choix_Famille_Article.TabIndex = 2;
             this.Choix_Famille_Article.Text = "Sélectionnez une famille";
+            this.Choix_Famille_Article.SelectedIndexChanged += new System.EventHandler(this.Choix_Famille_Article_SelectedIndexChanged);
             this.Choix_Famille_Article.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Famille_Article_Validating);
             this.Choix_Famille_Article.Validated += new System.EventHandler(this.Choix_Famille_Article_Validated);
             // 
