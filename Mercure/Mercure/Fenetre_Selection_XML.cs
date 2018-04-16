@@ -107,6 +107,8 @@ namespace Mercure
                 }
             
                 MessageBox.Show("Le fichier XML à été chargé avec succès dans la base de données. " + Nbre_Donnees + " données ont été chargées." , "Insertion réussie", MessageBoxButtons.OK);
+
+                Bouton_Annuler.Text = "Quitter";
             }
             catch (Exception)
             {

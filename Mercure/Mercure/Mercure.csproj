@@ -78,6 +78,12 @@
   <ItemGroup>
     <Compile Include="Article.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Edition_Famille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edition_Famille.Designer.cs">
+      <DependentUpon>Edition_Famille.cs</DependentUpon>
+    </Compile>
     <Compile Include="Famille.cs" />
     <Compile Include="Fenetre_Ajout_Article.cs">
       <SubType>Form</SubType>
@@ -103,6 +109,9 @@
     <Compile Include="List_View_Comparateur_Items.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Edition_Famille.resx">
+      <DependentUpon>Edition_Famille.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Ajout_Article.resx">
       <DependentUpon>Fenetre_Ajout_Article.cs</DependentUpon>
     </EmbeddedResource>

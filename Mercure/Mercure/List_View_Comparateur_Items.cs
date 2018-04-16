@@ -33,8 +33,8 @@ namespace Mercure
         {
             int Valeur = 0;
 
-            int Compare_Nombre = 0;
-            int Comparant_Nombre = 0;
+            double Compare_Nombre = 0;
+            double Comparant_Nombre = 0;
 
             string Compare_Texte = ((ListViewItem) Compare).SubItems[Colonne].Text;
             string Comparant_Texte = ((ListViewItem) Comparant).SubItems[Colonne].Text;
@@ -43,8 +43,8 @@ namespace Mercure
             // Si l'on souhaite effectuer un tri sur une colonne contenant des valeurs numériques,
             // il ne faut pas trier dans un ordre alphanumérique mais dans un ordre croissant.
 
-            if (int.TryParse(Compare_Texte, out Compare_Nombre)
-                && int.TryParse(Comparant_Texte, out Comparant_Nombre))
+            if (double.TryParse(Compare_Texte, out Compare_Nombre)
+                && double.TryParse(Comparant_Texte, out Comparant_Nombre))
             {
                 Valeur = Compare_Nombre.CompareTo(Comparant_Nombre);
             }

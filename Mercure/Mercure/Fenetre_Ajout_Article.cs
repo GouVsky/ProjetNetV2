@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace Mercure
 {
-
     public partial class Fenetre_Ajout_Article : Form
     {
         private ListViewItem Article;
@@ -261,7 +260,7 @@ namespace Mercure
                 {
                     Choix_Sous_Famille_Article.Items.Add(Sous_Famille);
 
-                    if (Article.SubItems[3].Text.Equals(Sous_Famille.Recuperer_Nom()))
+                    if (Article != null && Article.SubItems[3].Text.Equals(Sous_Famille.Recuperer_Nom()))
                     {
                         Choix_Sous_Famille_Article.SelectedItem = Sous_Famille;
                     }
