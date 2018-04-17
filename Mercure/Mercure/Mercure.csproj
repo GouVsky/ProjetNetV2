@@ -85,6 +85,12 @@
     <Compile Include="Fenetre_Ajout_Article.Designer.cs">
       <DependentUpon>Fenetre_Ajout_Article.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fenetre_Ajout_Famille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fenetre_Ajout_Famille.Designer.cs">
+      <DependentUpon>Fenetre_Ajout_Famille.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fenetre_Edition_Famille.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Fenetre_Ajout_Article.resx">
       <DependentUpon>Fenetre_Ajout_Article.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fenetre_Ajout_Famille.resx">
+      <DependentUpon>Fenetre_Ajout_Famille.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Edition_Famille.resx">
       <DependentUpon>Fenetre_Edition_Famille.cs</DependentUpon>
