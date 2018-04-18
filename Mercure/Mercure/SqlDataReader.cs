@@ -185,7 +185,6 @@ namespace Mercure
 
         public int Inserer_Famille(string Famille)
         {
-
             SQLiteDataReader Lecture;
             int Id_Max_Famille = 0;
 
@@ -197,14 +196,12 @@ namespace Mercure
                 SQLiteCommand Recuperer_Id_Max = new SQLiteCommand("SELECT * FROM Familles ORDER BY RefFamille DESC;", Connection);
                 Lecture = Recuperer_Id_Max.ExecuteReader();
                 Lecture.Read();
+
                 if (!Lecture.HasRows)
-                {
                     Id_Max_Famille = 0;
-                }
+
                 else
-                {
                     Id_Max_Famille = Lecture.GetInt32(0);
-                }
 
                 Lecture.Close();
 
@@ -213,6 +210,15 @@ namespace Mercure
                 Inserer_Famille.Parameters.AddWithValue("@IdParam", Id_Max_Famille + 1);
                 Inserer_Famille.ExecuteNonQuery();
             }
+
+            else
+            {
+                SQLiteCommand Mise_A_Jour_Famille = new SQLiteCommand("UPDATE Familles SET RefFamille = @Id_Famille, Nom = @Nom", Connection);
+                //Mise_A_Jour_Famille.Parameters.AddWithValue("@RefFamille", );
+                Mise_A_Jour_Famille.Parameters.AddWithValue("@Nom", Famille);
+                Mise_A_Jour_Famille.ExecuteNonQuery();
+            }
+
             Lecture = Verif_famille.ExecuteReader();
             Lecture.Read();
             int Id_Famille;
