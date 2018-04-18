@@ -223,6 +223,7 @@
             // 
             // Erreur
             // 
+            this.Erreur.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.Erreur.ContainerControl = this;
             // 
             // Fenetre_Ajout_Article
