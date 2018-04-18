@@ -56,18 +56,21 @@ namespace Mercure
             // On affiche la même fenêtre que celle pour l'ajout d'une famille,
             // mais avec les champs remplis avec les informations de l'objet.
 
-            Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille(Familles_Liste.SelectedItems[0]);
-
-            DialogResult Resultat = Fenetre_Ajout.ShowDialog();
-
-            if (Resultat == DialogResult.OK)
+            if (Familles_Liste.SelectedItems.Count > 0)
             {
-                Famille Famille = Fenetre_Ajout.Ajouter_Famille();
+                Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille(Familles_Liste.SelectedItems[0]);
 
-                Familles_Liste.Items[Familles_Liste.SelectedIndices[0]] = new ListViewItem(Famille.ToString());
+                DialogResult Resultat = Fenetre_Ajout.ShowDialog();
 
-                ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Vous avez modifié une famille avec succès.");
-            }
+                if (Resultat == DialogResult.OK)
+                {
+                    Famille Famille = Fenetre_Ajout.Ajouter_Famille();
+
+                    Familles_Liste.Items[Familles_Liste.SelectedIndices[0]] = new ListViewItem(Famille.ToString());
+
+                    ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Vous avez modifié une famille avec succès.");
+                }
+            } 
         }
 
         private void Bouton_Supprimer_Click(object sender, EventArgs e)

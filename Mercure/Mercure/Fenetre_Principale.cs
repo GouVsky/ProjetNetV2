@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
-using static System.Windows.Forms.ListViewItem;
 
 namespace Mercure
 {
@@ -144,7 +143,7 @@ namespace Mercure
 
                 for (int i = 0; i < Nombre_Articles; i++)
                 {
-                    ListViewSubItem Article = Affichage_Articles.Items[i].SubItems[Numero_Colonne];
+                    ListViewItem.ListViewSubItem Article = Affichage_Articles.Items[i].SubItems[Numero_Colonne];
 
                     // On crée le groupe.
 
