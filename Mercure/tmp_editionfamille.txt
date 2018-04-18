@@ -1,8 +1,5 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -50,37 +47,34 @@ namespace Mercure
 
                 Familles_Liste.Items.Add(Famille_Dans_Liste);
 
-                ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Vous avez ajoutÃ© une nouvelle famille avec succÃ¨s.");
+                ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Vous avez ajouté une nouvelle famille avec succès.");
             }
         }
 
         private void Bouton_Modifier_Click(object sender, EventArgs e)
         {
-            // On affiche la mÃªme fenÃªtre que celle pour l'ajout d'une famille,
+            // On affiche la même fenêtre que celle pour l'ajout d'une famille,
             // mais avec les champs remplis avec les informations de l'objet.
 
-            if (Familles_Liste.SelectedItems.Count > 0)
+            Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille(Familles_Liste.SelectedItems[0]);
+
+            DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+            if (Resultat == DialogResult.OK)
             {
-                Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille(Familles_Liste.SelectedItems[0]);
+                Famille Famille = Fenetre_Ajout.Ajouter_Famille();
 
-                DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+                Familles_Liste.Items[Familles_Liste.SelectedIndices[0]] = new ListViewItem(Famille.ToString());
 
-                if (Resultat == DialogResult.OK)
-                {
-                    Famille Famille = Fenetre_Ajout.Ajouter_Famille();
-
-                    Familles_Liste.Items[Familles_Liste.SelectedIndices[0]] = new ListViewItem(Famille.ToString());
-
-                    ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Vous avez modifiÃ© une famille avec succÃ¨s.");
-                }
-            } 
+                ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Vous avez modifié une famille avec succès.");
+            }
         }
 
         private void Bouton_Supprimer_Click(object sender, EventArgs e)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            DialogResult Resultat_Suppression = MessageBox.Show("La famille sÃ©lectionnÃ©e va Ãªtre supprimÃ©e. Il sera impossible de revenir en arriÃ¨re. Continuer ?",
+            DialogResult Resultat_Suppression = MessageBox.Show("La famille sélectionnée va être supprimée. Il sera impossible de revenir en arrière. Continuer ?",
                                                                 "Suppression",
                                                                 MessageBoxButtons.YesNo,
                                                                 MessageBoxIcon.Question);
@@ -94,7 +88,7 @@ namespace Mercure
 
             Data_Reader.Terminer_Connection();
 
-            ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimÃ©e.");
+            ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimée.");
         }
     }
 }

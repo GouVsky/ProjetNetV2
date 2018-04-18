@@ -79,23 +79,29 @@
     <Compile Include="Article.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Famille.cs" />
-    <Compile Include="Fenetre_Ajout_Article.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Fenetre_Ajout_Article.Designer.cs">
-      <DependentUpon>Fenetre_Ajout_Article.cs</DependentUpon>
-    </Compile>
     <Compile Include="Fenetre_Ajout_Famille.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Fenetre_Ajout_Famille.Designer.cs">
       <DependentUpon>Fenetre_Ajout_Famille.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fenetre_Ajout_Sous_Famille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fenetre_Ajout_Sous_Famille.Designer.cs">
+      <DependentUpon>Fenetre_Ajout_Sous_Famille.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fenetre_Edition_Famille.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Fenetre_Edition_Famille.Designer.cs">
       <DependentUpon>Fenetre_Edition_Famille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetre_Edition_Sous_Famille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fenetre_Edition_Sous_Famille.Designer.cs">
+      <DependentUpon>Fenetre_Edition_Sous_Famille.cs</DependentUpon>
     </Compile>
     <Compile Include="Fenetre_Principale.cs">
       <SubType>Form</SubType>
@@ -109,21 +115,18 @@
     <Compile Include="Fenetre_Selection_XML.Designer.cs">
       <DependentUpon>Fenetre_Selection_XML.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fentre_Ajout_Article.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fentre_Ajout_Article.Designer.cs">
+      <DependentUpon>Fentre_Ajout_Article.cs</DependentUpon>
+    </Compile>
     <Compile Include="Marque.cs" />
     <Compile Include="SousFamille.cs" />
     <Compile Include="SqlDataReader.cs" />
     <Compile Include="List_View_Comparateur_Items.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Fenetre_Ajout_Article.resx">
-      <DependentUpon>Fenetre_Ajout_Article.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Fenetre_Ajout_Famille.resx">
-      <DependentUpon>Fenetre_Ajout_Famille.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Fenetre_Edition_Famille.resx">
-      <DependentUpon>Fenetre_Edition_Famille.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Principale.resx">
       <DependentUpon>Fenetre_Principale.cs</DependentUpon>
     </EmbeddedResource>

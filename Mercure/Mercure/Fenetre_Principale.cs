@@ -143,7 +143,7 @@ namespace Mercure
 
                 for (int i = 0; i < Nombre_Articles; i++)
                 {
-                    ListViewItem.ListViewSubItem Article = Affichage_Articles.Items[i].SubItems[Numero_Colonne];
+                    System.Windows.Forms.ListViewItem.ListViewSubItem Article = Affichage_Articles.Items[i].SubItems[Numero_Colonne];
 
                     // On crée le groupe.
 
