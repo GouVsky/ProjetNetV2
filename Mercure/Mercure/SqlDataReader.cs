@@ -188,36 +188,39 @@ namespace Mercure
             SQLiteDataReader Lecture;
             int Id_Max_Famille = 0;
 
-            SQLiteCommand Verif_famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @nomParam", Connection);
-            Verif_famille.Parameters.AddWithValue("@nomParam", Famille);
+            // On récupère, si elle existe, la famille dont le nom a été envoyé en paramètre.
 
-            if (Verif_famille.ExecuteScalar() == null)
+            SQLiteCommand Verif_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE Nom LIKE @Nom", Connection);
+            Verif_Famille.Parameters.AddWithValue("@Nom", Famille);
+
+            if (Verif_Famille.ExecuteScalar() == null)
             {
                 SQLiteCommand Recuperer_Id_Max = new SQLiteCommand("SELECT * FROM Familles ORDER BY RefFamille DESC;", Connection);
                 Lecture = Recuperer_Id_Max.ExecuteReader();
                 Lecture.Read();
-                if (!Lecture.HasRows)
-                {
-                    Id_Max_Famille = 0;
-                }
-                else
-                {
-                    Id_Max_Famille = Lecture.GetInt32(0);
-                }
+
+                if (Lecture.HasRows)
+                    Id_Max_Famille = Lecture.GetInt32(0) + 1;
 
                 Lecture.Close();
 
                 SQLiteCommand Inserer_Famille = new SQLiteCommand("INSERT INTO Familles (RefFamille, Nom) VALUES (@IdParam , @nomParam);", Connection);
                 Inserer_Famille.Parameters.AddWithValue("@nomParam", Famille);
-                Inserer_Famille.Parameters.AddWithValue("@IdParam", Id_Max_Famille + 1);
+                Inserer_Famille.Parameters.AddWithValue("@IdParam", Id_Max_Famille);
                 Inserer_Famille.ExecuteNonQuery();
             }
-            Lecture = Verif_famille.ExecuteReader();
-            Lecture.Read();
-            int Id_Famille;
-            Id_Famille = Lecture.GetInt32(0);
+          
+            return Id_Max_Famille;
+        }
 
-            return Id_Famille;
+        public void Mise_A_Jour_Famille(int Reference, string Nom)
+        {
+            SQLiteCommand Mise_A_Jour_Famille = new SQLiteCommand("UPDATE Familles SET Nom = @Nom WHERE RefFamille = @Reference", Connection);
+
+            Mise_A_Jour_Famille.Parameters.AddWithValue("@Reference", Reference);
+            Mise_A_Jour_Famille.Parameters.AddWithValue("@Nom", Nom);
+
+            Mise_A_Jour_Famille.ExecuteNonQuery();
         }
 
         public int Inserer_Marque(string Marque)

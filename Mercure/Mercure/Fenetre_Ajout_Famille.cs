@@ -8,7 +8,7 @@ namespace Mercure
 {
     partial class Fenetre_Ajout_Famille : Form
     {
-        int Reference = -1;
+        ListViewItem Famille;
 
         public Fenetre_Ajout_Famille()
         {
@@ -19,7 +19,9 @@ namespace Mercure
         {
             InitializeComponent();
 
-            Nom_Famille_Edition.Text = Famille.SubItems[0].Text;
+            this.Famille = Famille;
+
+            Nom_Famille_Edition.Text = Famille.SubItems[1].Text;
         }
 
         public Famille Ajouter_Famille()
@@ -35,13 +37,33 @@ namespace Mercure
             return Famille;
         }
 
-        private void Bouton_Accepter_Click(object sender, EventArgs e)
+        public Famille Mettre_A_Jour_Famille()
+        {
+            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
+
+            int Reference = Convert.ToInt32(this.Famille.SubItems[0].Text);
+
+            Data_Reader.Mise_A_Jour_Famille(Reference, Nom_Famille_Edition.Text);
+
+            Famille Famille = new Famille(Reference, Nom_Famille_Edition.Text);
+
+            Data_Reader.Terminer_Connection();
+
+            return Famille;
+        }
+
+        private void Bouton_Validation_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren())
                 DialogResult = DialogResult.None;
 
             else
                 DialogResult = DialogResult.OK;
+        }
+
+        private void Bouton_Annuler_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.None;
         }
 
         private void Nom_Famille_Edition_Validating(object sender, System.ComponentModel.CancelEventArgs e)

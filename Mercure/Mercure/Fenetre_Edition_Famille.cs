@@ -15,6 +15,7 @@ namespace Mercure
         {
             InitializeComponent();
 
+            Familles_Liste.Columns.Add("ReferenceNonVisible", 0, HorizontalAlignment.Left);
             Familles_Liste.Columns.Add("NomNonVisible", Familles_Liste.Width, HorizontalAlignment.Left);
 
             Charger_Familles();
@@ -22,13 +23,15 @@ namespace Mercure
 
         private void Charger_Familles()
         {
+            Familles_Liste.Items.Clear();
+
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
             List<Famille> Familles = Data_Reader.Recuperer_Familles();
 
             foreach (Famille Famille in Familles)
             {
-                ListViewItem Famille_Item = new ListViewItem(Famille.ToString());
+                ListViewItem Famille_Item = new ListViewItem(Famille.Recuperer_Donnees());
 
                 Familles_Liste.Items.Add(Famille_Item);
             }
@@ -46,7 +49,7 @@ namespace Mercure
             {
                 Famille Famille = Fenetre_Ajout.Ajouter_Famille();
 
-                ListViewItem Famille_Dans_Liste = new ListViewItem(Famille.ToString());
+                ListViewItem Famille_Dans_Liste = new ListViewItem(Famille.Recuperer_Donnees());
 
                 Familles_Liste.Items.Add(Famille_Dans_Liste);
 
@@ -67,9 +70,9 @@ namespace Mercure
 
                 if (Resultat == DialogResult.OK)
                 {
-                    Famille Famille = Fenetre_Ajout.Ajouter_Famille();
+                    Famille Famille = Fenetre_Ajout.Mettre_A_Jour_Famille();
 
-                    Familles_Liste.Items[Familles_Liste.SelectedIndices[0]] = new ListViewItem(Famille.ToString());
+                    Familles_Liste.Items[Familles_Liste.SelectedIndices[0]] = new ListViewItem(Famille.Recuperer_Donnees());
 
                     ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Vous avez modifié une famille avec succès.");
                 }

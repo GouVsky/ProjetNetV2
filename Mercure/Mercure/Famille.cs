@@ -30,5 +30,12 @@ namespace Mercure
         {
             return Nom;
         }
+
+        public string[] Recuperer_Donnees()
+        {
+            string[] Donnees = { Convert.ToString(Reference), Nom };
+
+            return Donnees;
+        }
     }
 }

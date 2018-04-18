@@ -46,6 +46,7 @@
             this.Bouton_Validation.TabIndex = 0;
             this.Bouton_Validation.Text = "Ajouter";
             this.Bouton_Validation.UseVisualStyleBackColor = true;
+            this.Bouton_Validation.Click += new System.EventHandler(this.Bouton_Validation_Click);
             // 
             // Nom_Famille_Titre
             // 
@@ -71,6 +72,7 @@
             this.Bouton_Annuler.TabIndex = 3;
             this.Bouton_Annuler.Text = "Annuler";
             this.Bouton_Annuler.UseVisualStyleBackColor = true;
+            this.Bouton_Annuler.Click += new System.EventHandler(this.Bouton_Annuler_Click);
             // 
             // Erreur
             // 
