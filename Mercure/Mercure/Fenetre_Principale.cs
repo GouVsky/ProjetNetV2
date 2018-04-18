@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Windows.Forms;
 
-
 namespace Mercure
 {
     public partial class Fenetre_Principale : Form
