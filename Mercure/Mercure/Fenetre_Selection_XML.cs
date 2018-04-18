@@ -94,7 +94,7 @@ namespace Mercure
                     string Prix = selectNode.SelectSingleNode("prixHT").InnerText.Replace(',', '.');
 
                     //////////////////////////////////////////////////////////////////////////////////////////
-                    int Id_Famille = Data_Reader.Inserer_Famille(-1, Famille);
+                    int Id_Famille = Data_Reader.Inserer_Famille(Famille);
                     ///////////////////////////////////////////////////////////////////////
                     int Id_Marque = Data_Reader.Inserer_Marque(Marque);
                     //////////////////////////////////////////////////////////////////////
@@ -110,8 +110,9 @@ namespace Mercure
 
                 Bouton_Annuler.Text = "Quitter";
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 MessageBox.Show("Erreur de lecture du fichier XML.", "Erreur XML", MessageBoxButtons.OK);
             }
 

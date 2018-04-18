@@ -26,7 +26,7 @@ namespace Mercure
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            int Reference = Data_Reader.Inserer_Famille(this.Reference, Nom_Famille_Edition.Text);
+            int Reference = Data_Reader.Inserer_Famille(Nom_Famille_Edition.Text);
 
             Famille Famille = new Famille(Reference, Nom_Famille_Edition.Text);
 
