@@ -183,7 +183,7 @@ namespace Mercure
             return Marques;
         }
 
-        public int Inserer_Famille(string Famille)
+        public int Inserer_Famille(int Reference, string Famille)
         {
             SQLiteDataReader Lecture;
             int Id_Max_Famille = 0;
@@ -214,7 +214,7 @@ namespace Mercure
             else
             {
                 SQLiteCommand Mise_A_Jour_Famille = new SQLiteCommand("UPDATE Familles SET RefFamille = @Id_Famille, Nom = @Nom", Connection);
-                //Mise_A_Jour_Famille.Parameters.AddWithValue("@RefFamille", );
+                Mise_A_Jour_Famille.Parameters.AddWithValue("@RefFamille", Reference);
                 Mise_A_Jour_Famille.Parameters.AddWithValue("@Nom", Famille);
                 Mise_A_Jour_Famille.ExecuteNonQuery();
             }

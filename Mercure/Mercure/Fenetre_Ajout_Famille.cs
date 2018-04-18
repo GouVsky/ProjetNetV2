@@ -8,6 +8,9 @@ namespace Mercure
 {
     partial class Fenetre_Ajout_Famille : Form
     {
+        private int Reference = -1;
+        private ListViewItem Famille;
+
         public Fenetre_Ajout_Famille()
         {
             InitializeComponent();
@@ -17,6 +20,8 @@ namespace Mercure
         {
             InitializeComponent();
 
+            this.Famille = Famille;
+
             Nom_Famille_Edition.Text = Famille.SubItems[0].Text;
         }
 
@@ -24,7 +29,7 @@ namespace Mercure
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            int Reference = Data_Reader.Inserer_Famille(Nom_Famille_Edition.Text);
+            int Reference = Data_Reader.Inserer_Famille(this.Reference, Nom_Famille_Edition.Text);
 
             Famille Famille = new Famille(Reference, Nom_Famille_Edition.Text);
 
@@ -46,7 +51,7 @@ namespace Mercure
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            List<Famille> Familles = Data_Reader.Recuperer_Familles();
+            List <Famille> Familles = Data_Reader.Recuperer_Familles();
 
             string Nom = Nom_Famille_Edition.Text;
 
@@ -55,6 +60,8 @@ namespace Mercure
                 if (Famille.Recuperer_Nom().Equals(Nom))
                 {
                     e.Cancel = true;
+
+                    Reference = Famille.Recuperer_Reference();
 
                     Erreur.SetError(Nom_Famille_Edition, "La famille existe déjà. Veuillez en renseigner une nouvelle.");
 

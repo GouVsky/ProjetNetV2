@@ -94,7 +94,7 @@ namespace Mercure
                     string Prix = selectNode.SelectSingleNode("prixHT").InnerText.Replace(',', '.');
 
                     //////////////////////////////////////////////////////////////////////////////////////////
-                    int Id_Famille = Data_Reader.Inserer_Famille(Famille);
+                    int Id_Famille = Data_Reader.Inserer_Famille(-1, Famille);
                     ///////////////////////////////////////////////////////////////////////
                     int Id_Marque = Data_Reader.Inserer_Marque(Marque);
                     //////////////////////////////////////////////////////////////////////
