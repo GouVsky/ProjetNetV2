@@ -96,5 +96,10 @@ namespace Mercure
 
             ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimée.");
         }
+
+        private void Bouton_Quitter_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
