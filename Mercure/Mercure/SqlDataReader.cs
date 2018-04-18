@@ -148,6 +148,28 @@ namespace Mercure
             return Sous_Familles;
         }
 
+        public List<SousFamille> Recuperer_Sous_Familles()
+        {
+            List<SousFamille> Sous_Familles = new List<SousFamille>();
+
+            SQLiteCommand Requete_Sous_Familles = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY Nom ASC;", Connection);
+
+            SQLiteDataReader Lecture_Table_Sous_Famille = Requete_Sous_Familles.ExecuteReader();
+
+            while (Lecture_Table_Sous_Famille.Read())
+            {
+                Famille Famille = Recuperer_Famille(Convert.ToInt32(Lecture_Table_Sous_Famille[1]));
+
+                Sous_Familles.Add(new SousFamille(Convert.ToInt32(Lecture_Table_Sous_Famille[0]),
+                                                 Convert.ToString(Lecture_Table_Sous_Famille[2]),
+                                                 Famille));
+            }
+
+            Lecture_Table_Sous_Famille.Close();
+
+            return Sous_Familles;
+        }
+
         public Marque Recuperer_Marque(int Id_Marque)
         {
             SQLiteCommand Requete_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE @Id_Marque == RefMarque;", Connection);
@@ -287,6 +309,17 @@ namespace Mercure
             int Id_Sous_Famille;
             Id_Sous_Famille = Lecture.GetInt32(0);
             return Id_Sous_Famille;
+        }
+
+        public void Mise_A_Jour_Sous_Famille(int Reference, string Nom, int Reference_Famille)
+        {
+            SQLiteCommand Mise_A_Jour_Sous_Famille = new SQLiteCommand("UPDATE SousFamilles SET Nom = @Nom, RefFamille = @Reference_Famille WHERE RefSousFamille = @Reference", Connection);
+
+            Mise_A_Jour_Sous_Famille.Parameters.AddWithValue("@Reference", Reference);
+            Mise_A_Jour_Sous_Famille.Parameters.AddWithValue("@Reference_Famille", Reference_Famille);
+            Mise_A_Jour_Sous_Famille.Parameters.AddWithValue("@Nom", Nom);
+
+            Mise_A_Jour_Sous_Famille.ExecuteNonQuery();
         }
 
         public int Inserer_Article(string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, double Prix, int Quantite)

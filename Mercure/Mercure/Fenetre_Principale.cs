@@ -291,7 +291,9 @@ namespace Mercure
 
         private void Menu_Sous_Famille_Edition_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("sousFamillesToolStripMenuItem_Click", "Erreur XML", MessageBoxButtons.OK);
+            Fenetre_Edition_Sous_Famille Edition_Sous_Famille = new Fenetre_Edition_Sous_Famille();
+
+            Edition_Sous_Famille.ShowDialog(this);
         }
 
         private void Menu_Fichier_Click(object sender, EventArgs e)

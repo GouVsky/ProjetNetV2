@@ -133,8 +133,14 @@
     <EmbeddedResource Include="Fenetre_Ajout_Famille.resx">
       <DependentUpon>Fenetre_Ajout_Famille.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Fenetre_Ajout_Sous_Famille.resx">
+      <DependentUpon>Fenetre_Ajout_Sous_Famille.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Edition_Famille.resx">
       <DependentUpon>Fenetre_Edition_Famille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fenetre_Edition_Sous_Famille.resx">
+      <DependentUpon>Fenetre_Edition_Sous_Famille.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Principale.resx">
       <DependentUpon>Fenetre_Principale.cs</DependentUpon>

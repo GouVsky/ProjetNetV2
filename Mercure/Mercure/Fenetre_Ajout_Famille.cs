@@ -22,6 +22,8 @@ namespace Mercure
             this.Famille = Famille;
 
             Nom_Famille_Edition.Text = Famille.SubItems[1].Text;
+
+            Bouton_Validation.Text = "Modifier";
         }
 
         public Famille Ajouter_Famille()
