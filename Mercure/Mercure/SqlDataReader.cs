@@ -18,11 +18,18 @@ namespace Mercure
         private static SqlDataReader Data_Reader;
         private static SQLiteConnection Connection;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="SQLiteConnection"/>.
+        /// </summary>
         private SqlDataReader()
         {
             Connection = new SQLiteConnection("Data Source=Resources\\Mercure.SQLite; Version=3");
         }
 
+        /// <summary>
+        /// Etablit une connection avec la base de données.
+        /// </summary>
+        /// <returns>Une instance de <see cref="SqlDataReader"/> </returns>
         public static SqlDataReader Ouvrir_Connection()
         {
             if (Data_Reader == null)
@@ -33,11 +40,18 @@ namespace Mercure
             return Data_Reader;
         }
 
+        /// <summary>
+        /// Ferme la connection avec la base de données.
+        /// </summary>
         public void Terminer_Connection()
         {
             Connection.Close();
         }
 
+        /// <summary>
+        /// Retourne l'ensemble des articles disponibles.
+        /// </summary>
+        /// <returns>La liste des articles</returns>
         public List <Article> Recuperer_Articles()
         {
             List <Article> Articles = new List <Article> ();
@@ -70,6 +84,11 @@ namespace Mercure
             return Articles;
         }
 
+        /// <summary>
+        /// Retourne une instance de <see cref="Famille"/>.
+        /// </summary>
+        /// <param name="Id_Famille"> la référence de la famille </param>
+        /// <returns>Une instance de <see cref="Famille"/></returns>
         public Famille Recuperer_Famille(int Id_Famille)
         {
             SQLiteCommand Requete_Famille = new SQLiteCommand("SELECT * FROM Familles WHERE @Id_Famille == RefFamille;", Connection);
@@ -87,6 +106,10 @@ namespace Mercure
             return Famille;
         }
 
+        /// <summary>
+        /// Retourne l'ensemble des familles disponibles.
+        /// </summary>
+        /// <returns>La liste des familles</returns>
         public List <Famille> Recuperer_Familles()
         {
             List <Famille> Familles = new List <Famille>();
@@ -105,6 +128,11 @@ namespace Mercure
             return Familles;
         }
 
+        /// <summary>
+        /// Retourne une instance de <see cref="SousFamille"/>.
+        /// </summary>
+        /// <param name="Id_Sous_Famille"> la référence de la sous-famille</param>
+        /// <returns>Une instance de <see cref="SousFamille"/>.</returns>
         public SousFamille Recuperer_Sous_Famille(int Id_Sous_Famille)
         {
             SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("SELECT * FROM SousFamilles WHERE @Id_Sous_Famille == RefSousFamille;", Connection);
@@ -124,6 +152,11 @@ namespace Mercure
             return Sous_Famille;
         }
 
+        /// <summary>
+        /// Retourne l'ensemble des sous-famille disponibles d'un famille.
+        /// </summary>
+        /// <param name="Reference_Famille"> la référence de la famille associée</param>
+        /// <returns>La liste des sous-famille d'une famille</returns>
         public List <SousFamille> Recuperer_Sous_Familles(int Reference_Famille)
         {
             List <SousFamille> Sous_Familles = new List <SousFamille>();
@@ -148,6 +181,10 @@ namespace Mercure
             return Sous_Familles;
         }
 
+        /// <summary>
+        /// Retourne l'ensemble des sous-familles disponibles.
+        /// </summary>
+        /// <returns>La liste des sous-familles</returns>
         public List<SousFamille> Recuperer_Sous_Familles()
         {
             List<SousFamille> Sous_Familles = new List<SousFamille>();
@@ -170,6 +207,11 @@ namespace Mercure
             return Sous_Familles;
         }
 
+        /// <summary>
+        /// Retourne une instance de <see cref="Marque"/>.
+        /// </summary>
+        /// <param name="Id_Marque"> la référence de la marque</param>
+        /// <returns>Une instance de <see cref="Marque"/></returns>
         public Marque Recuperer_Marque(int Id_Marque)
         {
             SQLiteCommand Requete_Marque = new SQLiteCommand("SELECT * FROM Marques WHERE @Id_Marque == RefMarque;", Connection);
@@ -187,6 +229,10 @@ namespace Mercure
             return Marque;
         }
 
+        /// <summary>
+        /// Retourne l'ensemble des marques disponibles.
+        /// </summary>
+        /// <returns>La liste des marques</returns>
         public List <Marque> Recuperer_Marques()
         {
             List <Marque> Marques = new List <Marque> ();
@@ -205,6 +251,11 @@ namespace Mercure
             return Marques;
         }
 
+        /// <summary>
+        /// Ajoute une famille dans la base de données.
+        /// </summary>
+        /// <param name="Famille"> le nom de la famille à ajouter</param>
+        /// <returns>L'identifiant de la famille ajoutée</returns>
         public int Inserer_Famille(string Famille)
         {
             SQLiteDataReader Lecture;
@@ -217,6 +268,8 @@ namespace Mercure
 
             if (Verif_Famille.ExecuteScalar() == null)
             {
+                // On récupère l'identifiant suivant de la table.
+
                 SQLiteCommand Recuperer_Id_Max = new SQLiteCommand("SELECT * FROM Familles ORDER BY RefFamille DESC;", Connection);
                 Lecture = Recuperer_Id_Max.ExecuteReader();
                 Lecture.Read();
@@ -235,6 +288,11 @@ namespace Mercure
             return Id_Max_Famille;
         }
 
+        /// <summary>
+        /// Met à jour une famille.
+        /// </summary>
+        /// <param name="Reference"> la référence de la famille</param>
+        /// <param name="Nom"> le nom de la famille </param>
         public void Mise_A_Jour_Famille(int Reference, string Nom)
         {
             SQLiteCommand Mise_A_Jour_Famille = new SQLiteCommand("UPDATE Familles SET Nom = @Nom WHERE RefFamille = @Reference", Connection);
@@ -245,6 +303,11 @@ namespace Mercure
             Mise_A_Jour_Famille.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Ajoute une marque dans la base de données.
+        /// </summary>
+        /// <param name="Marque"> le nom de la marque à ajouter</param>
+        /// <returns>L'identifiant de la marque ajoutée</returns>
         public int Inserer_Marque(string Marque)
         {
             SQLiteDataReader Lecture;
@@ -254,6 +317,7 @@ namespace Mercure
 
             if (Verif_Marque.ExecuteScalar() == null)
             {
+                // ON récupère l'identifiant suivant de la table.
                 SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM Marques ORDER BY RefMarque DESC;", Connection);
                 Lecture = Recuperer_IdMax.ExecuteReader();
                 Lecture.Read();
@@ -277,6 +341,12 @@ namespace Mercure
             return Id_Marque;
         }
 
+        /// <summary>
+        /// Ajoute une sous-famille dans la base de données.
+        /// </summary>
+        /// <param name="Sous_Famille">le nom de la sous-famille</param>
+        /// <param name="Id_Famille"> la référence de la famille associée</param>
+        /// <returns>L'identifiant de la sous-famille ajoutée</returns>
         public int Inserer_Sous_Famille(string Sous_Famille, int Id_Famille)
         {
             SQLiteDataReader Lecture;
@@ -286,6 +356,7 @@ namespace Mercure
 
             if (Verif_Sous_Famille.ExecuteScalar() == null)
             {
+                // On récupère l'identifiant suivant de la table.
                 SQLiteCommand Recuperer_IdMax = new SQLiteCommand("SELECT * FROM SousFamilles ORDER BY RefSousFamille DESC;", Connection);
                 Lecture = Recuperer_IdMax.ExecuteReader();
                 Lecture.Read();
@@ -311,6 +382,12 @@ namespace Mercure
             return Id_Sous_Famille;
         }
 
+        /// <summary>
+        /// Met à jour une sous-famille.
+        /// </summary>
+        /// <param name="Reference"> la référence de la sous-famille</param>
+        /// <param name="Nom"> le nom de la sous-famille </param>
+        /// <param name="Reference_Famille"> la référence de la famille associée</param>
         public void Mise_A_Jour_Sous_Famille(int Reference, string Nom, int Reference_Famille)
         {
             SQLiteCommand Mise_A_Jour_Sous_Famille = new SQLiteCommand("UPDATE SousFamilles SET Nom = @Nom, RefFamille = @Reference_Famille WHERE RefSousFamille = @Reference", Connection);
@@ -322,9 +399,22 @@ namespace Mercure
             Mise_A_Jour_Sous_Famille.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Ajoute un article dans la base de données.
+        /// </summary>
+        /// <param name="Ref_Article"> la référence de l'article </param>
+        /// <param name="Description"> la description de l'article </param>
+        /// <param name="Id_Sous_Famille"> la référence de la sous-famille </param>
+        /// <param name="Id_Marque"> la référence de la marque </param>
+        /// <param name="Prix"> le prix unitaire de l'article</param>
+        /// <param name="Quantite"> la quantité d'articles présents </param>
+        /// <returns></returns>
         public int Inserer_Article(string Ref_Article, string Description, int Id_Sous_Famille, int Id_Marque, double Prix, int Quantite)
         {
             int Valeur=-1;
+
+            // On vérifie si l'article est déjà présent dans la base de données ou non.
+
             SQLiteCommand Verif_Article = new SQLiteCommand("SELECT * FROM Articles WHERE RefArticle LIKE @refArticle", Connection);
             Verif_Article.Parameters.AddWithValue("@refArticle", Ref_Article);
 
@@ -353,6 +443,11 @@ namespace Mercure
             return Valeur;
         }
 
+        /// <summary>
+        /// Met à jour une marque.
+        /// </summary>
+        /// <param name="Reference"> la référence de la marque </param>
+        /// <param name="Nom"> le nom de la marque </param>
         public void Mise_A_Jour_Marque(int Reference, string Nom)
         {
             SQLiteCommand Mise_A_Jour_Marque = new SQLiteCommand("UPDATE Marques SET Nom = @Nom WHERE RefMarque = @Reference", Connection);
@@ -363,6 +458,10 @@ namespace Mercure
             Mise_A_Jour_Marque.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Supprime un article de la base de données.
+        /// </summary>
+        /// <param name="Reference"> la référence de l'article </param>
         public void Supprimer_Article(string Reference)
         {
             SQLiteCommand Requete_Article = new SQLiteCommand("DELETE FROM Articles WHERE RefArticle LIKE @Reference;", Connection);
@@ -372,6 +471,10 @@ namespace Mercure
             Requete_Article.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Supprime une famille de la base de données.
+        /// </summary>
+        /// <param name="Nom"> le nom de la famille </param>
         public void Supprimer_Famille(string Nom)
         {
             SQLiteCommand Requete_Famille = new SQLiteCommand("DELETE FROM Familles WHERE Nom LIKE @Nom;", Connection);
@@ -381,6 +484,10 @@ namespace Mercure
             Requete_Famille.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Supprime une sous_famille de la base de données.
+        /// </summary>
+        /// <param name="Nom"></param>
         public void Supprimer_Sous_Famille(string Nom)
         {
             SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("DELETE FROM SousFamilles WHERE Nom LIKE @Nom;", Connection);
@@ -390,6 +497,10 @@ namespace Mercure
             Requete_Sous_Famille.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Supprime une marque de la base de données.
+        /// </summary>
+        /// <param name="Nom"> le nom de la marque </param>
         public void Supprimer_Marque(string Nom)
         {
             SQLiteCommand Requete_Marque = new SQLiteCommand("DELETE FROM Marques WHERE Nom LIKE @Nom;", Connection);
@@ -399,6 +510,9 @@ namespace Mercure
             Requete_Marque.ExecuteNonQuery();
         }
 
+        /// <summary>
+        /// Efface la base de données.
+        /// </summary>
         public void Purger_BDD()
         {
             SQLiteCommand Purger_Tables = new SQLiteCommand("DELETE FROM Familles; " +
