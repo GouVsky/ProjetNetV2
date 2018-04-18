@@ -15,5 +15,30 @@ namespace Mercure
         {
             InitializeComponent();
         }
+
+        private void Bouton_Ajout_SF_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Bouton_Edit_SF_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Bouton_Quitter_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
