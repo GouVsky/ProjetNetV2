@@ -102,6 +102,8 @@ namespace Mercure
             }
 
             Data_Reader.Terminer_Connection();
+
+            Mise_A_Jour_Barre_De_Statut("Un article supprimé.");
         }
 
         private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -276,7 +278,7 @@ namespace Mercure
         {
             Fenetre_Edition_Famille Edition_Famille = new Fenetre_Edition_Famille();
 
-            Edition_Famille.ShowDialog();
+            Edition_Famille.ShowDialog(this);
         }
 
         private void Menu_Marque_Edition_Click(object sender, EventArgs e)

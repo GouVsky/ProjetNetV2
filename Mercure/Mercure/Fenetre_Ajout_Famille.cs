@@ -13,6 +13,13 @@ namespace Mercure
             InitializeComponent();
         }
 
+        public Fenetre_Ajout_Famille(ListViewItem Famille)
+        {
+            InitializeComponent();
+
+            Nom_Famille_Edition.Text = Famille.SubItems[0].Text;
+        }
+
         public Famille Ajouter_Famille()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();

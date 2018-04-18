@@ -47,6 +47,7 @@ namespace Mercure
             this.Bouton_Modifier.TabIndex = 2;
             this.Bouton_Modifier.Text = "Modifier";
             this.Bouton_Modifier.UseVisualStyleBackColor = true;
+            this.Bouton_Modifier.Click += new System.EventHandler(this.Bouton_Modifier_Click);
             // 
             // Bouton_Supprimer
             // 
@@ -56,6 +57,7 @@ namespace Mercure
             this.Bouton_Supprimer.TabIndex = 3;
             this.Bouton_Supprimer.Text = "Supprimer";
             this.Bouton_Supprimer.UseVisualStyleBackColor = true;
+            this.Bouton_Supprimer.Click += new System.EventHandler(this.Bouton_Supprimer_Click);
             // 
             // Fenetre_Edition_Famille
             // 

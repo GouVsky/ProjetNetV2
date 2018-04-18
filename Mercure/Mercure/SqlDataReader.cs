@@ -327,6 +327,33 @@ namespace Mercure
             Requete_Article.ExecuteNonQuery();
         }
 
+        public void Supprimer_Famille(string Nom)
+        {
+            SQLiteCommand Requete_Famille = new SQLiteCommand("DELETE FROM Familles WHERE Nom LIKE @Nom;", Connection);
+
+            Requete_Famille.Parameters.AddWithValue("@Nom", Nom);
+
+            Requete_Famille.ExecuteNonQuery();
+        }
+
+        public void Supprimer_Sous_Famille(string Nom)
+        {
+            SQLiteCommand Requete_Sous_Famille = new SQLiteCommand("DELETE FROM SousFamilles WHERE Nom LIKE @Nom;", Connection);
+
+            Requete_Sous_Famille.Parameters.AddWithValue("@Nom", Nom);
+
+            Requete_Sous_Famille.ExecuteNonQuery();
+        }
+
+        public void Supprimer_Marque(string Nom)
+        {
+            SQLiteCommand Requete_Marque = new SQLiteCommand("DELETE FROM Marques WHERE Nom LIKE @Nom;", Connection);
+
+            Requete_Marque.Parameters.AddWithValue("@Nom", Nom);
+
+            Requete_Marque.ExecuteNonQuery();
+        }
+
         public void Purger_BDD()
         {
             SQLiteCommand Purger_Tables = new SQLiteCommand("DELETE FROM Familles; " +
