@@ -55,7 +55,9 @@
             this.Nom_Sous_Famille_Edition.Location = new System.Drawing.Point(25, 35);
             this.Nom_Sous_Famille_Edition.Name = "Nom_Sous_Famille_Edition";
             this.Nom_Sous_Famille_Edition.Size = new System.Drawing.Size(231, 20);
-            this.Nom_Sous_Famille_Edition.TabIndex = 6;
+            this.Nom_Sous_Famille_Edition.TabIndex = 0;
+            this.Nom_Sous_Famille_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Nom_Sous_Famille_Edition_Validating);
+            this.Nom_Sous_Famille_Edition.Validated += new System.EventHandler(this.Nom_Sous_Famille_Edition_Validated);
             // 
             // Nom_Sous_Famille_Titre
             // 
@@ -97,9 +99,10 @@
             this.Choix_Famille_Selection.Location = new System.Drawing.Point(25, 92);
             this.Choix_Famille_Selection.Name = "Choix_Famille_Selection";
             this.Choix_Famille_Selection.Size = new System.Drawing.Size(231, 21);
-            this.Choix_Famille_Selection.TabIndex = 9;
+            this.Choix_Famille_Selection.TabIndex = 1;
             this.Choix_Famille_Selection.Text = "Veuillez sélectionner une famille";
             this.Choix_Famille_Selection.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Famille_Selection_Validating);
+            this.Choix_Famille_Selection.Validated += new System.EventHandler(this.Choix_Famille_Selection_Validated);
             // 
             // Fenetre_Ajout_Sous_Famille
             // 

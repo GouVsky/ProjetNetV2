@@ -10,22 +10,35 @@ namespace Mercure
     {
         ListViewItem Famille;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Ajout_Famille"/>.
+        /// </summary>
         public Fenetre_Ajout_Famille()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Ajout_Famille"/> avec un objet <see cref="ListViewItem"/> de type <see cref="Famille"/>.
+        /// </summary>
+        /// <param name="Article">Un objet <see cref="ListViewItem"/> de type <see cref="Famille"/></param>
         public Fenetre_Ajout_Famille(ListViewItem Famille)
         {
             InitializeComponent();
 
             this.Famille = Famille;
 
+            // On charge les données de la famille.
+
             Nom_Famille_Edition.Text = Famille.SubItems[1].Text;
 
             Bouton_Validation.Text = "Modifier";
         }
 
+        /// <summary>
+        /// Ajoute la famille dans la base de données.
+        /// </summary>
+        /// <returns> La famille ajoutée </returns>
         public Famille Ajouter_Famille()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -39,6 +52,10 @@ namespace Mercure
             return Famille;
         }
 
+        /// <summary>
+        /// Met à jour la famille sélectionnée avec le nouveau nom entré.
+        /// </summary>
+        /// <returns> La famille mise à jour </returns>
         public Famille Mettre_A_Jour_Famille()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -54,6 +71,11 @@ namespace Mercure
             return Famille;
         }
 
+        /// <summary>
+        /// Lance la vérification des données entrées avant la validation.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren())
@@ -63,11 +85,21 @@ namespace Mercure
                 DialogResult = DialogResult.OK;
         }
 
+        /// <summary>
+        /// Annule les actions réalisées.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Annuler_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.None;
         }
 
+        /// <summary>
+        /// Lance la vérification de la validité du champ associé au nom de la famille. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement d'annulation </param>
         private void Nom_Famille_Edition_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -89,6 +121,16 @@ namespace Mercure
             }
 
             Data_Reader.Terminer_Connection();
+        }
+
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé au nom de la famille n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
+        private void Nom_Famille_Edition_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Nom_Famille_Edition, "");
         }
     }
 }

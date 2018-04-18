@@ -74,7 +74,7 @@
             this.Bouton_MAJ.TabIndex = 2;
             this.Bouton_MAJ.Text = "Mise à jour";
             this.Bouton_MAJ.UseVisualStyleBackColor = true;
-            this.Bouton_MAJ.Click += new System.EventHandler(this.Buton_MAJ_Click);
+            this.Bouton_MAJ.Click += new System.EventHandler(this.Bouton_MAJ_Click);
             // 
             // Bar_Chargement_XML
             // 

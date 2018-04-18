@@ -14,7 +14,9 @@ namespace Mercure
         private SortOrder Ordre;
 
 
-
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="List_View_Comparateur_Items"/>.
+        /// </summary>
         public List_View_Comparateur_Items()
         {
             Colonne = 0;
@@ -22,6 +24,11 @@ namespace Mercure
             Ordre = SortOrder.Ascending;
         }
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="List_View_Comparateur_Items"/> avec une colonne et un type de tri.
+        /// </summary>
+        /// <param name="Colonne"> le numéro de la colonne à trier </param>
+        /// <param name="Ordre"> le type de tri à effectuer </param>
         public List_View_Comparateur_Items(int Colonne, SortOrder Ordre)
         {
             this.Colonne = Colonne;
@@ -29,6 +36,12 @@ namespace Mercure
             this.Ordre = Ordre;
         }
 
+        /// <summary>
+        /// Compare chaque élément de liste entre eux.
+        /// </summary>
+        /// <param name="Compare"> l'élément de référence </param>
+        /// <param name="Comparant"> l'élément comparant </param>
+        /// <returns></returns>
         public int Compare(object Compare, object Comparant)
         {
             int Valeur = 0;

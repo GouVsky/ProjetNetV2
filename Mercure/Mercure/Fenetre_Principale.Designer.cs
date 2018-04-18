@@ -37,9 +37,6 @@
             this.Menu_Marque_Edition = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Famille_Edition = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Sous_Famille_Edition = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu_Affichage = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu_Apropos = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu_Aide = new System.Windows.Forms.ToolStripMenuItem();
             this.Barre_De_Statut = new System.Windows.Forms.StatusStrip();
             this.Barre_De_Statut_Texte = new System.Windows.Forms.ToolStripStatusLabel();
             this.Affichage_Articles = new System.Windows.Forms.ListView();
@@ -51,10 +48,7 @@
             // 
             this.Barre_Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_Fichier,
-            this.Menu_Edition,
-            this.Menu_Affichage,
-            this.Menu_Apropos,
-            this.Menu_Aide});
+            this.Menu_Edition});
             this.Barre_Menu.Location = new System.Drawing.Point(0, 0);
             this.Barre_Menu.Name = "Barre_Menu";
             this.Barre_Menu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -70,7 +64,6 @@
             this.Menu_Fichier.Name = "Menu_Fichier";
             this.Menu_Fichier.Size = new System.Drawing.Size(54, 20);
             this.Menu_Fichier.Text = "Fichier";
-            this.Menu_Fichier.Click += new System.EventHandler(this.Menu_Fichier_Click);
             // 
             // Menu_Fichier_Import_XML
             // 
@@ -99,42 +92,23 @@
             // Menu_Marque_Edition
             // 
             this.Menu_Marque_Edition.Name = "Menu_Marque_Edition";
-            this.Menu_Marque_Edition.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Marque_Edition.Size = new System.Drawing.Size(147, 22);
             this.Menu_Marque_Edition.Text = "Marques";
             this.Menu_Marque_Edition.Click += new System.EventHandler(this.Menu_Marque_Edition_Click);
             // 
             // Menu_Famille_Edition
             // 
             this.Menu_Famille_Edition.Name = "Menu_Famille_Edition";
-            this.Menu_Famille_Edition.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Famille_Edition.Size = new System.Drawing.Size(147, 22);
             this.Menu_Famille_Edition.Text = "Familles";
             this.Menu_Famille_Edition.Click += new System.EventHandler(this.Menu_Famille_Edition_Click);
             // 
             // Menu_Sous_Famille_Edition
             // 
             this.Menu_Sous_Famille_Edition.Name = "Menu_Sous_Famille_Edition";
-            this.Menu_Sous_Famille_Edition.Size = new System.Drawing.Size(152, 22);
+            this.Menu_Sous_Famille_Edition.Size = new System.Drawing.Size(147, 22);
             this.Menu_Sous_Famille_Edition.Text = "Sous-Familles";
             this.Menu_Sous_Famille_Edition.Click += new System.EventHandler(this.Menu_Sous_Famille_Edition_Click);
-            // 
-            // Menu_Affichage
-            // 
-            this.Menu_Affichage.Name = "Menu_Affichage";
-            this.Menu_Affichage.Size = new System.Drawing.Size(70, 20);
-            this.Menu_Affichage.Text = "Affichage";
-            // 
-            // Menu_Apropos
-            // 
-            this.Menu_Apropos.Name = "Menu_Apropos";
-            this.Menu_Apropos.Size = new System.Drawing.Size(70, 20);
-            this.Menu_Apropos.Text = "A propos ";
-            this.Menu_Apropos.Click += new System.EventHandler(this.Menu_Apropos_Click);
-            // 
-            // Menu_Aide
-            // 
-            this.Menu_Aide.Name = "Menu_Aide";
-            this.Menu_Aide.Size = new System.Drawing.Size(24, 20);
-            this.Menu_Aide.Text = "?";
             // 
             // Barre_De_Statut
             // 
@@ -201,9 +175,6 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Fichier;
         private System.Windows.Forms.ToolStripMenuItem Menu_Fichier_Import_XML;
         private System.Windows.Forms.ToolStripMenuItem Menu_Edition;
-        private System.Windows.Forms.ToolStripMenuItem Menu_Affichage;
-        private System.Windows.Forms.ToolStripMenuItem Menu_Apropos;
-        private System.Windows.Forms.ToolStripMenuItem Menu_Aide;
         private System.Windows.Forms.ToolStripMenuItem Menu_Fichier_Quitter;
         private System.Windows.Forms.ToolStripStatusLabel Barre_De_Statut_Texte;
         private System.Windows.Forms.ListView Affichage_Articles;

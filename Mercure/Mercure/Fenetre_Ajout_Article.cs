@@ -16,6 +16,9 @@ namespace Mercure
     {
         private ListViewItem Article;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Ajout_Article"/>.
+        /// </summary>
         public Fenetre_Ajout_Article()
         {
             InitializeComponent();
@@ -26,11 +29,17 @@ namespace Mercure
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
         }
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Ajout_Article"/> avec un objet <see cref="ListViewItem"/> de type <see cref="Article"/>.
+        /// </summary>
+        /// <param name="Article">Un objet <see cref="ListViewItem"/> de type <see cref="Article"/></param>
         public Fenetre_Ajout_Article(ListViewItem Article)
         {
             InitializeComponent();
 
             this.Article = Article;
+
+            // On remplit les champs avec les données de l'article.
 
             Charger_Marques(Article.SubItems[4].Text);
             Charger_Familles(Article.SubItems[2].Text);
@@ -43,8 +52,15 @@ namespace Mercure
             Quantite_Article_Edition.Value = Int32.Parse(Article.SubItems[6].Text);
 
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
+
+            Bouton_Validation.Text = "Modifier";
         }
 
+        /// <summary>
+        /// Lance la vérification des données entrées avant la validation.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren())
@@ -54,6 +70,11 @@ namespace Mercure
                 DialogResult = DialogResult.OK;
         }
 
+        /// <summary>
+        /// Lance la vérification de la validité du champ associé à la référence de l'article. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement d'annulation </param>
         private void Reference_Article_Edition_Validating(object sender, CancelEventArgs e)
         {
             if (Reference_Article_Edition.Text.Length < 8)
@@ -64,14 +85,26 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé à la référence de l'article n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Reference_Article_Edition_Validated(object sender, EventArgs e)
         {
             Erreur.SetError(Reference_Article_Edition, "");
         }
 
+        /// <summary>
+        /// Lance une vérification sur le champ de texte associé à la référence de l'article.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Reference_Article_Edition_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+
+            // On interdit l'utilisation des caractères spéciaux.
 
             Regex Regex = new Regex(@"[^a-zA-Z0-9]");
 
@@ -82,6 +115,11 @@ namespace Mercure
                 e.Handled = !(e.KeyChar == (char)8);
         }
 
+        /// <summary>
+        /// Lance une vérification sur le champ associé au choix de la marque de l'article. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Choix_Marque_Article_Validating(object sender, CancelEventArgs e)
         {
             if (Choix_Marque_Article.SelectedIndex == -1)
@@ -92,11 +130,21 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé à la marque de l'article n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Choix_Marque_Article_Validated(object sender, EventArgs e)
         {
             Erreur.SetError(Choix_Marque_Article, "");
         }
 
+        /// <summary>
+        /// Lance une vérification sur le champ associé au choix de la famille de l'article. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Choix_Famille_Article_Validating(object sender, CancelEventArgs e)
         {
             if (Choix_Famille_Article.SelectedIndex == -1)
@@ -107,11 +155,21 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé à la famille de l'article n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Choix_Famille_Article_Validated(object sender, EventArgs e)
         {
             Erreur.SetError(Choix_Famille_Article, "");
         }
 
+        /// <summary>
+        /// Lance une vérification sur le champ associé au choix de la sous-famille de l'article. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Choix_Sous_Famille_Article_Validating(object sender, CancelEventArgs e)
         {
             if (Choix_Sous_Famille_Article.SelectedIndex == -1)
@@ -122,11 +180,21 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé à la sous-famille de l'article n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Choix_Sous_Famille_Article_Validated(object sender, EventArgs e)
         {
             Erreur.SetError(Choix_Sous_Famille_Article, "");
         }
 
+        /// <summary>
+        /// Lance une vérification sur le champ associé à la description de l'article. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Description_Article_Edition_Validating(object sender, CancelEventArgs e)
         {
             if (string.IsNullOrEmpty(Description_Article_Edition.Text))
@@ -137,11 +205,21 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé à la description de l'article n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Description_Article_Edition_Validated(object sender, EventArgs e)
         {
             Erreur.SetError(Description_Article_Edition, "");
         }
 
+        /// <summary>
+        /// Lance une vérification sur le champ associé au prix unitaire de l'article. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Prix_Unitaire_Article_Edition_Validating(object sender, CancelEventArgs e)
         {
             if (Prix_Unitaire_Article_Edition.Value == 0)
@@ -152,11 +230,21 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé au prix unitaire de l'article n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Prix_Unitaire_Article_Edition_Validated(object sender, EventArgs e)
         {
             Erreur.SetError(Prix_Unitaire_Article_Edition, "");
         }
 
+        /// <summary>
+        /// Lance une vérification sur le champ associé à la quantité de l'article. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Quantite_Article_Edition_Validating(object sender, CancelEventArgs e)
         {
             if (Quantite_Article_Edition.Value == 0)
@@ -167,11 +255,19 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé à la quantité de l'article n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Quantite_Article_Edition_Validated(object sender, EventArgs e)
         {
             Erreur.SetError(Quantite_Article_Edition, "");
         }
 
+        /// <summary>
+        /// Affiche l'intégralité des marques disponibles dans un <see cref="ComboBox"/>.
+        /// </summary>
         private void Charger_Marques()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -186,6 +282,10 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Affiche l'intégralité des marques disponibles dans un <see cref="ComboBox"/> et sélectionne celle correspondant à celle de l'article à modifier.
+        /// </summary>
+        /// <param name="Nom"> le nom de la marque de l'article à modifier </param>
         private void Charger_Marques(string Nom)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -205,6 +305,9 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Affiche l'intégralité des familles disponibles dans un <see cref="ComboBox"/>.
+        /// </summary>
         private void Charger_Familles()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -219,6 +322,10 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Affiche l'intégralité des familles disponibles dans un <see cref="ComboBox"/> et sélectionne celle correspondant à celle de l'article à modifier.
+        /// </summary>
+        /// <param name="Nom"> le nom de la famille de l'article à modifier </param>
         private void Charger_Familles(string Nom)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -238,6 +345,10 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Ajoute un article dans la base de données.
+        /// </summary>
+        /// <returns>L'article ajouté</returns>
         public Article Ajouter_Article()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -273,6 +384,11 @@ namespace Mercure
             return Article;
         }
 
+        /// <summary>
+        /// Affiche les différentes sous_familles associées à la famille choisie.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Choix_Famille_Article_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Choix_Famille_Article.SelectedIndex > -1)
@@ -291,6 +407,8 @@ namespace Mercure
                 foreach (SousFamille Sous_Famille in Sous_Familles)
                 {
                     Choix_Sous_Famille_Article.Items.Add(Sous_Famille);
+
+                    // On sélectionne la sous-famille correspondant à la l'article.
 
                     if (Article != null && Article.SubItems[3].Text.Equals(Sous_Famille.Recuperer_Nom()))
                     {

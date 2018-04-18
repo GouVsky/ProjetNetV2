@@ -10,6 +10,9 @@ namespace Mercure
     {
         ListViewItem Sous_Famille;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Ajout_Sous_Famille"/>.
+        /// </summary>
         public Fenetre_Ajout_Sous_Famille()
         {
             InitializeComponent();
@@ -17,11 +20,16 @@ namespace Mercure
             Charger_Famille();
         }
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Ajout_Sous_Famille"/> avec un objet <see cref="ListViewItem"/> de type <see cref="SousFamille"/>.
+        /// </summary>
         public Fenetre_Ajout_Sous_Famille(ListViewItem Sous_Famille)
         {
             InitializeComponent();
 
             this.Sous_Famille = Sous_Famille;
+
+            // On remplit les champs avec les données de la sous-famille.
 
             Nom_Sous_Famille_Edition.Text = Sous_Famille.SubItems[1].Text;
 
@@ -30,6 +38,9 @@ namespace Mercure
             Charger_Famille();
         }
 
+        /// <summary>
+        /// Affiche l'intégralité des familles disponibles dans un <see cref="ComboBox"/> et sélectionne celle correspondant à celle de la sous-famille à modifier.
+        /// </summary>
         private void Charger_Famille()
         {
             Choix_Famille_Selection.Items.Clear();
@@ -51,19 +62,27 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Ajoute la sous-famille dans la base de données.
+        /// </summary>
+        /// <returns> La sous-famille ajoutée </returns>
         public SousFamille Ajouter_Famille()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-            int Reference = Data_Reader.Inserer_Sous_Famille(Nom_Sous_Famille_Edition.Text, Choix_Famille_Selection.SelectedIndex);
+            int Reference = Data_Reader.Inserer_Sous_Famille(Nom_Sous_Famille_Edition.Text, ((Famille)Choix_Famille_Selection.SelectedItem).Recuperer_Reference());
 
-            SousFamille Sous_Famille = new SousFamille(Reference, Nom_Sous_Famille_Edition.Text, (Famille)Choix_Famille_Selection.SelectedItem);
+            SousFamille Sous_Famille = new SousFamille(Reference, Nom_Sous_Famille_Edition.Text, ((Famille)Choix_Famille_Selection.SelectedItem));
 
             Data_Reader.Terminer_Connection();
 
             return Sous_Famille;
         }
 
+        /// <summary>
+        /// Met à jour la sous-famille sélectionnée avec le nouveau nom entré et/ou la nouvelle famille associée choisie.
+        /// </summary>
+        /// <returns> La sous-famille mise à jour </returns>
         public SousFamille Mettre_A_Jour_Sous_Famille()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -79,6 +98,11 @@ namespace Mercure
             return Sous_Famille;
         }
 
+        /// <summary>
+        /// Lance la vérification des données entrées avant la validation.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Validation_Click(object sender, EventArgs e)
         {
             if (!ValidateChildren())
@@ -88,11 +112,21 @@ namespace Mercure
                 DialogResult = DialogResult.OK;
         }
 
+        /// <summary>
+        /// Annule les actions réalisées.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Annuler_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.None;
         }
 
+        /// <summary>
+        /// Lance la vérification de la validité du champ associé au nom de la sous-famille. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement d'annulation </param>
         private void Nom_Sous_Famille_Edition_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -116,6 +150,21 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé au nom de la sous-famille n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
+        private void Nom_Sous_Famille_Edition_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Nom_Sous_Famille_Edition, "");
+        }
+
+        /// <summary>
+        /// Lance la vérification de la validité du champ associé au choix de la famille. Affiche une erreur si le champ n'est pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement d'annulation </param>
         private void Choix_Famille_Selection_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (Choix_Famille_Selection.SelectedIndex == -1)
@@ -124,6 +173,16 @@ namespace Mercure
 
                 Erreur.SetError(Choix_Famille_Selection, "Une famille doit être sélectionnée.");
             }
+        }
+
+        /// <summary>
+        /// Efface l'erreur affichée si le champ associé au choix de la famille n'était pas valide.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
+        private void Choix_Famille_Selection_Validated(object sender, EventArgs e)
+        {
+            Erreur.SetError(Choix_Famille_Selection, "");
         }
     }
 }

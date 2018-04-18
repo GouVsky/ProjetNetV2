@@ -11,9 +11,15 @@ namespace Mercure
 {
     public partial class Fenetre_Edition_Famille : Form
     {
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Edition_Famille"/>.
+        /// </summary>
         public Fenetre_Edition_Famille()
         {
             InitializeComponent();
+
+            // On garde en mémoire la référence de la famille, mais on ne l'affiche pas.
+            // On n'affiche pas non plus les headers, puisque seuls les noms sont affichés.
 
             Familles_Liste.Columns.Add("ReferenceNonVisible", 0, HorizontalAlignment.Left);
             Familles_Liste.Columns.Add("NomNonVisible", Familles_Liste.Width, HorizontalAlignment.Left);
@@ -21,6 +27,9 @@ namespace Mercure
             Charger_Familles();
         }
 
+        /// <summary>
+        /// Affiche l'intégralité des familles disponibles dans une <see cref="ListView"/>.
+        /// </summary>
         private void Charger_Familles()
         {
             Familles_Liste.Items.Clear();
@@ -39,11 +48,18 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Lance une nouvelle instance de <see cref="Fenetre_Ajout_Famille"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Ajouter_Click(object sender, EventArgs e)
         {
             Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille();
 
             DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+            // On affiche la nouvelle famille dans la liste.
 
             if (Resultat == DialogResult.OK)
             {
@@ -57,16 +73,25 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Lance une nouvelle instance de <see cref="Fenetre_Ajout_Famille"/> avec un objet <see cref="ListViewItem"/> de type <see cref="Famille"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Modifier_Click(object sender, EventArgs e)
         {
             // On affiche la même fenêtre que celle pour l'ajout d'une famille,
             // mais avec les champs remplis avec les informations de l'objet.
+
+            // On vérifie qu'un élément a bien été sélectionné.
 
             if (Familles_Liste.SelectedItems.Count > 0)
             {
                 Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille(Familles_Liste.SelectedItems[0]);
 
                 DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+                // On modifie les données de la ligne correspondant à la famille.
 
                 if (Resultat == DialogResult.OK)
                 {
@@ -79,6 +104,11 @@ namespace Mercure
             } 
         }
 
+        /// <summary>
+        /// Lance une instance de <see cref="MessageBox"/> demandant la confirmation de la suppression de la famille.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Supprimer_Click(object sender, EventArgs e)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -100,6 +130,11 @@ namespace Mercure
             ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimée.");
         }
 
+        /// <summary>
+        /// Ferme la fenêtre.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Quitter_Click(object sender, EventArgs e)
         {
             Close();

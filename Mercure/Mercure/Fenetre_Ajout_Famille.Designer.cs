@@ -62,7 +62,9 @@
             this.Nom_Famille_Edition.Location = new System.Drawing.Point(27, 42);
             this.Nom_Famille_Edition.Name = "Nom_Famille_Edition";
             this.Nom_Famille_Edition.Size = new System.Drawing.Size(231, 20);
-            this.Nom_Famille_Edition.TabIndex = 2;
+            this.Nom_Famille_Edition.TabIndex = 0;
+            this.Nom_Famille_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Nom_Famille_Edition_Validating);
+            this.Nom_Famille_Edition.Validated += new System.EventHandler(this.Nom_Famille_Edition_Validated);
             // 
             // Bouton_Annuler
             // 

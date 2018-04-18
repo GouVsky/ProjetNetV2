@@ -9,6 +9,9 @@ namespace Mercure
     {
         private int Facteur_Tri = -1;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Principale"/>.
+        /// </summary>
         public Fenetre_Principale()
         {
             InitializeComponent();
@@ -18,6 +21,10 @@ namespace Mercure
             Initialiser_Liste();
         }
 
+        /// <summary>
+        /// Met à jour la barre de statut avec un message.
+        /// </summary>
+        /// <param name="Message"> le message à afficher </param>
         public void Mise_A_Jour_Barre_De_Statut(string Message)
         {
             Barre_De_Statut_Texte.Text = Message;
@@ -25,6 +32,11 @@ namespace Mercure
             Barre_De_Statut.Refresh();
         }
 
+        /// <summary>
+        /// Lance une nouvelle instance de <see cref="Fenetre_Selection_XML"/> pour l'importation du fichier XML.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Menu_Fichier_Import_XML_Click(object sender, EventArgs e)
         {
             Fenetre_Selection_XML Fenetre_XML = new Fenetre_Selection_XML();
@@ -42,16 +54,28 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Ferme la fenêtre.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Menu_Fichier_Quitter_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Lance une nouvelle instance de <see cref="Fenetre_Ajout_Article"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Ajouter_Article_Click(object sender, EventArgs e)
         {
             Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article();
 
             DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+            // On affiche le nouvel article dans la liste.
 
             if (Resultat == DialogResult.OK)
             {
@@ -65,6 +89,11 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Lance une nouvelle instance de <see cref="Fenetre_Ajout_Article"/> avec un objet <see cref="ListViewItem"/> de type <see cref="Article"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Modifier_Article_Click(object sender, EventArgs e)
         {
             // On affiche la même fenêtre que celle pour l'ajout d'un article,
@@ -73,6 +102,8 @@ namespace Mercure
             Fenetre_Ajout_Article Fenetre_Ajout = new Fenetre_Ajout_Article(Affichage_Articles.SelectedItems[0]);
 
             DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+            // On modifie les données de la ligne correspondant à l'article.
 
             if (Resultat == DialogResult.OK)
             {
@@ -84,6 +115,11 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Lance une instance de <see cref="MessageBox"/> demandant la confirmation de la suppression de l'article.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Supprimer_Article_Click(object sender, EventArgs e)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -105,6 +141,11 @@ namespace Mercure
             Mise_A_Jour_Barre_De_Statut("Un article supprimé.");
         }
 
+        /// <summary>
+        /// Lance le tri des colonnes par ordre alphabétique et par groupe.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Affichage_Articles_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             Trier_Articles(e.Column);
@@ -112,6 +153,10 @@ namespace Mercure
             Creer_Groupes(e.Column);
         }
 
+        /// <summary>
+        /// Tri des articles d'une colonne dans l'ordre ascendant.
+        /// </summary>
+        /// <param name="Numero_Colonne"> Le numéro de la colonne à trier </param>
         private void Trier_Articles(int Numero_Colonne)
         {
             if (Numero_Colonne != Facteur_Tri)
@@ -128,6 +173,10 @@ namespace Mercure
             Affichage_Articles.Sort();
         }
 
+        /// <summary>
+        /// Tri les éléments d'une colonne par groupe.
+        /// </summary>
+        /// <param name="Numero_Colonne"> Le numéro de la colonne à trier </param>
         private void Creer_Groupes(int Numero_Colonne)
         {
             // On ne crée pas de groupe sur la référence et la description de l'article.
@@ -179,6 +228,11 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Lance une action spécifique si une touche du clavier est pressée.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Affichage_Articles_KeyDown(object sender, KeyEventArgs e)
         {
             // La fenêtre de modification d'un article ne s'affiche que lorsque l'utilisateur presse la touche 'Entrée'.
@@ -207,6 +261,11 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Lance une instance de <see cref="Fenetre_Ajout_Article"/> afin de modifier l'article double cliqué.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Affichage_Articles_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (Affichage_Articles.SelectedItems.Count > 0)
@@ -215,6 +274,11 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Ouvre un menu contextuel au clic droit de la souris.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Affichage_Articles_MouseClick(object sender, MouseEventArgs e)
         {
             ContextMenu Menu_Contextuel = new ContextMenu();
@@ -233,6 +297,9 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Initialise la liste des articles.
+        /// </summary>
         public void Initialiser_Liste()
         {
             int Nombre_Colonnes = 7;
@@ -261,6 +328,9 @@ namespace Mercure
             Remplir_Liste_Avec_Articles();
         }
 
+        /// <summary>
+        /// Remplit la liste d'articles.
+        /// </summary>
         public void Remplir_Liste_Avec_Articles()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -277,6 +347,11 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Lance une instance de <see cref="Fenetre_Edition_Famille"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Menu_Famille_Edition_Click(object sender, EventArgs e)
         {
             Fenetre_Edition_Famille Edition_Famille = new Fenetre_Edition_Famille();
@@ -284,26 +359,26 @@ namespace Mercure
             Edition_Famille.ShowDialog(this);
         }
 
+        /// <summary>
+        /// Lance une instance de <see cref="Fenetre_Edition_Marque"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Menu_Marque_Edition_Click(object sender, EventArgs e)
         {
             MessageBox.Show("marqueToolStripMenuItem_Click", "Erreur XML", MessageBoxButtons.OK);
         }
 
+        /// <summary>
+        /// Lance une instance de <see cref="Fenetre_Edition_Sous_Famille"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Menu_Sous_Famille_Edition_Click(object sender, EventArgs e)
         {
             Fenetre_Edition_Sous_Famille Edition_Sous_Famille = new Fenetre_Edition_Sous_Famille();
 
             Edition_Sous_Famille.ShowDialog(this);
-        }
-
-        private void Menu_Fichier_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Menu_Apropos_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("lalala LA LA", "olala", MessageBoxButtons.OK);
         }
     }
 }

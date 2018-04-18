@@ -11,9 +11,15 @@ namespace Mercure
 {
     public partial class Fenetre_Edition_Sous_Famille : Form
     {
+        /// <summary>
+        /// Initialise une nouvelle instance de <see cref="Fenetre_Edition_Sous_Famille"/>.
+        /// </summary>
         public Fenetre_Edition_Sous_Famille()
         {
             InitializeComponent();
+
+            // On garde en mémoire la référence de la sous-famille et la famille, mais on ne les affiche pas.
+            // On n'affiche pas non plus les headers, puisque seuls les noms sont affichés.
 
             Sous_Familles_Liste.Columns.Add("ReferenceNonVisible", 0, HorizontalAlignment.Left);
             Sous_Familles_Liste.Columns.Add("NomNonVisible", Sous_Familles_Liste.Width, HorizontalAlignment.Left);
@@ -22,6 +28,9 @@ namespace Mercure
             Charger_Sous_Familles();
         }
 
+        /// <summary>
+        /// Affiche l'intégralité des sous-familles disponibles dans une <see cref="ListView"/>.
+        /// </summary>
         private void Charger_Sous_Familles()
         {
             Sous_Familles_Liste.Items.Clear();
@@ -40,11 +49,18 @@ namespace Mercure
             Data_Reader.Terminer_Connection();
         }
 
+        /// <summary>
+        /// Lance une nouvelle instance de <see cref="Fenetre_Ajout_Sous_Famille"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Ajouter_Click(object sender, EventArgs e)
         {
             Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille();
 
             DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+            // On affiche la nouvelle sous-famille dans la liste.
 
             if (Resultat == DialogResult.OK)
             {
@@ -58,16 +74,25 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Lance une nouvelle instance de <see cref="Fenetre_Ajout_Sous_Famille"/> avec un objet <see cref="ListViewItem"/> de type <see cref="SousFamille"/>.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Modifier_Click(object sender, EventArgs e)
         {
             // On affiche la même fenêtre que celle pour l'ajout d'une sous-famille,
             // mais avec les champs remplis avec les informations de l'objet.
+
+            // On vérifie qu'un élément a bien été sélectionné.
 
             if (Sous_Familles_Liste.SelectedItems.Count > 0)
             {
                 Fenetre_Ajout_Sous_Famille Fenetre_Ajout = new Fenetre_Ajout_Sous_Famille(Sous_Familles_Liste.SelectedItems[0]);
 
                 DialogResult Resultat = Fenetre_Ajout.ShowDialog();
+
+                // On modifie les données de la ligne correspondant à la sous-famille.
 
                 if (Resultat == DialogResult.OK)
                 {
@@ -80,6 +105,11 @@ namespace Mercure
             }
         }
 
+        /// <summary>
+        /// Lance une instance de <see cref="MessageBox"/> demandant la confirmation de la suppression de la sous-famille.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Supprimer_Click(object sender, EventArgs e)
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
@@ -91,7 +121,7 @@ namespace Mercure
 
             if (Resultat_Suppression == DialogResult.Yes)
             {
-                Data_Reader.Supprimer_Famille(Sous_Familles_Liste.SelectedItems[0].SubItems[0].Text);
+                Data_Reader.Supprimer_Sous_Famille(Sous_Familles_Liste.SelectedItems[0].SubItems[0].Text);
 
                 Sous_Familles_Liste.SelectedItems[0].Remove();
             }
@@ -101,6 +131,11 @@ namespace Mercure
             ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Une sous-famille supprimée.");
         }
 
+        /// <summary>
+        /// Ferme la fenêtre.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
         private void Bouton_Quitter_Click(object sender, EventArgs e)
         {
             Close();

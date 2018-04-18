@@ -353,6 +353,16 @@ namespace Mercure
             return Valeur;
         }
 
+        public void Mise_A_Jour_Marque(int Reference, string Nom)
+        {
+            SQLiteCommand Mise_A_Jour_Marque = new SQLiteCommand("UPDATE Marques SET Nom = @Nom WHERE RefMarque = @Reference", Connection);
+
+            Mise_A_Jour_Marque.Parameters.AddWithValue("@Reference", Reference);
+            Mise_A_Jour_Marque.Parameters.AddWithValue("@Nom", Nom);
+
+            Mise_A_Jour_Marque.ExecuteNonQuery();
+        }
+
         public void Supprimer_Article(string Reference)
         {
             SQLiteCommand Requete_Article = new SQLiteCommand("DELETE FROM Articles WHERE RefArticle LIKE @Reference;", Connection);
