@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SQLite;
@@ -59,7 +59,7 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Erreur.SetError(Reference_Article_Edition, "La rÃ©fÃ©rence de l'article n'a pas ou a mal Ã©tÃ© renseignÃ©e.\nElle doit contenir 8 caractÃ¨res.");
+                Erreur.SetError(Reference_Article_Edition, "La référence de l'article n'a pas ou a mal été renseignée.\nElle doit contenir 8 caractères.");
             }
         }
 
@@ -87,7 +87,7 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Erreur.SetError(Choix_Marque_Article, "Une marque doit Ãªtre sÃ©lectionnÃ©e.");
+                Erreur.SetError(Choix_Marque_Article, "Une marque doit être sélectionnée.");
             }
         }
 
@@ -102,7 +102,7 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Erreur.SetError(Choix_Famille_Article, "Une famille d'articles doit Ãªtre sÃ©lectionnÃ©e.");
+                Erreur.SetError(Choix_Famille_Article, "Une famille d'articles doit être sélectionnée.");
             }
         }
 
@@ -117,7 +117,7 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Erreur.SetError(Choix_Sous_Famille_Article, "Une sous-famille d'articles doit Ãªtre sÃ©lectionnÃ©e.");
+                Erreur.SetError(Choix_Sous_Famille_Article, "Une sous-famille d'articles doit être sélectionnée.");
             }
         }
 
@@ -132,7 +132,7 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Erreur.SetError(Description_Article_Edition, "Une description de l'article doit Ãªtre renseignÃ©e.");
+                Erreur.SetError(Description_Article_Edition, "Une description de l'article doit être renseignée.");
             }
         }
 
@@ -147,7 +147,7 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Erreur.SetError(Prix_Unitaire_Article_Edition, "Le prix unitaire de l'article ne peut pas Ãªtre nul.");
+                Erreur.SetError(Prix_Unitaire_Article_Edition, "Le prix unitaire de l'article ne peut pas être nul.");
             }
         }
 
@@ -162,7 +162,7 @@ namespace Mercure
             {
                 e.Cancel = true;
 
-                Erreur.SetError(Quantite_Article_Edition, "La quantitÃ© prÃ©vue d'articles ne peut pas Ãªtre nulle.");
+                Erreur.SetError(Quantite_Article_Edition, "La quantité prévue d'articles ne peut pas être nulle.");
             }
         }
 
@@ -248,7 +248,7 @@ namespace Mercure
                 // On efface le contenu actuel du combobox.
 
                 Choix_Sous_Famille_Article.Items.Clear();
-                Choix_Sous_Famille_Article.Text = "SÃ©lectionnez une sous-famille";
+                Choix_Sous_Famille_Article.Text = "Sélectionnez une sous-famille";
 
                 // On remplit le combobox en fonction de la famille.
 

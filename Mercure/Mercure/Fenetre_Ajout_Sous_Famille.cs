@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Mercure
 {
-    public partial class Fenetre_Ajout_Famille : Form
+    public partial class Fenetre_Ajout_Sous_Famille : Form
     {
-        public Fenetre_Ajout_Famille()
+        public Fenetre_Ajout_Sous_Famille()
         {
             InitializeComponent();
         }

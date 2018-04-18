@@ -1,6 +1,6 @@
 ﻿namespace Mercure
 {
-    partial class Fenetre_Edition_Famille
+    partial class Fentre_Ajout_Article
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Fenetre_Edition_Famille";
+            this.Text = "Fentre_Ajout_Article";
         }
 
         #endregion
