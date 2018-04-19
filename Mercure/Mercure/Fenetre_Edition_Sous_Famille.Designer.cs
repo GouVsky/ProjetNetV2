@@ -101,7 +101,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Fenetre_Edition_Sous_Famille";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Fenetre_Edition_Sous_Famille";
+            this.Text = "Edtion des sous-familles";
             this.ResumeLayout(false);
 
         }

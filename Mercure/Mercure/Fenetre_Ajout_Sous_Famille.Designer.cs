@@ -109,6 +109,7 @@
             this.AcceptButton = this.Bouton_Validation;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.Bouton_Annuler;
             this.ClientSize = new System.Drawing.Size(280, 180);
             this.Controls.Add(this.Choix_Famille_Selection);
@@ -119,7 +120,6 @@
             this.Controls.Add(this.Bouton_Validation);
             this.Name = "Fenetre_Ajout_Sous_Famille";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Fenetre_Ajout_Sous_Famille";
             ((System.ComponentModel.ISupportInitialize)(this.Erreur)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

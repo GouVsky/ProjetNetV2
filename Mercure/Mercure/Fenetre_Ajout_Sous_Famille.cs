@@ -53,7 +53,7 @@ namespace Mercure
             {
                 Choix_Famille_Selection.Items.Add(Famille);
 
-                if (Famille.ToString().Equals(Sous_Famille.SubItems[2].Text))
+                if (Sous_Famille != null && Famille.ToString().Equals(Sous_Famille.SubItems[2].Text))
                 {
                     Choix_Famille_Selection.SelectedItem = Famille;
                 }
@@ -66,7 +66,7 @@ namespace Mercure
         /// Ajoute la sous-famille dans la base de données.
         /// </summary>
         /// <returns> La sous-famille ajoutée </returns>
-        public SousFamille Ajouter_Famille()
+        public SousFamille Ajouter_Sous_Famille()
         {
             SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 

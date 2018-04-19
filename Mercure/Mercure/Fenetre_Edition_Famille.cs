@@ -120,7 +120,7 @@ namespace Mercure
 
             if (Resultat_Suppression == DialogResult.Yes)
             {
-                Data_Reader.Supprimer_Famille(Familles_Liste.SelectedItems[0].SubItems[0].Text);
+                Data_Reader.Supprimer_Famille(Familles_Liste.SelectedItems[0].SubItems[1].Text);
 
                 Familles_Liste.SelectedItems[0].Remove();
             }

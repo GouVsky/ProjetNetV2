@@ -69,6 +69,9 @@
             this.Reference_Article_Edition.Name = "Reference_Article_Edition";
             this.Reference_Article_Edition.Size = new System.Drawing.Size(169, 20);
             this.Reference_Article_Edition.TabIndex = 1;
+            this.Reference_Article_Edition.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Reference_Article_Edition_KeyPress);
+            this.Reference_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Reference_Article_Edition_Validating);
+            this.Reference_Article_Edition.Validated += new System.EventHandler(this.Reference_Article_Edition_Validated);
             // 
             // Reference_Article_Titre
             // 
@@ -140,6 +143,8 @@
             this.Choix_Marque_Article.Name = "Choix_Marque_Article";
             this.Choix_Marque_Article.Size = new System.Drawing.Size(169, 21);
             this.Choix_Marque_Article.TabIndex = 9;
+            this.Choix_Marque_Article.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Marque_Article_Validating);
+            this.Choix_Marque_Article.Validated += new System.EventHandler(this.Choix_Marque_Article_Validated);
             // 
             // Choix_Famille_Article
             // 
@@ -149,6 +154,8 @@
             this.Choix_Famille_Article.Size = new System.Drawing.Size(169, 21);
             this.Choix_Famille_Article.TabIndex = 10;
             this.Choix_Famille_Article.SelectedIndexChanged += new System.EventHandler(this.Choix_Famille_Article_SelectedIndexChanged);
+            this.Choix_Famille_Article.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Famille_Article_Validating);
+            this.Choix_Famille_Article.Validated += new System.EventHandler(this.Choix_Famille_Article_Validated);
             // 
             // Choix_Sous_Famille_Article
             // 
@@ -157,6 +164,8 @@
             this.Choix_Sous_Famille_Article.Name = "Choix_Sous_Famille_Article";
             this.Choix_Sous_Famille_Article.Size = new System.Drawing.Size(169, 21);
             this.Choix_Sous_Famille_Article.TabIndex = 11;
+            this.Choix_Sous_Famille_Article.Validating += new System.ComponentModel.CancelEventHandler(this.Choix_Sous_Famille_Article_Validating);
+            this.Choix_Sous_Famille_Article.Validated += new System.EventHandler(this.Choix_Sous_Famille_Article_Validated);
             // 
             // Description_Article_Edition
             // 
@@ -165,6 +174,8 @@
             this.Description_Article_Edition.Name = "Description_Article_Edition";
             this.Description_Article_Edition.Size = new System.Drawing.Size(371, 85);
             this.Description_Article_Edition.TabIndex = 12;
+            this.Description_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Description_Article_Edition_Validating);
+            this.Description_Article_Edition.Validated += new System.EventHandler(this.Description_Article_Edition_Validated);
             // 
             // Informations_Titre
             // 
@@ -188,6 +199,8 @@
             this.Prix_Unitaire_Article_Edition.Name = "Prix_Unitaire_Article_Edition";
             this.Prix_Unitaire_Article_Edition.Size = new System.Drawing.Size(73, 20);
             this.Prix_Unitaire_Article_Edition.TabIndex = 14;
+            this.Prix_Unitaire_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Prix_Unitaire_Article_Edition_Validating);
+            this.Prix_Unitaire_Article_Edition.Validated += new System.EventHandler(this.Prix_Unitaire_Article_Edition_Validated);
             // 
             // Quantite_Article_Edition
             // 
@@ -200,6 +213,8 @@
             this.Quantite_Article_Edition.Name = "Quantite_Article_Edition";
             this.Quantite_Article_Edition.Size = new System.Drawing.Size(73, 20);
             this.Quantite_Article_Edition.TabIndex = 15;
+            this.Quantite_Article_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Quantite_Article_Edition_Validating);
+            this.Quantite_Article_Edition.Validated += new System.EventHandler(this.Quantite_Article_Edition_Validated);
             // 
             // Bouton_Validation
             // 
@@ -210,6 +225,7 @@
             this.Bouton_Validation.TabIndex = 16;
             this.Bouton_Validation.Text = "Ajouter";
             this.Bouton_Validation.UseVisualStyleBackColor = true;
+            this.Bouton_Validation.Click += new System.EventHandler(this.Bouton_Validation_Click);
             // 
             // Bouton_Annulation
             // 
@@ -220,6 +236,7 @@
             this.Bouton_Annulation.TabIndex = 17;
             this.Bouton_Annulation.Text = "Annuler";
             this.Bouton_Annulation.UseVisualStyleBackColor = true;
+            this.Bouton_Annulation.Click += new System.EventHandler(this.Bouton_Annulation_Click);
             // 
             // Erreur
             // 
@@ -231,6 +248,7 @@
             this.AcceptButton = this.Bouton_Validation;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.Bouton_Annulation;
             this.ClientSize = new System.Drawing.Size(422, 442);
             this.Controls.Add(this.Bouton_Annulation);
@@ -253,7 +271,6 @@
             this.Controls.Add(this.Description_Titre);
             this.Name = "Fenetre_Ajout_Article";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Fentre_Ajout_Article";
             ((System.ComponentModel.ISupportInitialize)(this.Prix_Unitaire_Article_Edition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Quantite_Article_Edition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Erreur)).EndInit();

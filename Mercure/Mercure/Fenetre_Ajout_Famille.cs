@@ -110,7 +110,7 @@ namespace Mercure
 
             foreach (Famille Famille in Familles)
             {
-                if (Famille.Recuperer_Nom().Equals(Nom))
+                if (Famille.Recuperer_Nom().Equals(Nom) && !this.Famille.SubItems[1].Text.Equals(Nom))
                 {
                     e.Cancel = true;
 

@@ -100,7 +100,7 @@
             this.Controls.Add(this.Familles_Liste);
             this.Name = "Fenetre_Edition_Famille";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Fenetre_Edition_Famille";
+            this.Text = "Edition des familes";
             this.ResumeLayout(false);
 
         }

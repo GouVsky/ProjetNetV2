@@ -71,6 +71,16 @@ namespace Mercure
         }
 
         /// <summary>
+        /// Annule les modifications réalisées.
+        /// </summary>
+        /// <param name="sender"> l'objet envoyé </param>
+        /// <param name="e"> l'évènement </param>
+        private void Bouton_Annulation_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.None;
+        }
+
+        /// <summary>
         /// Lance la vérification de la validité du champ associé à la référence de l'article. Affiche une erreur si le champ n'est pas valide.
         /// </summary>
         /// <param name="sender"> l'objet envoyé </param>
@@ -82,6 +92,25 @@ namespace Mercure
                 e.Cancel = true;
 
                 Erreur.SetError(Reference_Article_Edition, "La référence de l'article n'a pas ou a mal été renseignée.\nElle doit contenir 8 caractères.");
+            }
+
+            else
+            {
+                SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
+
+                List <Article> Articles = Data_Reader.Recuperer_Articles();
+
+                foreach(Article Article in Articles)
+                {
+                    if (Reference_Article_Edition.Text.Equals(Article.Recuperer_Reference()))
+                    {
+                        e.Cancel = true;
+
+                        Erreur.SetError(Reference_Article_Edition, "La référence de l'article existe déjà.");
+                    }
+                }
+
+                Data_Reader.Terminer_Connection();
             }
         }
 

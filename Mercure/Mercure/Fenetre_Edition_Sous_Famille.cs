@@ -56,7 +56,7 @@ namespace Mercure
         /// <param name="e"> l'évènement </param>
         private void Bouton_Ajouter_Click(object sender, EventArgs e)
         {
-            Fenetre_Ajout_Famille Fenetre_Ajout = new Fenetre_Ajout_Famille();
+            Fenetre_Ajout_Sous_Famille Fenetre_Ajout = new Fenetre_Ajout_Sous_Famille();
 
             DialogResult Resultat = Fenetre_Ajout.ShowDialog();
 
@@ -64,11 +64,11 @@ namespace Mercure
 
             if (Resultat == DialogResult.OK)
             {
-                Famille Famille = Fenetre_Ajout.Ajouter_Famille();
+                SousFamille Sous_Famille = Fenetre_Ajout.Ajouter_Sous_Famille();
 
-                ListViewItem Famille_Dans_Liste = new ListViewItem(Famille.Recuperer_Donnees());
+                ListViewItem Sous_Famille_Dans_Liste = new ListViewItem(Sous_Famille.Recuperer_Donnees());
 
-                Sous_Familles_Liste.Items.Add(Famille_Dans_Liste);
+                Sous_Familles_Liste.Items.Add(Sous_Famille_Dans_Liste);
 
                 ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Vous avez ajouté une nouvelle sous-famille avec succès.");
             }
@@ -121,7 +121,7 @@ namespace Mercure
 
             if (Resultat_Suppression == DialogResult.Yes)
             {
-                Data_Reader.Supprimer_Sous_Famille(Sous_Familles_Liste.SelectedItems[0].SubItems[0].Text);
+                Data_Reader.Supprimer_Sous_Famille(Sous_Familles_Liste.SelectedItems[0].SubItems[1].Text);
 
                 Sous_Familles_Liste.SelectedItems[0].Remove();
             }
