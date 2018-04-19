@@ -151,6 +151,7 @@ namespace Mercure
                 // On affiche un message dans le cas où il y a eu des erreurs.
 
                 MessageBox.Show("Erreur de lecture du fichier XML.", "Erreur XML", MessageBoxButtons.OK);
+                Data_Reader.Terminer_Connection();
             }
 
             Data_Reader.Terminer_Connection();
