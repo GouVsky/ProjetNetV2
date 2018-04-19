@@ -111,23 +111,44 @@ namespace Mercure
         /// <param name="e"> l'évènement </param>
         private void Bouton_Supprimer_Click(object sender, EventArgs e)
         {
-            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
-
-            DialogResult Resultat_Suppression = MessageBox.Show("La famille sélectionnée va être supprimée. Il sera impossible de revenir en arrière. Continuer ?",
-                                                                "Suppression",
-                                                                MessageBoxButtons.YesNo,
-                                                                MessageBoxIcon.Question);
-
-            if (Resultat_Suppression == DialogResult.Yes)
+            if (Familles_Liste.SelectedItems.Count > 0)
             {
-                Data_Reader.Supprimer_Famille(Familles_Liste.SelectedItems[0].SubItems[1].Text);
+                SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-                Familles_Liste.SelectedItems[0].Remove();
+                // On récupère les sous-familles de la famille.
+
+                int Reference_Famille = Convert.ToInt32(Familles_Liste.SelectedItems[0].SubItems[0].Text);
+
+                List <SousFamille> Sous_Familles = Data_Reader.Recuperer_Sous_Familles(Reference_Famille);
+
+                // On ne supprime la famille que s'il n'y a aucune sous-famille associée.
+
+                if (Sous_Familles.Count == 0)
+                {
+                    DialogResult Resultat_Suppression = MessageBox.Show("La famille sélectionnée va être supprimée. Il sera impossible de revenir en arrière. Continuer ?",
+                                                                    "Suppression",
+                                                                    MessageBoxButtons.YesNo,
+                                                                    MessageBoxIcon.Question);
+
+                    if (Resultat_Suppression == DialogResult.Yes)
+                    {
+                        Data_Reader.Supprimer_Famille(Familles_Liste.SelectedItems[0].SubItems[1].Text);
+
+                        Familles_Liste.SelectedItems[0].Remove();
+                    }
+                }
+
+                else
+                {
+                    MessageBox.Show("Il est impossible de supprimer la famille sélectionnée. Des sous-familles et/ou des articles y sont associés.",
+                                                                    "Erreur",
+                                                                    MessageBoxButtons.OK);
+                }
+
+                Data_Reader.Terminer_Connection();
+
+                ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimée.");
             }
-
-            Data_Reader.Terminer_Connection();
-
-            ((Fenetre_Principale) Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimée.");
         }
 
         /// <summary>

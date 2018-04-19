@@ -112,23 +112,52 @@ namespace Mercure
         /// <param name="e"> l'évènement </param>
         private void Bouton_Supprimer_Click(object sender, EventArgs e)
         {
-            SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
-
-            DialogResult Resultat_Suppression = MessageBox.Show("La sous-famille sélectionnée va être supprimée. Il sera impossible de revenir en arrière. Continuer ?",
-                                                                "Suppression",
-                                                                MessageBoxButtons.YesNo,
-                                                                MessageBoxIcon.Question);
-
-            if (Resultat_Suppression == DialogResult.Yes)
+            if (Sous_Familles_Liste.SelectedItems.Count > 0)
             {
-                Data_Reader.Supprimer_Sous_Famille(Sous_Familles_Liste.SelectedItems[0].SubItems[1].Text);
+                SqlDataReader Data_Reader = SqlDataReader.Ouvrir_Connection();
 
-                Sous_Familles_Liste.SelectedItems[0].Remove();
+                // On récupère les articles associés à la sous-famille.
+
+                bool Existe = false;
+
+                int Reference_Sous_Famille = Convert.ToInt32(Sous_Familles_Liste.SelectedItems[0].SubItems[0].Text);
+
+                List<Article> Articles = Data_Reader.Recuperer_Articles();
+
+                foreach(Article Article in Articles)
+                {
+                    if (Article.Recuperer_Sous_Famille().Recuperer_Reference() == Reference_Sous_Famille)
+                        Existe = true;
+                }
+
+                if (!Existe)
+                {
+                    DialogResult Resultat_Suppression = MessageBox.Show("La sous-famille sélectionnée va être supprimée. Il sera impossible de revenir en arrière. Continuer ?",
+                                                                        "Suppression",
+                                                                        MessageBoxButtons.YesNo,
+                                                                        MessageBoxIcon.Question);
+
+                    if (Resultat_Suppression == DialogResult.Yes)
+                    {
+                        Data_Reader.Supprimer_Sous_Famille(Sous_Familles_Liste.SelectedItems[0].SubItems[1].Text);
+
+                        Sous_Familles_Liste.SelectedItems[0].Remove();
+                    }
+
+                    Data_Reader.Terminer_Connection();
+
+                    ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Une sous-famille supprimée.");
+                }
+
+                else
+                {
+                    DialogResult Resultat_Suppression = MessageBox.Show("Il est impossible de supprimer la sous-famille sélectionnée. Des articles y sont associés.",
+                                                                        "Erreur",
+                                                                        MessageBoxButtons.OK);
+                }
+
+                Data_Reader.Terminer_Connection();
             }
-
-            Data_Reader.Terminer_Connection();
-
-            ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Une sous-famille supprimée.");
         }
 
         /// <summary>
