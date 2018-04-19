@@ -431,7 +431,7 @@ namespace Mercure
             }
             else
             {
-                SQLiteCommand Mise_A_Jour_Article = new SQLiteCommand("UPDATE Articles SET RefSousFamille = @Id_Sous_Famille, RefMarque = @Id_Marque, PrixHT = @Prix, Quantite = @Quantite+1 WHERE RefArticle LIKE @RefArticle", Connection);
+                SQLiteCommand Mise_A_Jour_Article = new SQLiteCommand("UPDATE Articles SET RefSousFamille = @Id_Sous_Famille, RefMarque = @Id_Marque, PrixHT = @Prix, Quantite = @Quantite + Quantite WHERE RefArticle LIKE @RefArticle", Connection);
                 Mise_A_Jour_Article.Parameters.AddWithValue("@RefArticle", Ref_Article);
                 Mise_A_Jour_Article.Parameters.AddWithValue("@Id_Sous_Famille", Id_Sous_Famille);
                 Mise_A_Jour_Article.Parameters.AddWithValue("@Id_Marque", Id_Marque);
