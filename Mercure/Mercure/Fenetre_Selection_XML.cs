@@ -16,7 +16,7 @@ namespace Mercure
     public partial class Fenetre_Selection_XML : Form
     {
         bool Importation = false;
-
+        public static string separateurRegion = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
         String Chemin_Fichier = "";
 
         /// <summary>
@@ -46,7 +46,6 @@ namespace Mercure
         {
             OpenFileDialog Fenetre_Parcours = new OpenFileDialog();
             Fenetre_Parcours.ShowDialog();
-
             Chemin_Fichier = Fenetre_Parcours.FileName.ToString();
 
             Affichage_Chemin_Fichier_XML.Text = Chemin_Fichier;
@@ -112,13 +111,13 @@ namespace Mercure
                 foreach (XmlNode selectNode in Article)
                 {
                     // On récupère les balises du fichier.
-
+                    
                     string Description = selectNode.SelectSingleNode("description").InnerText;
                     string Ref_Article = selectNode.SelectSingleNode("refArticle").InnerText;
                     string Marque = selectNode.SelectSingleNode("marque").InnerText;
                     string Famille = selectNode.SelectSingleNode("famille").InnerText;
                     string Sous_Famille = selectNode.SelectSingleNode("sousFamille").InnerText;
-                    string Prix = selectNode.SelectSingleNode("prixHT").InnerText.Replace(',', '.');
+                    string Prix = selectNode.SelectSingleNode("prixHT").InnerText.Replace(',', separateurRegion[0]);
 
                     // On insère la famille.
 
@@ -129,12 +128,11 @@ namespace Mercure
                     int Id_Marque = Data_Reader.Inserer_Marque(Marque);
 
                     // On insère la sous-famille.
-
                     int Id_Sous_Famille = Data_Reader.Inserer_Sous_Famille(Sous_Famille, Id_Famille);
 
                     // ON insère l'article.
-
-                    int Valeur = Data_Reader.Inserer_Article(Ref_Article, Description, Id_Sous_Famille, Id_Marque, Convert.ToDouble(Prix), 1);
+                    double tmpPrix = Convert.ToDouble(Prix);
+                    int Valeur = Data_Reader.Inserer_Article(Ref_Article, Description, Id_Sous_Famille, Id_Marque, tmpPrix, 1);
 
                     Nbre_Donnees++;
                     Bar_Chargement_XML.PerformStep();
