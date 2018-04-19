@@ -39,10 +39,10 @@
             // 
             // Bouton_Validation
             // 
-            this.Bouton_Validation.Location = new System.Drawing.Point(91, 70);
-            this.Bouton_Validation.Margin = new System.Windows.Forms.Padding(2);
+            this.Bouton_Validation.Location = new System.Drawing.Point(121, 86);
+            this.Bouton_Validation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Bouton_Validation.Name = "Bouton_Validation";
-            this.Bouton_Validation.Size = new System.Drawing.Size(75, 24);
+            this.Bouton_Validation.Size = new System.Drawing.Size(100, 30);
             this.Bouton_Validation.TabIndex = 0;
             this.Bouton_Validation.Text = "Ajouter";
             this.Bouton_Validation.UseVisualStyleBackColor = true;
@@ -51,17 +51,19 @@
             // Nom_Famille_Titre
             // 
             this.Nom_Famille_Titre.AutoSize = true;
-            this.Nom_Famille_Titre.Location = new System.Drawing.Point(21, 12);
+            this.Nom_Famille_Titre.Location = new System.Drawing.Point(28, 15);
+            this.Nom_Famille_Titre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Nom_Famille_Titre.Name = "Nom_Famille_Titre";
-            this.Nom_Famille_Titre.Size = new System.Drawing.Size(29, 13);
+            this.Nom_Famille_Titre.Size = new System.Drawing.Size(37, 17);
             this.Nom_Famille_Titre.TabIndex = 1;
             this.Nom_Famille_Titre.Text = "Nom";
             // 
             // Nom_Famille_Edition
             // 
-            this.Nom_Famille_Edition.Location = new System.Drawing.Point(24, 28);
+            this.Nom_Famille_Edition.Location = new System.Drawing.Point(32, 34);
+            this.Nom_Famille_Edition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Nom_Famille_Edition.Name = "Nom_Famille_Edition";
-            this.Nom_Famille_Edition.Size = new System.Drawing.Size(231, 20);
+            this.Nom_Famille_Edition.Size = new System.Drawing.Size(307, 22);
             this.Nom_Famille_Edition.TabIndex = 0;
             this.Nom_Famille_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Nom_Famille_Edition_Validating);
             this.Nom_Famille_Edition.Validated += new System.EventHandler(this.Nom_Famille_Edition_Validated);
@@ -69,9 +71,10 @@
             // Bouton_Annuler
             // 
             this.Bouton_Annuler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Bouton_Annuler.Location = new System.Drawing.Point(180, 70);
+            this.Bouton_Annuler.Location = new System.Drawing.Point(240, 86);
+            this.Bouton_Annuler.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Bouton_Annuler.Name = "Bouton_Annuler";
-            this.Bouton_Annuler.Size = new System.Drawing.Size(75, 23);
+            this.Bouton_Annuler.Size = new System.Drawing.Size(100, 28);
             this.Bouton_Annuler.TabIndex = 3;
             this.Bouton_Annuler.Text = "Annuler";
             this.Bouton_Annuler.UseVisualStyleBackColor = true;
@@ -85,16 +88,17 @@
             // Fenetre_Ajout_Famille
             // 
             this.AcceptButton = this.Bouton_Validation;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.Bouton_Annuler;
-            this.ClientSize = new System.Drawing.Size(280, 109);
+            this.ClientSize = new System.Drawing.Size(373, 134);
             this.Controls.Add(this.Bouton_Annuler);
             this.Controls.Add(this.Nom_Famille_Edition);
             this.Controls.Add(this.Nom_Famille_Titre);
             this.Controls.Add(this.Bouton_Validation);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Fenetre_Ajout_Famille";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             ((System.ComponentModel.ISupportInitialize)(this.Erreur)).EndInit();

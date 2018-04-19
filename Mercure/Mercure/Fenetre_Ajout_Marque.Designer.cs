@@ -39,9 +39,11 @@
             // 
             // Bouton_Annuler
             // 
-            this.Bouton_Annuler.Location = new System.Drawing.Point(182, 71);
+            this.Bouton_Annuler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Bouton_Annuler.Location = new System.Drawing.Point(243, 87);
+            this.Bouton_Annuler.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Bouton_Annuler.Name = "Bouton_Annuler";
-            this.Bouton_Annuler.Size = new System.Drawing.Size(75, 23);
+            this.Bouton_Annuler.Size = new System.Drawing.Size(100, 28);
             this.Bouton_Annuler.TabIndex = 7;
             this.Bouton_Annuler.Text = "Annuler";
             this.Bouton_Annuler.UseVisualStyleBackColor = true;
@@ -49,9 +51,10 @@
             // 
             // Nom_Marque_Edition
             // 
-            this.Nom_Marque_Edition.Location = new System.Drawing.Point(26, 29);
+            this.Nom_Marque_Edition.Location = new System.Drawing.Point(35, 36);
+            this.Nom_Marque_Edition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Nom_Marque_Edition.Name = "Nom_Marque_Edition";
-            this.Nom_Marque_Edition.Size = new System.Drawing.Size(231, 20);
+            this.Nom_Marque_Edition.Size = new System.Drawing.Size(307, 22);
             this.Nom_Marque_Edition.TabIndex = 4;
             this.Nom_Marque_Edition.Validating += new System.ComponentModel.CancelEventHandler(this.Nom_Marque_Edition_Validating);
             this.Nom_Marque_Edition.Validated += new System.EventHandler(this.Nom_Marque_Edition_Validated);
@@ -59,18 +62,19 @@
             // Nom_Marque_Titre
             // 
             this.Nom_Marque_Titre.AutoSize = true;
-            this.Nom_Marque_Titre.Location = new System.Drawing.Point(23, 13);
+            this.Nom_Marque_Titre.Location = new System.Drawing.Point(31, 16);
+            this.Nom_Marque_Titre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Nom_Marque_Titre.Name = "Nom_Marque_Titre";
-            this.Nom_Marque_Titre.Size = new System.Drawing.Size(29, 13);
+            this.Nom_Marque_Titre.Size = new System.Drawing.Size(37, 17);
             this.Nom_Marque_Titre.TabIndex = 6;
             this.Nom_Marque_Titre.Text = "Nom";
             // 
             // Bouton_Validation
             // 
-            this.Bouton_Validation.Location = new System.Drawing.Point(93, 71);
-            this.Bouton_Validation.Margin = new System.Windows.Forms.Padding(2);
+            this.Bouton_Validation.Location = new System.Drawing.Point(124, 87);
+            this.Bouton_Validation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Bouton_Validation.Name = "Bouton_Validation";
-            this.Bouton_Validation.Size = new System.Drawing.Size(75, 24);
+            this.Bouton_Validation.Size = new System.Drawing.Size(100, 30);
             this.Bouton_Validation.TabIndex = 5;
             this.Bouton_Validation.Text = "Ajouter";
             this.Bouton_Validation.UseVisualStyleBackColor = true;
@@ -84,14 +88,16 @@
             // Fenetre_Ajout_Marque
             // 
             this.AcceptButton = this.Bouton_Validation;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.Bouton_Annuler;
-            this.ClientSize = new System.Drawing.Size(285, 108);
+            this.ClientSize = new System.Drawing.Size(380, 133);
             this.Controls.Add(this.Bouton_Annuler);
             this.Controls.Add(this.Nom_Marque_Edition);
             this.Controls.Add(this.Nom_Marque_Titre);
             this.Controls.Add(this.Bouton_Validation);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Fenetre_Ajout_Marque";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             ((System.ComponentModel.ISupportInitialize)(this.Erreur)).EndInit();
