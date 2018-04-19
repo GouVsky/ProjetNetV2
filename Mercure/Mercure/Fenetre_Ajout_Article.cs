@@ -102,7 +102,19 @@ namespace Mercure
 
                 foreach(Article Article in Articles)
                 {
-                    if (Reference_Article_Edition.Text.Equals(Article.Recuperer_Reference()) || (this.Article != null && this.Article.SubItems[0].Equals(Reference_Article_Edition.Text)))
+                    // Si on ajoute un nouvel article, on vérifie que la référence indiquée n'existe pas.
+
+                    if (Reference_Article_Edition.Text.Equals(Article.Recuperer_Reference()) && this.Article == null)
+                    {
+                        e.Cancel = true;
+
+                        Erreur.SetError(Reference_Article_Edition, "La référence de l'article existe déjà.");
+                    }
+
+                    // Si on modifie un article, on vérifie que la référence indiquée est différente de la référence actuelle,
+                    // et qu'elle n'est pas attribuée à un autre article.
+
+                    else if (this.Article != null && Reference_Article_Edition.Text.Equals(Article.Recuperer_Reference()) && !this.Article.SubItems[0].Text.Equals(Reference_Article_Edition.Text))
                     {
                         e.Cancel = true;
 

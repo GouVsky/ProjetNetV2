@@ -139,13 +139,23 @@ namespace Mercure
 
             foreach (SousFamille Sous_Famille in Sous_Familles)
             {
-                if (Sous_Famille.Recuperer_Nom().Equals(Nom) || (this.Sous_Famille != null && this.Sous_Famille.SubItems[1].Text.Equals(Nom)))
+                // Si on ajoute une nouvelle sous-famille, on vérifie que le nom indiqué n'existe pas.
+
+                if (Nom_Sous_Famille_Edition.Text.Equals(Sous_Famille.Recuperer_Nom()) && this.Sous_Famille == null)
                 {
                     e.Cancel = true;
 
-                    Erreur.SetError(Nom_Sous_Famille_Edition, "La sous-famille existe déjà. Veuillez en renseigner une nouvelle.");
+                    Erreur.SetError(Nom_Sous_Famille_Edition, "La sous-famille existe déjà.");
+                }
 
-                    break;
+                // Si on modifie une sous-famille, on vérifie que le nom indiqué est différent du nom actuel,
+                // et qu'il n'est pas attribué à une autre sous-famille.
+
+                else if (this.Sous_Famille != null && Nom_Sous_Famille_Edition.Text.Equals(Sous_Famille.Recuperer_Nom()) && !this.Sous_Famille.SubItems[1].Text.Equals(Nom_Sous_Famille_Edition.Text))
+                {
+                    e.Cancel = true;
+
+                    Erreur.SetError(Nom_Sous_Famille_Edition, "La sous-famille existe déjà.");
                 }
             }
         }

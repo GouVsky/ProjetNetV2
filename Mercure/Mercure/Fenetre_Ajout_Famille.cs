@@ -112,13 +112,23 @@ namespace Mercure
 
             foreach (Famille Famille in Familles)
             {
-                if (Famille.Recuperer_Nom().Equals(Nom) || (this.Famille != null && this.Famille.SubItems[1].Text.Equals(Nom)))
+                // Si on ajoute une nouvelle famille, on vérifie que le nom indiqué n'existe pas.
+
+                if (Nom_Famille_Edition.Text.Equals(Famille.Recuperer_Nom()) && this.Famille == null)
                 {
                     e.Cancel = true;
 
-                    Erreur.SetError(Nom_Famille_Edition, "La famille existe déjà. Veuillez en renseigner une nouvelle.");
+                    Erreur.SetError(Nom_Famille_Edition, "La famille existe déjà.");
+                }
 
-                    break;
+                // Si on modifie une famille, on vérifie que le nom indiqué est différent du nom actuel,
+                // et qu'il n'est pas attribué à une autre famille.
+
+                else if (this.Famille != null && Nom_Famille_Edition.Text.Equals(Famille.Recuperer_Nom()) && !this.Famille.SubItems[1].Text.Equals(Nom_Famille_Edition.Text))
+                {
+                    e.Cancel = true;
+
+                    Erreur.SetError(Nom_Famille_Edition, "La famille existe déjà.");
                 }
             }
         }

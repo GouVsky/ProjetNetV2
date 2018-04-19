@@ -112,13 +112,23 @@ namespace Mercure
 
             foreach (Marque Marque in Marques)
             {
-                if (Marque.Recuperer_Nom().Equals(Nom) || (this.Marque != null && this.Marque.SubItems[1].Text.Equals(Nom)))
+                // Si on ajoute une nouvelle marque, on vérifie que le nom indiqué n'existe pas.
+
+                if (Nom_Marque_Edition.Text.Equals(Marque.Recuperer_Nom()) && this.Marque == null)
                 {
                     e.Cancel = true;
 
-                    Erreur.SetError(Nom_Marque_Edition, "La marque existe déjà. Veuillez en renseigner une nouvelle.");
+                    Erreur.SetError(Nom_Marque_Edition, "La marque existe déjà.");
+                }
 
-                    break;
+                // Si on modifie une marque, on vérifie que le nom indiqué est différent du nom actuel,
+                // et qu'il n'est pas attribué à une autre marque.
+
+                else if (this.Marque != null && Nom_Marque_Edition.Text.Equals(Marque.Recuperer_Nom()) && !this.Marque.SubItems[1].Text.Equals(Nom_Marque_Edition.Text))
+                {
+                    e.Cancel = true;
+
+                    Erreur.SetError(Nom_Marque_Edition, "La marque existe déjà.");
                 }
             }
         }
