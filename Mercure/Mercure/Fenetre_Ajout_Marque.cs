@@ -45,9 +45,9 @@ namespace Mercure
 
             int Reference = Data_Reader.Inserer_Marque(Nom_Marque_Edition.Text);
 
-            Marque Marque = new Marque(Reference, Nom_Marque_Edition.Text);
-
             Data_Reader.Terminer_Connection();
+
+            Marque Marque = new Marque(Reference, Nom_Marque_Edition.Text);
 
             return Marque;
         }
@@ -64,9 +64,9 @@ namespace Mercure
 
             Data_Reader.Mise_A_Jour_Marque(Reference, Nom_Marque_Edition.Text);
 
-            Marque Marque = new Marque(Reference, Nom_Marque_Edition.Text);
-
             Data_Reader.Terminer_Connection();
+
+            Marque Marque = new Marque(Reference, Nom_Marque_Edition.Text);
 
             return Marque;
         }
@@ -106,6 +106,8 @@ namespace Mercure
 
             List<Marque> Marques = Data_Reader.Recuperer_Marques();
 
+            Data_Reader.Terminer_Connection();
+
             string Nom = Nom_Marque_Edition.Text;
 
             foreach (Marque Marque in Marques)
@@ -119,8 +121,6 @@ namespace Mercure
                     break;
                 }
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>

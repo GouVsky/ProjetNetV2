@@ -303,12 +303,12 @@ namespace Mercure
 
             List<Marque> Marques = Data_Reader.Recuperer_Marques();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (Marque Marque in Marques)
             {
                 Choix_Marque_Article.Items.Add(Marque);
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>
@@ -321,6 +321,8 @@ namespace Mercure
 
             List<Marque> Marques = Data_Reader.Recuperer_Marques();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (Marque Marque in Marques)
             {
                 Choix_Marque_Article.Items.Add(Marque);
@@ -330,8 +332,6 @@ namespace Mercure
                     Choix_Marque_Article.SelectedItem = Marque;
                 }
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>
@@ -343,12 +343,12 @@ namespace Mercure
 
             List<Famille> Familles = Data_Reader.Recuperer_Familles();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (Famille Famille in Familles)
             {
                 Choix_Famille_Article.Items.Add(Famille);
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>
@@ -361,6 +361,8 @@ namespace Mercure
 
             List<Famille> Familles = Data_Reader.Recuperer_Familles();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (Famille Famille in Familles)
             {
                 Choix_Famille_Article.Items.Add(Famille);
@@ -370,8 +372,6 @@ namespace Mercure
                     Choix_Famille_Article.SelectedItem = Famille;
                 }
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>
@@ -406,9 +406,9 @@ namespace Mercure
                                         Prix_Converti,
                                         Int32.Parse(Quantite));
 
-            Article Article = new Article(Reference, Description, Sous_Famille, Marque, Prix_Converti, Int32.Parse(Quantite));
-
             Data_Reader.Terminer_Connection();
+
+            Article Article = new Article(Reference, Description, Sous_Famille, Marque, Prix_Converti, Int32.Parse(Quantite));
 
             return Article;
         }
@@ -433,6 +433,8 @@ namespace Mercure
 
                 List<SousFamille> Sous_Familles = Data_Reader.Recuperer_Sous_Familles(((Famille)Choix_Famille_Article.SelectedItem).Recuperer_Reference());
 
+                Data_Reader.Terminer_Connection();
+
                 foreach (SousFamille Sous_Famille in Sous_Familles)
                 {
                     Choix_Sous_Famille_Article.Items.Add(Sous_Famille);
@@ -444,8 +446,6 @@ namespace Mercure
                         Choix_Sous_Famille_Article.SelectedItem = Sous_Famille;
                     }
                 }
-
-                Data_Reader.Terminer_Connection();
             }
         }
     }

@@ -39,14 +39,14 @@ namespace Mercure
 
             List<SousFamille> Sous_Familles = Data_Reader.Recuperer_Sous_Familles();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (SousFamille Sous_Famille in Sous_Familles)
             {
                 ListViewItem Sous_Famille_Item = new ListViewItem(Sous_Famille.Recuperer_Donnees());
 
                 Sous_Familles_Liste.Items.Add(Sous_Famille_Item);
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>
@@ -143,8 +143,6 @@ namespace Mercure
 
                         Sous_Familles_Liste.SelectedItems[0].Remove();
                     }
-
-                    Data_Reader.Terminer_Connection();
 
                     ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Une sous-famille supprimée.");
                 }

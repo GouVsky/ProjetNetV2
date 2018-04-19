@@ -38,14 +38,14 @@ namespace Mercure
 
             List <Marque> Marques = Data_Reader.Recuperer_Marques();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (Marque Marque in Marques)
             {
                 ListViewItem Marque_Item = new ListViewItem(Marque.Recuperer_Donnees());
 
                 Marques_Liste.Items.Add(Marque_Item);
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>

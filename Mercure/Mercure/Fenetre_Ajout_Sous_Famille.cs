@@ -49,6 +49,8 @@ namespace Mercure
 
             List<Famille> Familles = Data_Reader.Recuperer_Familles();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (Famille Famille in Familles)
             {
                 Choix_Famille_Selection.Items.Add(Famille);
@@ -58,8 +60,6 @@ namespace Mercure
                     Choix_Famille_Selection.SelectedItem = Famille;
                 }
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>
@@ -72,9 +72,9 @@ namespace Mercure
 
             int Reference = Data_Reader.Inserer_Sous_Famille(Nom_Sous_Famille_Edition.Text, ((Famille)Choix_Famille_Selection.SelectedItem).Recuperer_Reference());
 
-            SousFamille Sous_Famille = new SousFamille(Reference, Nom_Sous_Famille_Edition.Text, ((Famille)Choix_Famille_Selection.SelectedItem));
-
             Data_Reader.Terminer_Connection();
+
+            SousFamille Sous_Famille = new SousFamille(Reference, Nom_Sous_Famille_Edition.Text, ((Famille)Choix_Famille_Selection.SelectedItem));
 
             return Sous_Famille;
         }
@@ -91,9 +91,9 @@ namespace Mercure
 
             Data_Reader.Mise_A_Jour_Sous_Famille(Reference, Nom_Sous_Famille_Edition.Text, ((Famille)Choix_Famille_Selection.SelectedItem).Recuperer_Reference());
 
-            SousFamille Sous_Famille = new SousFamille(Reference, Nom_Sous_Famille_Edition.Text, (Famille)Choix_Famille_Selection.SelectedItem);
-
             Data_Reader.Terminer_Connection();
+
+            SousFamille Sous_Famille = new SousFamille(Reference, Nom_Sous_Famille_Edition.Text, (Famille)Choix_Famille_Selection.SelectedItem);
 
             return Sous_Famille;
         }
@@ -133,6 +133,8 @@ namespace Mercure
 
             List<SousFamille> Sous_Familles = Data_Reader.Recuperer_Sous_Familles();
 
+            Data_Reader.Terminer_Connection();
+
             string Nom = Nom_Sous_Famille_Edition.Text;
 
             foreach (SousFamille Sous_Famille in Sous_Familles)
@@ -146,8 +148,6 @@ namespace Mercure
                     break;
                 }
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>

@@ -45,9 +45,9 @@ namespace Mercure
 
             int Reference = Data_Reader.Inserer_Famille(Nom_Famille_Edition.Text);
 
-            Famille Famille = new Famille(Reference, Nom_Famille_Edition.Text);
-
             Data_Reader.Terminer_Connection();
+
+            Famille Famille = new Famille(Reference, Nom_Famille_Edition.Text);
 
             return Famille;
         }
@@ -64,9 +64,9 @@ namespace Mercure
 
             Data_Reader.Mise_A_Jour_Famille(Reference, Nom_Famille_Edition.Text);
 
-            Famille Famille = new Famille(Reference, Nom_Famille_Edition.Text);
-
             Data_Reader.Terminer_Connection();
+
+            Famille Famille = new Famille(Reference, Nom_Famille_Edition.Text);
 
             return Famille;
         }
@@ -106,6 +106,8 @@ namespace Mercure
 
             List<Famille> Familles = Data_Reader.Recuperer_Familles();
 
+            Data_Reader.Terminer_Connection();
+
             string Nom = Nom_Famille_Edition.Text;
 
             foreach (Famille Famille in Familles)
@@ -119,8 +121,6 @@ namespace Mercure
                     break;
                 }
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>

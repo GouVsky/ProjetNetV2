@@ -196,6 +196,11 @@
             0,
             131072});
             this.Prix_Unitaire_Article_Edition.Location = new System.Drawing.Point(29, 353);
+            this.Prix_Unitaire_Article_Edition.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.Prix_Unitaire_Article_Edition.Name = "Prix_Unitaire_Article_Edition";
             this.Prix_Unitaire_Article_Edition.Size = new System.Drawing.Size(73, 20);
             this.Prix_Unitaire_Article_Edition.TabIndex = 14;
@@ -206,7 +211,7 @@
             // 
             this.Quantite_Article_Edition.Location = new System.Drawing.Point(228, 353);
             this.Quantite_Article_Edition.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});

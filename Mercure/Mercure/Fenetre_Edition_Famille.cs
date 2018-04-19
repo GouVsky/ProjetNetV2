@@ -38,14 +38,14 @@ namespace Mercure
 
             List<Famille> Familles = Data_Reader.Recuperer_Familles();
 
+            Data_Reader.Terminer_Connection();
+
             foreach (Famille Famille in Familles)
             {
                 ListViewItem Famille_Item = new ListViewItem(Famille.Recuperer_Donnees());
 
                 Familles_Liste.Items.Add(Famille_Item);
             }
-
-            Data_Reader.Terminer_Connection();
         }
 
         /// <summary>
