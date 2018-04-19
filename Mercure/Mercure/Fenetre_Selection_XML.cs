@@ -117,7 +117,9 @@ namespace Mercure
                     string Marque = selectNode.SelectSingleNode("marque").InnerText;
                     string Famille = selectNode.SelectSingleNode("famille").InnerText;
                     string Sous_Famille = selectNode.SelectSingleNode("sousFamille").InnerText;
-                    string Prix = selectNode.SelectSingleNode("prixHT").InnerText.Replace(',', separateurRegion[0]);
+                    string Prix = selectNode.SelectSingleNode("prixHT").InnerText;
+                    Prix.Replace(',', separateurRegion[0]);
+                    Prix.Replace('.', separateurRegion[0]);
 
                     // On insère la famille.
 
