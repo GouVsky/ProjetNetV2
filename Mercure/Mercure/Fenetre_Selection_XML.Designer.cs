@@ -94,6 +94,7 @@
             this.Bouton_Annuler.TabIndex = 5;
             this.Bouton_Annuler.Text = "Annuler";
             this.Bouton_Annuler.UseVisualStyleBackColor = true;
+            this.Bouton_Annuler.Click += new System.EventHandler(this.Bouton_Annuler_Click);
             // 
             // Fenetre_Selection_XML
             // 

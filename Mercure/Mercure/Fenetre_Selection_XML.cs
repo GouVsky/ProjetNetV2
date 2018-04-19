@@ -166,13 +166,13 @@ namespace Mercure
         }
 
         /// <summary>
-        /// Ferme la fenêtre.
+        /// Annule l'importation.
         /// </summary>
         /// <param name="sender"> l'objet envoyé </param>
         /// <param name="e"> l'évènement </param>
-        private void BoutonCliquer_Click(object sender, EventArgs e)
+        private void Bouton_Annuler_Click(object sender, EventArgs e)
         {
-            Close();
+            DialogResult = DialogResult.Cancel;
         }
     }
 }

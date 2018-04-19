@@ -39,7 +39,7 @@
             // 
             // Bouton_Validation
             // 
-            this.Bouton_Validation.Location = new System.Drawing.Point(94, 84);
+            this.Bouton_Validation.Location = new System.Drawing.Point(91, 70);
             this.Bouton_Validation.Margin = new System.Windows.Forms.Padding(2);
             this.Bouton_Validation.Name = "Bouton_Validation";
             this.Bouton_Validation.Size = new System.Drawing.Size(75, 24);
@@ -51,7 +51,7 @@
             // Nom_Famille_Titre
             // 
             this.Nom_Famille_Titre.AutoSize = true;
-            this.Nom_Famille_Titre.Location = new System.Drawing.Point(24, 26);
+            this.Nom_Famille_Titre.Location = new System.Drawing.Point(21, 12);
             this.Nom_Famille_Titre.Name = "Nom_Famille_Titre";
             this.Nom_Famille_Titre.Size = new System.Drawing.Size(29, 13);
             this.Nom_Famille_Titre.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // Nom_Famille_Edition
             // 
-            this.Nom_Famille_Edition.Location = new System.Drawing.Point(27, 42);
+            this.Nom_Famille_Edition.Location = new System.Drawing.Point(24, 28);
             this.Nom_Famille_Edition.Name = "Nom_Famille_Edition";
             this.Nom_Famille_Edition.Size = new System.Drawing.Size(231, 20);
             this.Nom_Famille_Edition.TabIndex = 0;
@@ -68,7 +68,8 @@
             // 
             // Bouton_Annuler
             // 
-            this.Bouton_Annuler.Location = new System.Drawing.Point(183, 84);
+            this.Bouton_Annuler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Bouton_Annuler.Location = new System.Drawing.Point(180, 70);
             this.Bouton_Annuler.Name = "Bouton_Annuler";
             this.Bouton_Annuler.Size = new System.Drawing.Size(75, 23);
             this.Bouton_Annuler.TabIndex = 3;
@@ -87,7 +88,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(286, 120);
+            this.CancelButton = this.Bouton_Annuler;
+            this.ClientSize = new System.Drawing.Size(280, 109);
             this.Controls.Add(this.Bouton_Annuler);
             this.Controls.Add(this.Nom_Famille_Edition);
             this.Controls.Add(this.Nom_Famille_Titre);

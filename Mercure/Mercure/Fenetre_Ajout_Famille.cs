@@ -92,7 +92,7 @@ namespace Mercure
         /// <param name="e"> l'évènement </param>
         private void Bouton_Annuler_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.None;
+            DialogResult = DialogResult.Cancel;
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Mercure
 
             foreach (Famille Famille in Familles)
             {
-                if (Famille.Recuperer_Nom().Equals(Nom) && !this.Famille.SubItems[1].Text.Equals(Nom))
+                if (Famille.Recuperer_Nom().Equals(Nom) || (this.Famille != null && this.Famille.SubItems[1].Text.Equals(Nom)))
                 {
                     e.Cancel = true;
 

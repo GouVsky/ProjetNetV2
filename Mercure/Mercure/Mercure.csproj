@@ -85,6 +85,12 @@
     <Compile Include="Fenetre_Ajout_Famille.Designer.cs">
       <DependentUpon>Fenetre_Ajout_Famille.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fenetre_Ajout_Marque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fenetre_Ajout_Marque.Designer.cs">
+      <DependentUpon>Fenetre_Ajout_Marque.cs</DependentUpon>
+    </Compile>
     <Compile Include="Fenetre_Ajout_Sous_Famille.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,12 @@
     </Compile>
     <Compile Include="Fenetre_Edition_Famille.Designer.cs">
       <DependentUpon>Fenetre_Edition_Famille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fenetre_Edition_Marque.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fenetre_Edition_Marque.Designer.cs">
+      <DependentUpon>Fenetre_Edition_Marque.cs</DependentUpon>
     </Compile>
     <Compile Include="Fenetre_Edition_Sous_Famille.cs">
       <SubType>Form</SubType>
@@ -133,11 +145,17 @@
     <EmbeddedResource Include="Fenetre_Ajout_Famille.resx">
       <DependentUpon>Fenetre_Ajout_Famille.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Fenetre_Ajout_Marque.resx">
+      <DependentUpon>Fenetre_Ajout_Marque.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Ajout_Sous_Famille.resx">
       <DependentUpon>Fenetre_Ajout_Sous_Famille.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Edition_Famille.resx">
       <DependentUpon>Fenetre_Edition_Famille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fenetre_Edition_Marque.resx">
+      <DependentUpon>Fenetre_Edition_Marque.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fenetre_Edition_Sous_Famille.resx">
       <DependentUpon>Fenetre_Edition_Sous_Famille.cs</DependentUpon>

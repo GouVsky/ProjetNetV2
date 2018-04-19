@@ -135,6 +135,8 @@ namespace Mercure
                         Data_Reader.Supprimer_Famille(Familles_Liste.SelectedItems[0].SubItems[1].Text);
 
                         Familles_Liste.SelectedItems[0].Remove();
+
+                        ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimée.");
                     }
                 }
 
@@ -146,8 +148,6 @@ namespace Mercure
                 }
 
                 Data_Reader.Terminer_Connection();
-
-                ((Fenetre_Principale)Owner).Mise_A_Jour_Barre_De_Statut("Une famille supprimée.");
             }
         }
 

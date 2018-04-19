@@ -366,7 +366,9 @@ namespace Mercure
         /// <param name="e"> l'évènement </param>
         private void Menu_Marque_Edition_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("marqueToolStripMenuItem_Click", "Erreur XML", MessageBoxButtons.OK);
+            Fenetre_Edition_Marque Edition_Marque = new Fenetre_Edition_Marque();
+
+            Edition_Marque.ShowDialog(this);
         }
 
         /// <summary>

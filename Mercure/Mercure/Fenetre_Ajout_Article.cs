@@ -77,7 +77,7 @@ namespace Mercure
         /// <param name="e"> l'évènement </param>
         private void Bouton_Annulation_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.None;
+            DialogResult = DialogResult.Cancel;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Mercure
 
                 foreach(Article Article in Articles)
                 {
-                    if (Reference_Article_Edition.Text.Equals(Article.Recuperer_Reference()))
+                    if (Reference_Article_Edition.Text.Equals(Article.Recuperer_Reference()) || (this.Article != null && this.Article.SubItems[0].Equals(Reference_Article_Edition.Text)))
                     {
                         e.Cancel = true;
 

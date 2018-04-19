@@ -42,7 +42,7 @@
             // Bouton_Annuler
             // 
             this.Bouton_Annuler.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Bouton_Annuler.Location = new System.Drawing.Point(181, 145);
+            this.Bouton_Annuler.Location = new System.Drawing.Point(179, 138);
             this.Bouton_Annuler.Name = "Bouton_Annuler";
             this.Bouton_Annuler.Size = new System.Drawing.Size(75, 23);
             this.Bouton_Annuler.TabIndex = 7;
@@ -52,7 +52,7 @@
             // 
             // Nom_Sous_Famille_Edition
             // 
-            this.Nom_Sous_Famille_Edition.Location = new System.Drawing.Point(25, 35);
+            this.Nom_Sous_Famille_Edition.Location = new System.Drawing.Point(23, 28);
             this.Nom_Sous_Famille_Edition.Name = "Nom_Sous_Famille_Edition";
             this.Nom_Sous_Famille_Edition.Size = new System.Drawing.Size(231, 20);
             this.Nom_Sous_Famille_Edition.TabIndex = 0;
@@ -62,7 +62,7 @@
             // Nom_Sous_Famille_Titre
             // 
             this.Nom_Sous_Famille_Titre.AutoSize = true;
-            this.Nom_Sous_Famille_Titre.Location = new System.Drawing.Point(22, 19);
+            this.Nom_Sous_Famille_Titre.Location = new System.Drawing.Point(20, 12);
             this.Nom_Sous_Famille_Titre.Name = "Nom_Sous_Famille_Titre";
             this.Nom_Sous_Famille_Titre.Size = new System.Drawing.Size(29, 13);
             this.Nom_Sous_Famille_Titre.TabIndex = 5;
@@ -70,7 +70,7 @@
             // 
             // Bouton_Validation
             // 
-            this.Bouton_Validation.Location = new System.Drawing.Point(89, 145);
+            this.Bouton_Validation.Location = new System.Drawing.Point(87, 138);
             this.Bouton_Validation.Margin = new System.Windows.Forms.Padding(2);
             this.Bouton_Validation.Name = "Bouton_Validation";
             this.Bouton_Validation.Size = new System.Drawing.Size(75, 24);
@@ -87,7 +87,7 @@
             // Choix_Famille_Titre
             // 
             this.Choix_Famille_Titre.AutoSize = true;
-            this.Choix_Famille_Titre.Location = new System.Drawing.Point(22, 76);
+            this.Choix_Famille_Titre.Location = new System.Drawing.Point(20, 69);
             this.Choix_Famille_Titre.Name = "Choix_Famille_Titre";
             this.Choix_Famille_Titre.Size = new System.Drawing.Size(39, 13);
             this.Choix_Famille_Titre.TabIndex = 8;
@@ -96,7 +96,7 @@
             // Choix_Famille_Selection
             // 
             this.Choix_Famille_Selection.FormattingEnabled = true;
-            this.Choix_Famille_Selection.Location = new System.Drawing.Point(25, 92);
+            this.Choix_Famille_Selection.Location = new System.Drawing.Point(23, 85);
             this.Choix_Famille_Selection.Name = "Choix_Famille_Selection";
             this.Choix_Famille_Selection.Size = new System.Drawing.Size(231, 21);
             this.Choix_Famille_Selection.TabIndex = 1;
@@ -111,7 +111,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.CancelButton = this.Bouton_Annuler;
-            this.ClientSize = new System.Drawing.Size(280, 180);
+            this.ClientSize = new System.Drawing.Size(280, 174);
             this.Controls.Add(this.Choix_Famille_Selection);
             this.Controls.Add(this.Choix_Famille_Titre);
             this.Controls.Add(this.Bouton_Annuler);
