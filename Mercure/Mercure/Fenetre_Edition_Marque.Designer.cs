@@ -38,8 +38,8 @@
             // Bouton_Quitter
             // 
             this.Bouton_Quitter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bouton_Quitter.Location = new System.Drawing.Point(295, 336);
-            this.Bouton_Quitter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Bouton_Quitter.Location = new System.Drawing.Point(292, 331);
+            this.Bouton_Quitter.Margin = new System.Windows.Forms.Padding(4);
             this.Bouton_Quitter.Name = "Bouton_Quitter";
             this.Bouton_Quitter.Size = new System.Drawing.Size(100, 28);
             this.Bouton_Quitter.TabIndex = 9;
@@ -50,8 +50,8 @@
             // Bouton_Supprimer
             // 
             this.Bouton_Supprimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bouton_Supprimer.Location = new System.Drawing.Point(295, 110);
-            this.Bouton_Supprimer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Bouton_Supprimer.Location = new System.Drawing.Point(292, 110);
+            this.Bouton_Supprimer.Margin = new System.Windows.Forms.Padding(4);
             this.Bouton_Supprimer.Name = "Bouton_Supprimer";
             this.Bouton_Supprimer.Size = new System.Drawing.Size(100, 28);
             this.Bouton_Supprimer.TabIndex = 8;
@@ -62,8 +62,8 @@
             // Bouton_Modifier
             // 
             this.Bouton_Modifier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bouton_Modifier.Location = new System.Drawing.Point(295, 62);
-            this.Bouton_Modifier.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Bouton_Modifier.Location = new System.Drawing.Point(292, 62);
+            this.Bouton_Modifier.Margin = new System.Windows.Forms.Padding(4);
             this.Bouton_Modifier.Name = "Bouton_Modifier";
             this.Bouton_Modifier.Size = new System.Drawing.Size(100, 28);
             this.Bouton_Modifier.TabIndex = 7;
@@ -74,8 +74,8 @@
             // Bouton_Ajouter
             // 
             this.Bouton_Ajouter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Bouton_Ajouter.Location = new System.Drawing.Point(295, 15);
-            this.Bouton_Ajouter.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Bouton_Ajouter.Location = new System.Drawing.Point(292, 15);
+            this.Bouton_Ajouter.Margin = new System.Windows.Forms.Padding(4);
             this.Bouton_Ajouter.Name = "Bouton_Ajouter";
             this.Bouton_Ajouter.Size = new System.Drawing.Size(100, 28);
             this.Bouton_Ajouter.TabIndex = 6;
@@ -91,10 +91,10 @@
             this.Marques_Liste.FullRowSelect = true;
             this.Marques_Liste.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.Marques_Liste.Location = new System.Drawing.Point(16, 15);
-            this.Marques_Liste.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Marques_Liste.Margin = new System.Windows.Forms.Padding(4);
             this.Marques_Liste.MultiSelect = false;
             this.Marques_Liste.Name = "Marques_Liste";
-            this.Marques_Liste.Size = new System.Drawing.Size(255, 349);
+            this.Marques_Liste.Size = new System.Drawing.Size(252, 344);
             this.Marques_Liste.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.Marques_Liste.TabIndex = 5;
             this.Marques_Liste.UseCompatibleStateImageBehavior = false;
@@ -104,13 +104,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 383);
+            this.ClientSize = new System.Drawing.Size(412, 378);
             this.Controls.Add(this.Bouton_Quitter);
             this.Controls.Add(this.Bouton_Supprimer);
             this.Controls.Add(this.Bouton_Modifier);
             this.Controls.Add(this.Bouton_Ajouter);
             this.Controls.Add(this.Marques_Liste);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(350, 300);
             this.Name = "Fenetre_Edition_Marque";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
